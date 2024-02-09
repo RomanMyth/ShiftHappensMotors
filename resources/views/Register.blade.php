@@ -2,17 +2,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            .col-lg-3{
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+    </head>
 <body>
     <div class="box">
-        <h3>Register</h3>
-        <form id = "register">
-            
+     
+        <form id = "register" method="POST" class=".container p-5">
+            <h3>Register</h3>
             
             <label for="first_name">First Name:</label>
             <input placeholder= "First" type="text" name="firstName" id="first_name" required>
@@ -45,7 +49,7 @@
             <button type="button" onclick="clearFields()">Clear</button>
         </form>
         <br>
-        <form id="already" action="{{url('/')}}" method="">
+        <form id="already" action="{{url('/Login')}}" method="" class=".container p-5">
         
           <p>Already a member?</p>
           <button type="submit">Log In</button>
