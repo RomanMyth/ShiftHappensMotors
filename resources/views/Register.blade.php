@@ -1,97 +1,77 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <style>
-            .col-lg-3{
-                display: flex;
-                flex-direction: column;
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+    </style>
+</head>
 <body>
-    <div class="box">
-     
-        <form id = "register" method="POST" class=".container p-5">
-            <h3>Register</h3>
-            
-            <label for="first_name">First Name:</label>
-            <input placeholder= "First" type="text" name="firstName" id="first_name" required>
-
-            <label for="last_name">Last Name:</label>
-            <input placeholder= "Last" type="text" name="lastName" id="last_name" required>
-
-            <label for="email">Email:</label>
-            <input placeholder= "example@email.com" id="emailID" name="emailID" id="emailID" required>
-
-            <label for="phone">Phone:</label>
-            <input placeholder= "(###)-###-####" type="tel" name="phoneNumber" id="phone" required>
-
-            <label for="password">Password:</label>
-            <input placeholder= "password" type="password" name="userPass" id="password" required>
-            <div class="checkbox-container">
-                <label for="checkbox">Show Password?</label>
-                <input type="checkbox" id="checkbox" onclick="showPass()">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form id="register" method="POST" class="p-5">
+                    <h3 class="mb-4">Register</h3>
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name:</label>
+                        <input type="text" class="form-control" id="first_name" name="firstName" placeholder="First" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="last_name" name="lastName" placeholder="Last" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="emailID" name="emailID" placeholder="example@email.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone:</label>
+                        <input type="tel" class="form-control" id="phone" name="phoneNumber" placeholder="(###)-###-####" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="userPass" placeholder="Password" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="checkbox" onclick="showPass()">
+                        <label class="form-check-label" for="checkbox">Show Password?</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dob" class="form-label">Date of Birth:</label>
+                        <input type="date" class="form-control" id="dob" name="DOB" placeholder="YYYY-MM-DD" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="register">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearFields()">Clear</button>
+                </form>
+                <div class="text-center">
+                    <p>Already a member? <a href="{{url('/Login')}}">Log In</a></p>
+                </div>
             </div>
-
-            <br>
-
-            <label class= "last" for="dob">Date of Birth:</label>
-            <input placeholder= "YYYY-MM-DD" type="date" name="DOB" id="dob" required>
-
-          
-
-          
-            <button type="submit" name="register">Submit</button>
-            <button type="button" onclick="clearFields()">Clear</button>
-        </form>
-        <br>
-        <form id="already" action="{{url('/Login')}}" method="" class=".container p-5">
-        
-          <p>Already a member?</p>
-          <button type="submit">Log In</button>
-      </form>
+        </div>
     </div>
-    
-
 
     <script>
-        
         function clearFields() {
-            var element = document.getElementById("register");
-            element.reset()
+            document.getElementById("register").reset();
         }
 
         function showPass() {
-        var passwordField = document.getElementById('password');
+            var passwordField = document.getElementById('password');
             if (passwordField.type === "password") {
-                    passwordField.type = "text";
-             } else {
+                passwordField.type = "text";
+            } else {
                 passwordField.type = "password";
-                }
-              }
+            }
+        }
     </script>
 
-    @if(isset($error)) --}}
+    @if(isset($error))
     <script>
-      alert("{{ $error }}")
-      </script>
+        alert("{{ $error }}");
+    </script>
     @endif
-
 </body>
 </html>
-       
-
-            
-
-
-  
-
-
-
-
-   
-
