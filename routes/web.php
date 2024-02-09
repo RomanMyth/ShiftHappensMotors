@@ -19,8 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [TestController::class, 'getTestData']);
+Route::get('/Login', function() {
+    return view('Login');
+});
 
+Route::get('/Register', function() {
+    return view('Register');
+});
+
+
+Route::get('/test', [TestController::class, 'getTestData']);
 
 Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
 Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
