@@ -15,9 +15,11 @@ use App\Http\Controllers\CarControllerAPI;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [CarControllerAPI::class, 'index']);
 
 Route::get('/test', [TestController::class, 'getTestData']);
 
