@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\CarControllerAPI;
+use App\Http\Controllers\EmployeeControllerAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,6 @@ Route::get('/test', [TestController::class, 'getTestData']);
 
 Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
 Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
+
+Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
