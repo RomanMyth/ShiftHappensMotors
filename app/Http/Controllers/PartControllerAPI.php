@@ -3,31 +3,25 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Employee;
+use App\Models\Part;
 
-
-class EmployeeControllerAPI extends Controller
+class PartControllerAPI extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * 
-     */
+    public function create(){
 
-     public function create(){
-
-        return view("addEmployee");
+        return view("addParts");
      }
     public function index()
     {
-        $newEmp = Employee::all();
+        $newPart = Part::all();
 
-        return view("Home", ["employees"=>$newEmp]);
+        return view("Home", ["parts"=>$newPart]);
     }
 
     public function store(Request $request)
     {
-        $newEmp = $request->all();
-        Employee::create($newEmp);
+        $newPart = $request->all();
+        Part::create($newPart);
         echo"Success";
 
     }
