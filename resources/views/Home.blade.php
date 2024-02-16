@@ -44,6 +44,11 @@
         </style>
     </head>
     <body>
+        <div class="navbar">
+            <form action="/dashboard" method="GET">
+                <button>View Dashboard</button>
+            </form>
+        </div>
         <div class="container pt-5">
             @for($i = 0; $i < count($cars); $i++)
                 {{-- If the total number of cars is odd and is on the last car, end previous row and create new row with the car inside --}}
