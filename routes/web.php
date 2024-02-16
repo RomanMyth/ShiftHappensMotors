@@ -5,7 +5,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\CarControllerAPI;
 use App\Http\Controllers\MaintenanceControllerAPI;
 use App\Http\Controllers\EmployeeControllerAPI;
-
+use App\Http\Controllers\PartControllerAPI;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,4 +42,7 @@ Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index']);
 
 Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
 Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
+
+Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
+Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
 
