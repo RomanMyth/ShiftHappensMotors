@@ -6,6 +6,7 @@ use App\Http\Controllers\CarControllerAPI;
 use App\Http\Controllers\MaintenanceControllerAPI;
 use App\Http\Controllers\EmployeeControllerAPI;
 use App\Http\Controllers\PartControllerAPI;
+use App\Http\Middleware\AuthManager;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,15 +32,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
-Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
+//Routes Accessed by a Manager Only
+Route::middleware([AuthManager::class])->group(function(){
+    Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
+    Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
+    Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
+    Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
+    Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
+    Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
+});
+
 
 Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index']);
 
-Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
-Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
-
-Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
-Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
 
 require __DIR__.'/auth.php';
