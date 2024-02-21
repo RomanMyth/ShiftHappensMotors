@@ -47,4 +47,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin(){
+        if($this->userType === "Manager"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
