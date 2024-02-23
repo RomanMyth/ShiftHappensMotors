@@ -28,11 +28,8 @@
                     <input type="decimal" name="Price">
                 </div>
                 <div class="col-lg-3">
-                    <label for="Available">Available:</label>
-                    <select name="Available" class="form-select">
-                        <option value="0">Not Available</option>
-                        <option value="1">Available</option>
-                    </select>
+                    <label for="Quantity">Quantity:</label>
+                    <input type="number" name="Quantity" min="0">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Submit</button>

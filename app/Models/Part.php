@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Part extends Model
 {
     public $timestamps = false;
+
+    protected $primaryKey = 'PartNumber';
     protected $fillable = [
-    //   i think is not needed because of the autoincrement  // 'PartNumber',
         'PartName',
         'Price',
-        'Available'
+        'Quantity'
     ];
     use HasFactory;
 }
