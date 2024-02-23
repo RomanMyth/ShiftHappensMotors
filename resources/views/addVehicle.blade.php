@@ -10,6 +10,8 @@
         </style>
     </head>
     <body>
+        <x-navbar>
+        </x-navbar>
         <div class=".container">
             <form action="/storeVehicle" method="POST" class="p-5">
                 @csrf

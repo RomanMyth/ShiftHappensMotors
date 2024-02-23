@@ -7,6 +7,23 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <style>
+            #banner{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+                height: 100px;
+                font-size: 50px;
+                font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+                background-image: linear-gradient(to right, rgba(59, 210, 230, 0.5), white); 
+                padding: 20px;
+            }
+            .navbar{
+                justify-content: space-around;
+            }
+            .container-fluid{
+                /* background-color: red;  */
+            }
             .row{
                 display: flex;
             }
@@ -51,6 +68,7 @@
 
             .vehicleCon{
                 height: 100%;
+                width: 80%;
                 border: 1px solid black;
                 border-radius: 15px;
                 box-shadow: 5px 5px 10px gray;
@@ -58,6 +76,10 @@
             }
 
             @media only screen and (max-width: 1000px){
+                #banner{
+                    justify-content: center;
+                    font-size: 8vw;
+                }
                 .col-lg-6{
                     height: auto;
                 }
@@ -68,26 +90,15 @@
         </style>
     </head>
     <body>
-        <div class="navbar">
-            <x-nav-link :href="route('Home')" :active="request()->routeIs('Home')">
-                {{ __('Home') }}
-            </x-nav-link>
-
-            {{-- Check if any user is currently logged in and if that user is a Manager--}}
-            @if (Auth::user() !== null && Auth::user()->isAdmin())
-                <x-nav-link :href="route('employees.create')" :active="request()->routeIs('employees.create')">
-                    {{ __('Add Employees') }}
-                </x-nav-link>
-                <x-nav-link :href="route('Part.create')" :active="request()->routeIs('Part.create')">
-                    {{ __('Add Part') }}
-                </x-nav-link>
-            @endif
-
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-nav-link>
+        <div id='banner'>
+            ShiftHappensMotors
         </div>
-        <div class="container pt-5">
+
+        {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
+        <x-navbar>
+        </x-navbar>
+
+        <div class="container-fluid pt-5">
             @for($i = 0; $i < count($cars); $i++)
 
                 {{-- If the total number of cars is odd and is on the last car, create new row with the car inside --}}
