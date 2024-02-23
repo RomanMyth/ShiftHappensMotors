@@ -45,5 +45,10 @@ Route::middleware([AuthManager::class])->group(function(){
 
 Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index']);
 
+Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
+Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
+Route::post('/add-to-cart', [PartControllerAPI::class, 'addToCart'])->name('add.to.cart');
+Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->name('sell.parts.checkout');
+Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::class, 'removeFromCart'])->name('sell.parts.removeFromCart');
 
 require __DIR__.'/auth.php';
