@@ -20,7 +20,7 @@ use App\Http\Middleware\AuthManager;
 
 
 
-Route::get('/', [CarControllerAPI::class, 'index']);
+Route::get('/', [CarControllerAPI::class, 'index'])->name('Home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
