@@ -9,19 +9,8 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Navigation Links -->
-                <div class="navbar">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    @if (Auth::user() !== null && Auth::user()->isAdmin())
-                        <x-nav-link :href="route('employees.create')" :active="request()->routeIs('employees.create')">
-                            {{ __('Add Employees') }}
-                        </x-nav-link>
-                    @endif
-                    <x-nav-link :href="route('Home')" :active="request()->routeIs('Home')">
-                        {{ __('Home') }}
-                    </x-nav-link>
-                </div>
+                <x-navbar>
+                </x-navbar>
             </div>
 
             <!-- Settings Dropdown -->

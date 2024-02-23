@@ -38,12 +38,12 @@ Route::middleware([AuthManager::class])->group(function(){
     Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
     Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
     Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
-    Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
+    Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm'])->name('Vehicle.create');
     Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
 });
 
 
-Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index']);
+Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index'])->name("schedule.maintenance");
 
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');

@@ -18,6 +18,8 @@
     </style>
 </head>
 <body>
+    <x-navbar>
+    </x-navbar>
     <div class="container">
         <h1>Sell Parts</h1>
         <table class="table">

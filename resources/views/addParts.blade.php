@@ -13,6 +13,8 @@
     </style>
 </head>
 <body>
+    <x-navbar>
+    </x-navbar>
     <div class="container p-5">
         <h1>Add Parts</h1>
         <form action="{{ route('Part.store') }}" method="POST">
