@@ -112,6 +112,7 @@ public function sellPart(Request $request, $partNumber)
 {
     $cart = session()->get('cart', []);
     foreach ($cart as $partNumber => $quantity) {
+        $quantity = (int)$quantity; // Cast $quantity to integer
         $part = Part::where('PartNumber', $partNumber)->firstOrFail();
         $part->Quantity -= $quantity;
         $part->save();
