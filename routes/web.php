@@ -38,7 +38,14 @@ Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
 Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
 
 
-Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index']);
+Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm']);
+Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store']);
+Route::get('/checkAppointments', [MaintenanceControllerAPI::class, 'checkAppointments'] );
+Route::get('/getUnavailableDates', [MaintenanceControllerAPI::class, 'getUnavailableDates']);
+Route::get('/getAvailableTimes', [MaintenanceControllerAPI::class, 'getAvailableTimes']);
+Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppointmentUnavailable']);
+Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
+
 
 Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
 Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
