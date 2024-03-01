@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\CarControllerAPI;
 use App\Http\Controllers\MaintenanceControllerAPI;
 use App\Http\Controllers\EmployeeControllerAPI;
-
+use App\Http\Controllers\PartControllerAPI;
+use App\Http\Middleware\AuthManager;
+use App\Http\Controllers\EmployeeRatingControllerAPI;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,26 +19,38 @@ use App\Http\Controllers\EmployeeControllerAPI;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-Route::get('/', [CarControllerAPI::class, 'index']);
 
-Route::get('/Login', function() {
-    return view('Login');
+Route::get('/', [CarControllerAPI::class, 'index'])->name('Home');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/Register', function() {
-    return view('Register');
+//Routes Accessed by a Manager Only
+Route::middleware([AuthManager::class])->group(function(){
+    Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
+    Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
+    Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
+    Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
+    Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm'])->name('Vehicle.create');
+    Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
 });
 
 
-Route::get('/test', [TestController::class, 'getTestData']);
+Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index'])->name("schedule.maintenance");
 
-Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm']);
-Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
-
+Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
+Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
+Route::post('/add-to-cart', [PartControllerAPI::class, 'addToCart'])->name('add.to.cart');
+Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->name('sell.parts.checkout');
+Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::class, 'removeFromCart'])->name('sell.parts.removeFromCart');
 
 Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm']);
 Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store']);
@@ -46,7 +60,9 @@ Route::get('/getAvailableTimes', [MaintenanceControllerAPI::class, 'getAvailable
 Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppointmentUnavailable']);
 Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
 
+Route::get('/ratings/create', [EmployeeRatingControllerAPI::class, 'create'])->name('ratings.create');
+Route::post('/ratings', [EmployeeRatingControllerAPI::class, 'store'])->name('ratings.store');
+Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdown'])->name('empRatings');
 
-Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
-Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
 
+require __DIR__.'/auth.php';

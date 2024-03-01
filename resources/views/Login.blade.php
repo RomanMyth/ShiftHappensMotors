@@ -13,13 +13,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <form action="" method="POST" class="p-5">
+                <form method="POST" action="{{ route('login') }}" lass="p-5">
+                    @csrf
                     <h3>Login</h3>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="emailID" placeholder="Email" required>
+                        <input type="text" class="form-control" name="email" placeholder="Email" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="userPass" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>

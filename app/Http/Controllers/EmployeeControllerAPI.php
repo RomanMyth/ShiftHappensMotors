@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
@@ -20,7 +21,7 @@ class EmployeeControllerAPI extends Controller
     {
         $newEmp = Employee::all();
 
-        return view("Home", ["cars"=>$newEmp]);
+        return view("Home", ["employees"=>$newEmp]);
     }
 
     public function store(Request $request)
