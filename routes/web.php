@@ -7,6 +7,8 @@ use App\Http\Controllers\MaintenanceControllerAPI;
 use App\Http\Controllers\EmployeeControllerAPI;
 use App\Http\Controllers\PartControllerAPI;
 use App\Http\Middleware\AuthManager;
+use App\Http\Controllers\ScheduleControllerAPI;
+use App\Http\Middleware\AuthEmployee;
 use App\Http\Controllers\EmployeeRatingControllerAPI;
 /*
 |--------------------------------------------------------------------------
@@ -27,21 +29,31 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+//checks if a user is logged in. If not brings them to the login page
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Routes Accessed by a Manager Only
+    Route::middleware([AuthManager::class])->group(function(){
+        Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
+        Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
+        Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
+        Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
+        Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm'])->name('Vehicle.create');
+        Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
+        Route::get('/newSchedule', [ScheduleControllerAPI::class, 'newSchedule'])->name('schedule');
+        Route::post('/createSchedule', [ScheduleControllerAPI::class, 'store'])->name('schedule.create');
+    });
+
+    //Routes Accessed by any employee (non-customer)
+    Route::middleware([AuthEmployee::class])->group(function(){
+        Route::get('/viewSchedule', [ScheduleControllerAPI::class, 'index'])->name('schedule.view');
+    });
 });
 
-//Routes Accessed by a Manager Only
-Route::middleware([AuthManager::class])->group(function(){
-    Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
-    Route::post('/employees', [EmployeeControllerAPI::class, 'store'])->name('employees.store');
-    Route::get('/addParts', [PartControllerAPI::class, 'create'])->name('Part.create');
-    Route::post('/Part', [PartControllerAPI::class, 'store'])->name('Part.store');
-    Route::get("/addVehicle", [CarControllerAPI::class, 'addVehicleForm'])->name('Vehicle.create');
-    Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
-});
 
 
 // Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index'])->name("schedule.maintenance");
