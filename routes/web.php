@@ -44,7 +44,7 @@ Route::middleware([AuthManager::class])->group(function(){
 });
 
 
-Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index'])->name("schedule.maintenance");
+// Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index'])->name("schedule.maintenance");
 
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
@@ -52,17 +52,20 @@ Route::post('/add-to-cart', [PartControllerAPI::class, 'addToCart'])->name('add.
 Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->name('sell.parts.checkout');
 Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::class, 'removeFromCart'])->name('sell.parts.removeFromCart');
 
-Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm']);
-Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store']);
+Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm'])->name("schedule.maintenance");
 Route::get('/checkAppointments', [MaintenanceControllerAPI::class, 'checkAppointments'] );
 Route::get('/getUnavailableDates', [MaintenanceControllerAPI::class, 'getUnavailableDates']);
 Route::get('/getAvailableTimes', [MaintenanceControllerAPI::class, 'getAvailableTimes']);
 Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppointmentUnavailable']);
 Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
 
+
+
 Route::get('/ratings/create', [EmployeeRatingControllerAPI::class, 'create'])->name('ratings.create');
 Route::post('/ratings', [EmployeeRatingControllerAPI::class, 'store'])->name('ratings.store');
 Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdown'])->name('empRatings');
+
+
 
 
 require __DIR__.'/auth.php';

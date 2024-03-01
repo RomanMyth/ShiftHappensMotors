@@ -95,7 +95,7 @@ class MaintenanceControllerAPI extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
