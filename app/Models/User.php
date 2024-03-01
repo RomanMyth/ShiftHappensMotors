@@ -56,4 +56,13 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function isCustomer(){
+        if($this->userType === "Customer"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
