@@ -9,6 +9,7 @@ use App\Http\Controllers\PartControllerAPI;
 use App\Http\Middleware\AuthManager;
 use App\Http\Controllers\ScheduleControllerAPI;
 use App\Http\Middleware\AuthEmployee;
+use App\Http\Controllers\EmployeeRatingControllerAPI;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,5 +63,18 @@ Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPar
 Route::post('/add-to-cart', [PartControllerAPI::class, 'addToCart'])->name('add.to.cart');
 Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->name('sell.parts.checkout');
 Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::class, 'removeFromCart'])->name('sell.parts.removeFromCart');
+
+Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm']);
+Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store']);
+Route::get('/checkAppointments', [MaintenanceControllerAPI::class, 'checkAppointments'] );
+Route::get('/getUnavailableDates', [MaintenanceControllerAPI::class, 'getUnavailableDates']);
+Route::get('/getAvailableTimes', [MaintenanceControllerAPI::class, 'getAvailableTimes']);
+Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppointmentUnavailable']);
+Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
+
+Route::get('/ratings/create', [EmployeeRatingControllerAPI::class, 'create'])->name('ratings.create');
+Route::post('/ratings', [EmployeeRatingControllerAPI::class, 'store'])->name('ratings.store');
+Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdown'])->name('empRatings');
+
 
 require __DIR__.'/auth.php';

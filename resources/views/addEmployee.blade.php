@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css" type="text/css">
     <style>
         .col-lg-4 {
             display: flex;
@@ -19,7 +20,7 @@
 <body>
     <x-navbar>
     </x-navbar>
-    <div class="container p-5">
+    <div class="emp-container p-5">
         <h1>Add Employee</h1>
         <form action="{{ route('employees.store') }}" method="POST" class="container">
             @csrf
