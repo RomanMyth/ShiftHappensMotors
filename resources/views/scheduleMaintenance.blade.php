@@ -13,9 +13,11 @@
 </head>
 <body class="maintenance">
 
+    <x-navbar>
+    </x-navbar>
+
     <div class="container mt-5">
-        <x-navbar>
-        </x-navbar>
+
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <div class="card">
