@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\User;
 
 
 class EmployeeControllerAPI extends Controller
@@ -27,7 +28,7 @@ class EmployeeControllerAPI extends Controller
     public function store(Request $request)
     {
         $newEmp = $request->all();
-        Employee::create($newEmp);
+        User::create($newEmp);
         echo"Success";
 
     }

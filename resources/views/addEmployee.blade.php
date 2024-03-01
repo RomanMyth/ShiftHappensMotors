@@ -21,7 +21,7 @@
     </x-navbar>
     <div class="container p-5">
         <h1>Add Employee</h1>
-        <form action="{{ route('register') }}" method="POST" class="container">
+        <form action="{{ route('employees.store') }}" method="POST" class="container">
             @csrf
             <div class="row">
                 <div class="col-lg-4">
