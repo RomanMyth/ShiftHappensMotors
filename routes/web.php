@@ -8,6 +8,9 @@ use App\Http\Controllers\EmployeeControllerAPI;
 use App\Http\Controllers\PartControllerAPI;
 use App\Http\Middleware\AuthManager;
 use App\Http\Controllers\EmployeeRatingControllerAPI;
+use App\Http\Controllers\PaymentControllerAPI;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +59,11 @@ Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::c
 Route::get('/ratings/create', [EmployeeRatingControllerAPI::class, 'create'])->name('ratings.create');
 Route::post('/ratings', [EmployeeRatingControllerAPI::class, 'store'])->name('ratings.store');
 Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdown'])->name('empRatings');
+
+
+Route::get('/payment', [PaymentControllerAPI::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/payment/process', [PaymentControllerAPI::class, 'processPayment'])->name('payment.process');
+
 
 
 require __DIR__.'/auth.php';

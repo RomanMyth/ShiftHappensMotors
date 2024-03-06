@@ -36,6 +36,8 @@
     </style>
 </head>
 <body>
+    <x-navbar>
+    </x-navbar>
     <div class="container">
         <h1>Employee Ratings</h1>
         

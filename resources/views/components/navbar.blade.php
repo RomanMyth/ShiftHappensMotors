@@ -15,6 +15,11 @@
         {{ __('Schedule Maintenance') }}
     </x-nav-link>
 
+    <x-nav-link :href="route('ratings.create')" :active="request()->routeIs('ratings.create')">
+        {{ __('Employees Ratings') }}
+    </x-nav-link>
+
+
     {{-- Check if any user is currently logged in and if that user is a Manager--}}
     @if (Auth::user() !== null && Auth::user()->isAdmin())
         <x-nav-link :href="route('employees.create')" :active="request()->routeIs('employees.create')">
