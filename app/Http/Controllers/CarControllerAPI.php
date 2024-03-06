@@ -14,7 +14,6 @@ class CarControllerAPI extends Controller
     public function index()
     {
         $data = Car::all();
-        //return gettype($data);
         return view("Home", ["cars"=>$data]);
     }
 
