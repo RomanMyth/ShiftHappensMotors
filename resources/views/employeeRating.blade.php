@@ -36,66 +36,66 @@
     </style>
 </head>
 <body>
+    <x-navbar></x-navbar>
     <div class="container">
         <h1>Employee Ratings</h1>
         
         <!-- Add Rating Form -->
-<form action="{{ route('ratings.store') }}" method="POST">
-    @csrf
-    <div class="mb-3">
-        <label for="employee">Select Employee:</label>
-        <select name="employee_id">
-            <option value="">Select Employee</option>
-            @foreach ($employees as $employee)
-            <option value="{{ $employee->id }}">{{ $employee->firstName }} {{ $employee->lastName }}</option>
-            @endforeach                
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="rating">Rating:</label>
-        <div class="star-rating">
-            <span class="star" data-rating="1">&#9733;</span>
-            <span class="star" data-rating="2">&#9733;</span>
-            <span class="star" data-rating="3">&#9733;</span>
-            <span class="star" data-rating="4">&#9733;</span>
-            <span class="star" data-rating="5">&#9733;</span>
-        </div>
-        <input type="hidden" name="rating" id="rating" value="0">
-    </div>
-    <div class="mb-3">
-        <label for="comment">Comment:</label>
-        <textarea class="form-control" name="comment" rows="3" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit Rating</button>
-</form>
-        
+        <form action="{{ route('ratings.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="employee">Select Employee:</label>
+                <select name="employee_id">
+                    <option value="">Select Employee</option>
+                    @foreach ($employees as $employee)
+                    <option value="{{ $employee->id }}">{{ $employee->firstName }} {{ $employee->lastName }}</option>
+                    @endforeach                
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="rating">Rating:</label>
+                <div class="star-rating">
+                    <span class="star" data-rating="1">&#9733;</span>
+                    <span class="star" data-rating="2">&#9733;</span>
+                    <span class="star" data-rating="3">&#9733;</span>
+                    <span class="star" data-rating="4">&#9733;</span>
+                    <span class="star" data-rating="5">&#9733;</span>
+                </div>
+                <input type="hidden" name="rating" id="rating" value="0">
+            </div>
+            <div class="mb-3">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" name="comment" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Rating</button>
+        </form>
     </div>
     
     
     @if ($ratings->count() > 0)
-    <div class="container mt-5">
-        <h2>Submitted Ratings</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Employee Being Rated</th>
-                    <th>Rating</th>
-                    <th>Comment</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($ratings as $rating)
-                <tr>
-                    <td>{{ $rating->employee->firstName }} {{ $rating->employee->lastName }}</td>
-                    <td>{{ $rating->rating }}</td>
-                    <td>{{ $rating->comment }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        <div class="container mt-5">
+            <h2>Submitted Ratings</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Employee Being Rated</th>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($ratings as $rating)
+                    <tr>
+                        <td>{{ $rating->employee->firstName }} {{ $rating->employee->lastName }}</td>
+                        <td>{{ $rating->rating }}</td>
+                        <td>{{ $rating->comment }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     @else
-    <p>No ratings found.</p>
+        <p>No ratings found.</p>
     @endif
     
 

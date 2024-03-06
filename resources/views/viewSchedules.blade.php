@@ -15,9 +15,7 @@
     </script>
 </head>
 <body>
-    <div class='navbar'>
-        <x-navbar></x-navbar>
-    </div>
+    <x-navbar></x-navbar>
     <div class="container">
         <input type="date">
         <table>
