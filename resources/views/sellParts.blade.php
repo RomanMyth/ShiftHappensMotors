@@ -21,7 +21,7 @@
     <x-navbar>
     </x-navbar>
     <div class="container">
-        <h1>Sell Parts</h1>
+        <h1>Buy the Parts for your ride that you need!</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -92,10 +92,30 @@
         </table>
 
         <h3>Total Cost: {{ $totalCost }}</h3>
-        <form action="{{ route('sell.parts.checkout') }}" method="POST">
+        <form  id="checkoutForm" action="{{ route('sell.parts.checkout') }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-primary">Checkout</button>
+            <button href= type="submit" class="btn btn-primary">Checkout</button>
         </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get the form element
+                var checkoutForm = document.getElementById('checkoutForm');
+    
+                // Add event listener for form submission
+                checkoutForm.addEventListener('submit', function(event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+    
+                    // Submit the form
+                    this.submit();
+    
+                    // Redirect to the payments page
+                    window.location.href = "{{ route('payment.form') }}";
+                });
+            });
+        </script>
+
     </div>
 </body>
 </html>

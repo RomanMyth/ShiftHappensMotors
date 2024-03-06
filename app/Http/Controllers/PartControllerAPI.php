@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Part;
-
+use App\Models\Balance;
+//Comments are here to review my code if needed later when working on other pages
 class PartControllerAPI extends Controller
 {
     public function create(){
@@ -62,9 +63,9 @@ public function sellPart(Request $request, $partNumber)
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
+    //Update the specified resource in storage.
+   
     public function update(Request $request, string $id)
     {
         //
@@ -110,16 +111,53 @@ public function sellPart(Request $request, $partNumber)
 
     public function checkout(Request $request)
 {
+    // Get the cart from the session
     $cart = session()->get('cart', []);
+
+    // Calculate total cost of parts in the cart
+    $totalCost = 0;
     foreach ($cart as $partNumber => $quantity) {
-        $quantity = (int)$quantity; // Cast $quantity to integer
         $part = Part::where('PartNumber', $partNumber)->firstOrFail();
-        $part->Quantity -= $quantity;
-        $part->save();
+        // Ensure $quantity is cast to integer and is positive
+
+        $quantity = max(0, (int)$quantity); // Ensure quantity is not negative
+        // Calculate total price for this part based on its price and quantity
+        $totalCost += $part->Price * $quantity;
     }
-    session()->forget('cart');
-    return redirect()->route('sell.parts')->with('success', 'Checkout successful. Congrats on your purchase!.');
+
+   // Update user's balance
+$userId = auth()->id();
+$balanceRecord = Balance::where('user_id', $userId)->first();
+
+if ($balanceRecord) {
+    // If balance record exists, update balance
+    foreach ($cart as $partNumber => $quantity) {
+        $part = Part::where('PartNumber', $partNumber)->firstOrFail();
+        // Ensure $quantity is cast to integer
+        $quantity = (int)$quantity;
+        // Calculate total price for this part based on its price and quantity
+        $totalCost += $part->Price * $quantity;
+    }
+    $balanceRecord->balance += $totalCost;
+    $balanceRecord->save();
+} else {
+    // If balance record does not exist, create new balance record
+    Balance::create([
+        'user_id' => $userId,
+        'balance' => $totalCost,
+    ]);
 }
+
+    // Clear the cart after successful checkout
+    session()->forget('cart');
+
+    // Redirect the user back with a success message
+    return redirect()->route('payment')->with('success', 'Checkout successful. Balance updated.');
+}
+
+    
+
+    
 
 public function removeFromCart($partNumber)
 {
