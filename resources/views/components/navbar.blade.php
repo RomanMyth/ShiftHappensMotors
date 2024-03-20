@@ -25,6 +25,10 @@
         {{ __('Employees Ratings') }}
     </x-nav-link>
 
+    <x-nav-link :href="route('payment.form')" :active="request()->routeIs('payment.form')">
+        {{ __('Make a Payment') }}
+    </x-nav-link>
+
 
     {{-- Check if any user is currently logged in and if that user is a Manager--}}
     @if (Auth::user() !== null && Auth::user()->isAdmin())
