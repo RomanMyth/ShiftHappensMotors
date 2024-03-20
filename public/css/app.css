@@ -1,0 +1,136 @@
+*{
+    font-family: "Montserrat", sans-serif;
+  color: #8d97ad;
+  font-weight: 300;
+  /* background-color: #f8f9fa; */
+}
+
+.maintenance{
+    background-image: url('https://www.kbb.com/wp-content/uploads/2021/08/car-maintenance-guide.jpeg?w=918'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #343a40;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+}
+
+.input-group-text {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.input-group-text:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+@import url(//fonts.googleapis.com/css?family=Montserrat:400,500,700);
+.ui-datepicker {
+    font-size: 14px;
+    z-index: 9999; /* Ensure datepicker appears on top of other elements */
+    position: absolute;
+}
+.ui-datepicker-header {
+    background-color: white;
+    border: none;
+    color: white;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+.ui-datepicker-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.ui-datepicker-prev, .ui-datepicker-next {
+    background-color: white;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    text-decoration: none;
+}
+.ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+    background-color: #007bff;
+    color: #007bff;
+    cursor: pointer;
+}
+.ui-datepicker-calendar {
+    border: none;
+    margin: 0;
+    padding: 0;
+
+}
+.ui-datepicker-calendar td {
+    border: none;
+    padding: 0.25rem;
+    text-align: center;
+    width: 2rem; /* Adjust the width of the calendar cells */
+    height: 2rem; /* Adjust the height of the calendar cells */
+    font-size: 0.9rem; /* Adjust the font size of the numbers */
+    line-height: 1.2rem; /* Adjust the line height to center the numbers vertically */
+}
+
+
+.ui-datepicker-calendar .ui-state-default {
+    background-color: transparent;
+    border: none;
+    color: #343a40;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ensure the numbers fill the cell width */
+    height: 100%; /* Ensure the numbers fill the cell height */
+    line-height: 2rem; /* Adjust the line height to center the numbers vertically */
+}
+
+
+.ui-datepicker-calendar .ui-state-default:hover {
+    background-color: #007bff;
+    color: white;
+    border-radius: 25%; /* Adjust the border radius to change the shape */
+}
+.ui-datepicker-calendar .ui-state-highlight {
+    background-color: #ffc107;
+    color: #343a40;
+    border-radius: 25%;
+}
+.ui-datepicker-calendar .ui-state-active {
+    background-color: #343a40;
+    color: white;
+    border-radius: 25%;
+}

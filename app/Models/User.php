@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'email',
+        'Phone',
+        'Address',
+        'userType',
         'password',
+        'DOB'
     ];
 
     /**
@@ -42,4 +47,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin(){
+        if($this->userType === "Manager"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function isCustomer(){
+        if($this->userType === "Customer"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
