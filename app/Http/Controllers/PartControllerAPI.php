@@ -157,7 +157,7 @@ if ($balanceRecord) {
 
     
 
-    
+
 
 public function removeFromCart($partNumber)
 {

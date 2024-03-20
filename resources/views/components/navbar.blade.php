@@ -9,7 +9,7 @@
         {{ __('Home') }}
     </x-nav-link>
     <x-nav-link :href="route('sell.parts')" :active="request()->routeIs('sell.parts')">
-        {{ __('Parts') }}
+        {{ __('Buy Parts') }}
     </x-nav-link>
     <x-nav-link :href="route('schedule.maintenance')" :active="request()->routeIs('schedule.maintenance')">
         {{ __('Schedule Maintenance') }}
@@ -17,6 +17,10 @@
 
     <x-nav-link :href="route('ratings.create')" :active="request()->routeIs('ratings.create')">
         {{ __('Employees Ratings') }}
+    </x-nav-link>
+
+    <x-nav-link :href="route('payment.form')" :active="request()->routeIs('payment.form')">
+        {{ __('Make a Payment') }}
     </x-nav-link>
 
 
@@ -34,6 +38,7 @@
         <x-nav-link :href="route('schedule')" :active="request()->routeIs('schedule')">
             {{ __('Create Schedule') }}
         </x-nav-link>
+
     @endif
 
     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
