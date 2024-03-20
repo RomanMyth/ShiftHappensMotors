@@ -20,9 +20,7 @@
     </script>
 </head>
 <body>
-    <div class='navbar'>
-        <x-navbar></x-navbar>
-    </div>
+    <x-navbar></x-navbar>
     <div class='container'>
         <form action="{{ route('schedule.create') }}" method="POST">
             @csrf

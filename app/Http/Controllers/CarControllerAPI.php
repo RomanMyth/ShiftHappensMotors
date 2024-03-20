@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarControllerAPI extends Controller
 {
@@ -14,7 +15,8 @@ class CarControllerAPI extends Controller
     public function index()
     {
         $data = Car::all();
-        return view("Home", ["cars"=>$data]);
+        $makes = DB::select("SELECT DISTINCT CONVERT(varchar(max), Make) as Make FROM cars;");
+        return view("Home", ["cars"=>$data, 'makes'=>$makes]);
     }
 
     /**

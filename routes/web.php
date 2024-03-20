@@ -7,8 +7,9 @@ use App\Http\Controllers\MaintenanceControllerAPI;
 use App\Http\Controllers\EmployeeControllerAPI;
 use App\Http\Controllers\PartControllerAPI;
 use App\Http\Middleware\AuthManager;
-use App\Http\Controllers\ScheduleControllerAPI;
 use App\Http\Middleware\AuthEmployee;
+use App\Http\Middleware\AuthCustomer;
+use App\Http\Controllers\ScheduleControllerAPI;
 use App\Http\Controllers\EmployeeRatingControllerAPI;
 use App\Http\Controllers\PaymentControllerAPI;
 
@@ -33,7 +34,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-//checks if a user is logged in. If not brings them to the login page
+//checks if a user is logged in when accessing a route inside. If they are not, brings them to the login page
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -55,11 +56,12 @@ Route::middleware('auth')->group(function () {
     Route::middleware([AuthEmployee::class])->group(function(){
         Route::get('/viewSchedule', [ScheduleControllerAPI::class, 'index'])->name('schedule.view');
     });
+
+    //Routes Accessed by customers only
+    Route::middleware([AuthCustomer::class])->group(function(){
+
+    });
 });
-
-
-
-// Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'index'])->name("schedule.maintenance");
 
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
@@ -68,6 +70,9 @@ Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->nam
 Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::class, 'removeFromCart'])->name('sell.parts.removeFromCart');
 
 Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm'])->name("schedule.maintenance");
+
+Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store']);
+
 Route::get('/checkAppointments', [MaintenanceControllerAPI::class, 'checkAppointments'] );
 Route::get('/getUnavailableDates', [MaintenanceControllerAPI::class, 'getUnavailableDates']);
 Route::get('/getAvailableTimes', [MaintenanceControllerAPI::class, 'getAvailableTimes']);
