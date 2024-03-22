@@ -18,8 +18,7 @@
     </style>
 </head>
 <body>
-    <x-navbar>
-    </x-navbar>
+    <x-navbar></x-navbar>
     <div class="emp-container p-5">
         <h1>Add Employee</h1>
         <form action="{{ route('employees.store') }}" method="POST" class="container">
