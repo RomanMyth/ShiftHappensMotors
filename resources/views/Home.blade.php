@@ -203,6 +203,21 @@
                 padding: 10px;
             }
 
+            .vehicleInfo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+
+            /* .purchase{
+                display: flex;
+                flex-direction: row;
+            } */
+
+            /* .overtop{
+                pointer-events: none;
+            } */
+
             @media only screen and (max-width: 1000px){
                 #banner{
                     justify-content: center;
@@ -360,8 +375,8 @@
                                     </div>
                             
                                     {{-- Short description of car that clicks for modal --}}
-                                    <div class="col-lg-6" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
-                                        <div class="row">
+                                    <div class="col-lg-6 vehicleInfo">
+                                        <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item">
                                                 Make: {{ $cars[$i]->Make }}
                                             </div>
@@ -374,6 +389,16 @@
                                             <div class="desc-item">
                                                 Price: {{ $cars[$i]->Price }}
                                             </div>
+                                        </div>
+                                        <div class="row purchase">
+                                            <form class="col-lg-6" action="" class="overtop">
+                                                <input type="hidden" value={{ $cars[$i]->Price }}>
+                                                <button type="submit">Buy</button>
+                                            </form>
+                                            <form class="col-lg-6" action="" class="overtop">
+                                                <input type="hidden" value={{ $cars[$i]->Price/1000 }}>
+                                                <button type="submit">Lease</button>
+                                            </form>
                                         </div>
 
                                         {{-- Modal for description that shows all desc items of vehicle --}}
