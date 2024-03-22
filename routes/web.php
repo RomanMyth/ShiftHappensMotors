@@ -86,4 +86,5 @@ Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdow
 Route::get('/payment', [PaymentControllerAPI::class, 'showPaymentForm'])->name('payment.form');
 Route::post('/payment/process', [PaymentControllerAPI::class, 'processPayment'])->name('payment.process');
 
+
 require __DIR__.'/auth.php';
