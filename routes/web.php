@@ -78,6 +78,15 @@ Route::get('/getUnavailableDates', [MaintenanceControllerAPI::class, 'getUnavail
 Route::get('/getAvailableTimes', [MaintenanceControllerAPI::class, 'getAvailableTimes']);
 Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppointmentUnavailable']);
 Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
+Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store'])->name('storeAppointment');
+
+Route::get('/maintenanceSchedule', [MaintenanceControllerAPI::class, 'show'])->name("viewSchedule.maintenance");
+Route::delete('/appointments', [MaintenanceControllerAPI::class,'destroy'])->name('appointments.destroy');
+// Route::get('/search', [MaintenanceControllerAPI::class, 'search']);
+Route::get('/search', [MaintenanceControllerAPI::class, 'search'])->name('search.appointments');
+Route::get('/filter-appointments-by-month', [MaintenanceControllerAPI::class, 'filterByMonth'])->name('filter.appointments.by.month');
+Route::delete('/appointments/{appointmentId}', [MaintenanceControllerAPI::class, 'destroy'])->name('appointments.destroy');
+
 
 Route::get('/ratings/create', [EmployeeRatingControllerAPI::class, 'create'])->name('ratings.create');
 Route::post('/ratings', [EmployeeRatingControllerAPI::class, 'store'])->name('ratings.store');
