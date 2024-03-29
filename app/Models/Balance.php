@@ -10,7 +10,7 @@ class Balance extends Model
     use HasFactory;
 
    
-    protected $table = 'balance';
+    protected $table = 'Balance';
     protected $primaryKey = 'balance_ID';
     
     public $timestamps = false;

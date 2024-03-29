@@ -57,4 +57,30 @@ class CarControllerAPI extends Controller
     public function addVehicleForm(){
         return view("addVehicle");
     }
+
+    public function showBuyVehicleDetails(Request $request)
+    {
+        $car = Car::where('Vin', $request["car_details"])->first();
+        if (!$car) {
+            // Handle the case where the car is not found
+            abort(404);
+        }
+    
+        // Pass the car data to the view, including the picture URL
+        return view('BuyVehicleDetails', compact('car'));
+    }
+
+    public function showLeaseVehicleDetails(Request $request)
+    {
+        $car = Car::where('Vin', $request["car_details"])->first();
+        if (!$car) {
+            // Handle the case where the car is not found
+            abort(404);
+        }
+    
+        // Pass the car data to the view, including the picture URL
+        return view('LeaseVehicleDetails', compact('car'));
+    }
+    
+
 }

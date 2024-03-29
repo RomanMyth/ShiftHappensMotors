@@ -40,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/buy/{vin}', [CarControllerAPI::class, 'showBuyVehicleDetails'])->name('car.buy');
+    Route::get('/lease', [CarControllerAPI::class, 'showLeaseVehicleDetails'])->name('car.leaseDetails');
+
     //Routes Accessed by a Manager Only
     Route::middleware([AuthManager::class])->group(function(){
         Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
@@ -59,9 +62,12 @@ Route::middleware('auth')->group(function () {
 
     //Routes Accessed by customers only
     Route::middleware([AuthCustomer::class])->group(function(){
-
+      
     });
 });
+
+
+
 
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');

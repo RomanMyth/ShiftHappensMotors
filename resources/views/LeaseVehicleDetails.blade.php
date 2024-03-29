@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
+    <title>Lease</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
@@ -39,7 +39,7 @@
         <h5>{{ $car->Make }} {{ $car->Model }} {{ $car->Year }}</h5>
     </div>
     <div class="card-body">
-        <p><strong>Price:</strong> ${{ $car->Price }}</p>
+        <p><strong>Price Per Day:</strong> ${{ (int)$car->Price/100 }}</p>
         <p><strong>Color:</strong> {{ $car->Color }}</p>
         <!-- Add more details here -->
 
@@ -48,13 +48,13 @@
     </div>
 </div>
 
-
         <!-- Form for buying the car -->
         <form action="" method="POST">
             @csrf
             <!-- Add hidden input fields for car details -->
             <input type="hidden" name="vin" value="{{ $car->Vin }}">
-            <input type="hidden" name="price" value="{{ $car->Price }}">
+            <input type="hidden" name="price" value="{{ $car->Price/10 }}">
+
         
             <!-- Add form fields for customer information -->
             <div class="mb-3">
@@ -68,7 +68,7 @@
             <!-- Add more form fields for other customer information -->
         
             <!-- Add a submit button -->
-            <button type="submit" class="btn btn-primary">Buy Now</button>
+            <button type="submit" class="btn btn-primary">Lease Now</button>
         </form>
         
     </div>
