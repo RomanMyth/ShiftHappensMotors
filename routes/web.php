@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/buy/{vin}', [CarControllerAPI::class, 'showBuyVehicleDetails'])->name('car.buy');
+    Route::get('/buy', [CarControllerAPI::class, 'showBuyVehicleDetails'])->name('car.buy');
     Route::get('/lease', [CarControllerAPI::class, 'showLeaseVehicleDetails'])->name('car.leaseDetails');
 
     //Routes Accessed by a Manager Only
@@ -100,6 +100,11 @@ Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdow
 
 Route::get('/payment', [PaymentControllerAPI::class, 'showPaymentForm'])->name('payment.form');
 Route::post('/payment/process', [PaymentControllerAPI::class, 'processPayment'])->name('payment.process');
+
+
+Route::post('/update-balance', [CarControllerAPI::class, 'updateBalance'])->name('update.balance');
+Route::post('/lease/vehicle', [CarControllerAPI::class, 'storeLease'])->name('lease.vehicle');
+
 
 
 require __DIR__.'/auth.php';

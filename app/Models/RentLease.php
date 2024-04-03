@@ -9,6 +9,7 @@ class RentLease extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'RentLease';
     protected $primaryKey = 'LeaseID';
     protected $fillable = [
         'UserID',

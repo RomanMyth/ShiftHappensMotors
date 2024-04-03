@@ -50,11 +50,11 @@
 
 
         <!-- Form for buying the car -->
-        <form action="" method="POST">
+        <form action="{{ route('update.balance') }}" method="POST">
             @csrf
-            <!-- Add hidden input fields for car details -->
-            <input type="hidden" name="vin" value="{{ $car->Vin }}">
+            <!-- Add hidden input fields for necessary data -->
             <input type="hidden" name="price" value="{{ $car->Price }}">
+            <!-- Add additional hidden fields if needed -->
         
             <!-- Add form fields for customer information -->
             <div class="mb-3">
@@ -65,11 +65,24 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
+            <div class="mb-3">
+                <label for="cardNumber" class="form-label">Credit Card Number</label>
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+            </div>
+            <div class="mb-3">
+                <label for="expiryDate" class="form-label">Expiry Date</label>
+                <input type="text" class="form-control" id="expiryDate" name="expiryDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cvv" name="cvv" required>
+            </div>
             <!-- Add more form fields for other customer information -->
         
             <!-- Add a submit button -->
             <button type="submit" class="btn btn-primary">Buy Now</button>
         </form>
+        
         
     </div>
 </body>
