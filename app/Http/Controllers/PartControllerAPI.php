@@ -97,51 +97,70 @@ class PartControllerAPI extends Controller
     }
 
     public function addToCart(Request $request)
-    {
-        $partNumber = $request->input('partNumber');
-        $quantity = $request->input('quantity');
+{
+    $partNumber = $request->input('partNumber');
+    $quantity = $request->input('quantity');
 
-        // Retrieve the part from the database
-        $part = Part::where('PartNumber', $partNumber)->firstOrFail();
+    // Retrieve the part from the database
+    $part = Part::where('PartNumber', $partNumber)->firstOrFail();
 
-        // Get the current cart items from session or initialize an empty array
-        $cart = session()->get('cart', []);
+    // Get the current cart items from session or initialize an empty array
+    $cart = session()->get('cart', []);
 
-        // Check if the part is already in the cart
-        if (array_key_exists($partNumber, $cart)) {
-            // Increment the quantity if the part is already in the cart
-            $cart[$partNumber]['quantity'] += $quantity;
-        } else {
-            // Add the part to the cart with the given quantity
-            $cart[$partNumber] = [
-                'quantity' => $quantity,
-                'price' => $part->Price,
-                'name' => $part->PartName
-            ];
-        }
-
-        // Store the updated cart in session
-        session()->put('cart', $cart);
-
-        return redirect()->back()->with('success', 'Part added to cart successfully.');
+    // Check if the part is already in the cart
+    if (array_key_exists($partNumber, $cart)) {
+        // Increment the quantity if the part is already in the cart
+        $cart[$partNumber]['quantity'] += $quantity;
+    } else {
+        // Add the part to the cart with the given quantity
+        $cart[$partNumber] = [
+            'quantity' => $quantity,
+            'price' => $part->Price,
+            'name' => $part->PartName
+        ];
     }
+
+    // Store the updated cart in session
+    session()->put('cart', $cart);
+
+    return redirect()->back()->with('success', 'Part added to cart successfully.');
+}
 
     
 
 
    
 
-    public function checkout(Request $request)
+public function checkout(Request $request)
 {
     // Get the cart from the session
     $cart = session()->get('cart', []);
 
-    // Calculate total cost of parts in the cart
-    $totalCost = 0;
-    foreach ($cart as $partNumber => $quantity) {
+    // Initialize grand total
+    $grandTotal = 0;
+
+    // Calculate grand total of all parts in the cart
+    foreach ($cart as $partNumber => $item) {
+        // Retrieve the part from the database
         $part = Part::where('PartNumber', $partNumber)->firstOrFail();
-        $quantity = max(0, (int)$quantity); // Ensure quantity is not negative
-        $totalCost += $part->Price * $quantity;
+
+        // Ensure quantity is not negative
+        $quantity = max(0, (int)$item['quantity']);
+
+        // Calculate total cost for this part (price * quantity)
+        $partTotalCost = $part->Price * $quantity;
+
+
+         // Ensure the quantity bought does not exceed the available quantity
+         $quantityBought = min($quantity, $part->Quantity);
+
+         // Subtract the quantity bought from the available quantity of the part in the database
+         $part->Quantity -= $quantityBought;
+         $part->save();
+
+
+        // Add the total cost for this part to the grand total
+        $grandTotal += $partTotalCost;
     }
 
     // Get the authenticated user's ID
@@ -154,11 +173,11 @@ class PartControllerAPI extends Controller
         // If balance record does not exist, create new balance record
         Balance::create([
             'user_ID' => $userId,
-            'balance' => $totalCost, // Initial balance is the total cost of parts
+            'balance' => $grandTotal, // Initial balance is the grand total of all parts
         ]);
     } else {
-        // If balance record exists, update balance
-        $balance->balance += $totalCost;
+        // If balance record exists, update balance by adding the grand total
+        $balance->balance += $grandTotal;
         $balance->save();
     }
 
@@ -169,21 +188,24 @@ class PartControllerAPI extends Controller
     return redirect()->back()->with('success', 'Checkout successful. Balance updated.');
 }
 
+
     
 
-public function removeFromCart($partNumber)
-{
-    $cart = session()->get('cart', []);
+    
 
-    // Remove the specified part from the cart
-    unset($cart[$partNumber]);
-
-    // Update the cart in session
-    session()->put('cart', $cart);
-
-    // Redirect back to the sell parts page with a success message
-    return redirect()->route('sell.parts')->with('success', 'Item removed from cart.');
-}
+    public function removeFromCart($partNumber)
+    {
+        $cart = session()->get('cart', []);
+    
+        // Remove the specified part from the cart
+        unset($cart[$partNumber]);
+    
+        // Update the cart in session
+        session()->put('cart', $cart);
+    
+        // Redirect back to the sell parts page with a success message
+        return redirect()->route('sell.parts')->with('success', 'Item removed from cart.');
+    }
 
 
 
