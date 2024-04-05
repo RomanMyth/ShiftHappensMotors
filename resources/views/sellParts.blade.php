@@ -153,12 +153,17 @@
         </table>
 
         <h3>Total Cost: {{ $totalCost }}</h3>
-        <form  id="checkoutForm" action="{{ route('sell.parts.checkout') }}" method="POST">
+        <form id="checkoutForm" action="{{ route('sell.parts.checkout') }}" method="POST">
             @csrf
-            <button href= type="submit" class="btn btn-primary">Checkout</button>
+            <input type="hidden" name="userId" value="{{ auth()->id() }}">
+            <input type="hidden" name="totalCost" value="{{ $totalCost }}">
+            <button type="submit" class="btn btn-primary">Checkout</button>
         </form>
+        
+        
+        
 
-        <script>
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Get the form element
                 var checkoutForm = document.getElementById('checkoutForm');
@@ -175,7 +180,7 @@
                     window.location.href = "{{ route('payment.form') }}";
                 });
             });
-        </script>
+        </script> --}}
 
     </div>
 </body>

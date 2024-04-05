@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [ProfileController::class, "dashboard"])->name('dashboard');
 
+    Route::get('/buy', [CarControllerAPI::class, 'showBuyVehicleDetails'])->name('car.buy');
+    Route::get('/lease', [CarControllerAPI::class, 'showLeaseVehicleDetails'])->name('car.leaseDetails');
+
     //Routes Accessed by a Manager Only
     Route::middleware([AuthManager::class])->group(function(){
         Route::get('/addEmployee', [EmployeeControllerAPI::class, 'create'])->name('employees.create');
@@ -64,6 +67,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/deleteFavorite', [CarControllerAPI::class, 'deleteFavorite'])->name('deleteFavorite');
     });
 });
+
+
+
 
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
@@ -96,6 +102,11 @@ Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdow
 
 Route::get('/payment', [PaymentControllerAPI::class, 'showPaymentForm'])->name('payment.form');
 Route::post('/payment/process', [PaymentControllerAPI::class, 'processPayment'])->name('payment.process');
+
+
+Route::post('/update-balance', [CarControllerAPI::class, 'updateBalance'])->name('update.balance');
+Route::post('/lease/vehicle', [CarControllerAPI::class, 'storeLease'])->name('lease.vehicle');
+
 
 
 require __DIR__.'/auth.php';

@@ -483,15 +483,18 @@
                                             </div>
                                         </div>
                                         <div class="row purchase">
-                                            <form class="col-lg-6" action="" class="overtop">
-                                                <input type="hidden" value={{ $cars[$i]->Price }}>
-                                                <button type="submit">Buy</button>
+                                            <form class="col-lg-6" action="{{ route('car.buy', ['vin' => $cars[$i]->Vin]) }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="car_details" value="{{$cars[$i]->Vin }}">
+                                                <button type="submit" class="btn btn-primary">Buy</button>
                                             </form>
-                                            <form class="col-lg-6" action="" class="overtop">
-                                                <input type="hidden" value={{ $cars[$i]->Price/1000 }}>
-                                                <button type="submit">Lease</button>
+                                            <form class="col-lg-6" action="{{ route('car.leaseDetails') }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="car_details" value="{{ $cars[$i]->Vin }}">
+                                                <button type="submit" class="btn btn-primary">Lease</button>
                                             </form>
                                         </div>
+                                        
 
                                         {{-- Modal for description that shows all desc items of vehicle --}}
                                         <div class="modal fade" id="{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}" role="dialog">
