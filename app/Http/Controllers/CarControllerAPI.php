@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CarControllerAPI extends Controller
 {
@@ -16,7 +19,15 @@ class CarControllerAPI extends Controller
     {
         $data = Car::all();
         $makes = DB::select("SELECT DISTINCT CONVERT(varchar(max), Make) as Make FROM cars;");
-        return view("Home", ["cars"=>$data, 'makes'=>$makes]);
+
+        $favorites = [];
+        if(Auth::user()){
+            $id = Auth::user()->id;
+            $favorites = DB::select("SELECT Vin FROM favorites WHERE User_ID = $id;");
+        }
+        
+        //return $favorites;
+        return view("Home", ["cars"=>$data, 'makes'=>$makes, 'favorites'=>$favorites]);
     }
 
     /**
@@ -52,6 +63,24 @@ class CarControllerAPI extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function favorite(Request $request){
+        if(!Auth::user()){
+            return auth()->check();
+        }
+        
+        $Vin = $request->Vin;
+        $User_ID = auth()->id();
+
+        Favorite::create(['User_ID' => $User_ID, 'Vin' => $Vin]);
+    }
+
+    public function deleteFavorite(Request $request){
+        $Vin = $request->Vin;
+        $User_ID = auth()->id();
+
+        Favorite::where(['User_ID' => $User_ID, 'Vin' => $Vin])->delete();
     }
 
     public function addVehicleForm(){
