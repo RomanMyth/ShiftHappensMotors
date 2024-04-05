@@ -129,8 +129,6 @@ class PartControllerAPI extends Controller
     
 
 
-   
-
 public function checkout(Request $request)
 {
     // Get the cart from the session
@@ -185,7 +183,7 @@ public function checkout(Request $request)
     session()->forget('cart');
 
     // Redirect the user back with a success message
-    return redirect()->back()->with('success', 'Checkout successful. Balance updated.');
+    return redirect()->route('payment')->with('success', 'Checkout successful. Balance updated.');
 }
 
 
