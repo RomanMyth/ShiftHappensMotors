@@ -10,5 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 class Car extends Model
 {
     use HasFactory; use HasApiTokens, HasFactory, Notifiable;
-    public $timestamps = false;protected $fillable = ["Vin", "Make", "Model", "Year", "Price", "Available", "Image", "gasType", "Color", "vehicleType", "Mileage", "Transmission", "driveTrain", "Engine", "interiorColor", "newOrUsed"];
+    public $timestamps = false;
+    protected $fillable = ["Vin", "Make", "Model", "Year", "Price", "Available", "Image", "gasType", "Color", "vehicleType", "Mileage", "Transmission", "driveTrain", "Engine", "interiorColor", "newOrUsed"];
 }

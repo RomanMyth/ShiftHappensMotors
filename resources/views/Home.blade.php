@@ -3,18 +3,76 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>ShiftHappensMotors</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <script>
             $(document).ready(function(){
+                //check when a a vehicle has the 'favorite' button clicked
+                $("ion-icon").click(function(){
+
+                    //save the element that triggered the function
+                    var trigger = this;
+
+                    //check if the vehicle is not favorited
+                    if(!$(trigger).hasClass("fav")){
+                        try{
+                            $.ajax({
+                                url: "/favorite",
+                                type: 'POST',
+                                data: {Vin:$(trigger).attr("data-vin")},
+                                dataType: 'JSON',
+                                headers: {
+                                    'X_CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                error: function(xhr) {
+                                    if(xhr.status == 401){
+                                        window.location.href = '/login'
+                                    }
+                                }
+                            }) 
+                        }
+                        catch(err){
+                            alert(err);
+                        }
+
+                        $(trigger).addClass("fav");
+                    }
+
+                    //else unfavorite it
+                    else{
+                        $.ajax({
+                            url: "/deleteFavorite",
+                            type: 'DELETE',
+                            data: {_token: $('meta[name="csrf-token"]').attr('content'), Vin:$(trigger).attr("data-vin")},
+                            dataType: 'JSON'
+                        })
+
+                        $(trigger).removeClass("fav");
+                    }
+
+                });
+
+
                 Colors = [];
+                interiorColors = [];
+                
                 filters = {
                     "Colors" : Colors,
+                    "Interior" : interiorColors,
                     "Make" : "",
                     "MinPrice" : 0,
-                    "MaxPrice" : 0
+                    "MaxPrice" : 0,
+                    "Age": "",
+                    "MinMiles": 0,
+                    "MaxMiles": 0,
+                    "Transmission" : "",
+                    "Gas" : ""
                 };
 
                 $(".color-filter").change(function(){
@@ -24,6 +82,16 @@
                     }
                     else{
                         filters.Colors = filters.Colors.filter(item => item !== current_color);
+                    }
+                });
+
+                $(".interior-color").change(function(){
+                    current_color = this.value;
+                    if(this.checked){
+                        filters.Interior.push(current_color);
+                    }
+                    else{
+                        filters.Interior = filters.Interior.filter(item => item !== current_color);
                     }
                 });
 
@@ -39,38 +107,35 @@
                     filters.MaxPrice =  this.value;
                 });
 
+                $(".age").change(function(){
+                    filters.Age = this.value;
+                });
+
+                $(".min-mileage").change(function(){
+                    filters.MinMiles = this.value;
+                });
+
+                $(".max-mileage").change(function(){
+                    filters.MaxMiles = this.value;
+                });
+
+                $(".transmission").change(function(){
+                    filters.Transmission = this.value;
+                });
+
+                $(".gas-type").change(function(){
+                    filters.Gas = this.value;
+                });
+
                 $(".filter-option").change(function(){
                     $(".vehicle").each(function(){
-                        if((filters.Colors.includes($(this).attr("data-color")) || filters.Colors.length == 0) && (filters.Make == $(this).attr("data-make") || filters.Make == "") && (filters.MinPrice < parseFloat($(this).attr("data-price")) || filters.MinPrice == 0) && (filters.MaxPrice > parseFloat($(this).attr("data-price")) || filters.MaxPrice == 0)){
+                        if((filters.Colors.includes($(this).attr("data-color")) || filters.Colors.length == 0) && (filters.Interior.includes($(this).attr("data-interior")) || filters.Interior.length == 0) && (filters.Make == $(this).attr("data-make") || filters.Make == "") && (filters.MinPrice <= parseFloat($(this).attr("data-price")) || filters.MinPrice == 0) && (filters.MaxPrice >= parseFloat($(this).attr("data-price")) || filters.MaxPrice == 0) && (filters.Age == $(this).attr("data-age") || filters.Age == "") && (filters.MinMiles < $(this).attr("data-mileage") || filters.MinMiles == 0) && (filters.MaxMiles > $(this).attr("data-mileage") || filters.MaxMiles == 0) && (filters.Transmission == $(this).attr("data-transmission") || filters.Transmission == "") && (filters.Gas == $(this).attr("data-gas") || filters.Gas == "")){
                             $(this).show();
                         }
                         else{
                             $(this).hide();
                         }
                     });
-
-                    // for(var key in filters){
-                    //     if(key == "Colors"){
-                    //         if(Colors.length == 0){
-                    //             $(".vehicle").each(function(){
-                    //                 $(this).show();
-                    //             });
-                    //         }
-                    //         else{
-                    //             $(".vehicle").each(function(){
-                    //                 if(!Colors.includes($(this).attr("data-color"))){
-                    //                     $(this).hide();
-                    //                 }
-                    //                 else{
-                    //                     $(this).show();
-                    //                 }
-                    //             });
-                    //         }
-                    //     }
-                    //     if(key == "Make"){
-
-                    //     }
-                    // }
                 });
             });
         </script>
@@ -94,6 +159,10 @@
                 display: flex;
                 flex-direction: row;
                 /* background-color: red;  */
+            }
+            #con{
+                width: 100%;
+                height: 100%;
             }
             .row{
                 display: flex;
@@ -134,13 +203,6 @@
                 background-size: cover; */
             }
 
-            .border-end{
-                /* background-image: url(https://t3.ftcdn.net/jpg/02/78/85/18/240_F_278851891_YOcWwTNJ4XoaudVUf4qXvpBb9ROrzBQO.jpg);
-                background-repeat: no-repeat;
-                background-size: cover;
-                border-radius: 15px; */
-            }
-
             .vehicleCon{
                 height: 100%;
                 width: 80%;
@@ -179,6 +241,60 @@
                 font-size: 2em;
             }
 
+            .col-lg-2{
+                height: fit-content;
+                padding: 10px;
+            }
+
+            .vehicleInfo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: stretch;
+            }
+
+            .favorite{
+                width: 100%;
+                height: 10%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                align-content: center;
+                margin: 0;
+            }
+
+            .favorite button{
+                height: 100%;
+                border: none;
+                background: none;
+            }
+
+            .fav{
+                fill: red;
+            }
+
+            ion-icon{
+                height: 10%;
+                width: 20px;
+                stroke: black;
+                stroke-width: 4px;
+                stroke-linejoin: round;
+                paint-order: stroke;
+                transition: 200ms;
+            }
+            ion-icon:hover{
+                fill: red;
+            }
+
+            /* .purchase{
+                display: flex;
+                flex-direction: row;
+            } */
+
+            /* .overtop{
+                pointer-events: none;
+            } */
+
             @media only screen and (max-width: 1000px){
                 #banner{
                     justify-content: center;
@@ -203,12 +319,12 @@
         </x-navbar>
 
         <div class="container-fluid p-5">
-            <div class="row">
-                <div class="col-lg-2">
+            <div class="row" id="con">
+                <div class="col-lg-2 sticky-top">
                     <div id="filter-header">
                         Filter Vehicles
                     </div>
-                        Color: 
+                    Color: 
                     <div class="row">
                         <div class="col-lg-3">
                             <input type="checkbox" id="Red" name="color" value="Red" class="color-filter filter-option">
@@ -224,33 +340,94 @@
                         </div>
                         <div class="col-lg-3">
                             <input type="checkbox" id="White" name="color" value="White" class="color-filter filter-option">
-                            <label for="White">white</label>
+                            <label for="White">White</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="checkbox" id="Green" name="color" value="Green" class="color-filter filter-option">
+                            <label for="Green">Green</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="checkbox" id="Silver" name="color" value="Silver" class="color-filter filter-option">
+                            <label for="Silver">Silver</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="checkbox" id="Orange" name="color" value="Orange" class="color-filter filter-option">
+                            <label for="Orange">Orange</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="checkbox" id="Gray" name="color" value="Gray" class="color-filter filter-option">
+                            <label for="Gray">Gray</label>
+                        </div>
+                    </div>
+                    Interior Color: 
+                    <div class="row">
+                        <div class="col-lg-3">
+                            Black
+                            <input type="checkbox" value="Black" class="interior-color filter-option">
+                        </div>
+                        <div class="col-lg-3">
+                            Gray
+                            <input type="checkbox" value="Gray" class="interior-color filter-option">
+                        </div>
+                        <div class="col-lg-3">
+                            White
+                            <input type="checkbox" value="White" class="interior-color filter-option">
                         </div>
                     </div>
                     Make:
                     <div class="row">
                         <select name="make" id="" class="make-filter filter-option">
-                            <option value="">None</option>
+                            <option value="">All</option>
                             @foreach ($makes as $make)
                                 <option value="{{ $make->Make }}">{{ $make->Make }}</option>
                             @endforeach
                         </select>
                     </div>
-                    Minimum Price
+                    Minimum Price:
                     <div>
                         <input type="number" class="min-filter filter-option">
                     </div>
-                    Maximum Price
+                    Maximum Price:
                     <div>
                         <input type="number" class="max-filter filter-option">
                     </div>
-                    {{-- <input type="radio" class="radio-item" name="Color" id="red">
-                    <label for="red" class="label-item"><img src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png" alt="Color: Red"></label> --}}
+                    New or Used:
+                    <div>
+                        <select name="age" class="age filter-option">
+                            <option value="">All</option>
+                            <option value="0">New</option>
+                            <option value="1">Used</option>
+                        </select>
+                    </div>
+                    Minimum Mileage:
+                    <div>
+                        <input type="number" class="min-mileage filter-option">
+                    </div>
+                    Maximum Mileage:
+                    <div>
+                        <input type="number" class="max-mileage filter-option">
+                    </div>
+                   Transmission:
+                   <div>
+                        <select name="transmission" class="transmission filter-option">
+                            <option value="">All</option>
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+                   </div>
+                   Gas Type:
+                   <div>
+                        <select name="Gas" class="gas-type filter-option">
+                            <option value="">All</option>
+                            <option value="Gas">Gas</option>
+                            <option value="Diesel">Diesel</option>
+                        </select>
+                   </div>
                 </div>
                 <div class="col-lg-10">
                     <div class="row">
                         @for($i = 0; $i < count($cars); $i++)
-                            <div class="col-lg-6 vehicle" data-color="{{ $cars[$i]->Color }}" data-make="{{ $cars[$i]->Make }}" data-price="{{ $cars[$i]->Price }}">
+                            <div class="col-lg-6 vehicle" data-color="{{ $cars[$i]->Color }}" data-make="{{ $cars[$i]->Make }}" data-price="{{ $cars[$i]->Price }}" data-age="{{ $cars[$i]->newOrUsed }}" data-mileage="{{ $cars[$i]->Mileage }}" data-transmission="{{ $cars[$i]->Transmission }}" data-interior="{{ $cars[$i]->interiorColor }}" data-gas="{{ $cars[$i]->gasType }}">
                                 <div class="row vehicleCon">
                                     <div class="col-lg-6 border-end">
 
@@ -264,7 +441,7 @@
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <div class="modal-body image-modal">
                                                         <img src="{{ $cars[$i]->Image }}" alt="">
@@ -275,8 +452,23 @@
                                     </div>
                             
                                     {{-- Short description of car that clicks for modal --}}
-                                    <div class="col-lg-6" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
-                                        <div class="row">
+                                    <div class="col-lg-6 vehicleInfo">
+                                        @php
+                                            $count = 0;
+                                            foreach($favorites as $favorite){
+                                                if($cars[$i]->Vin == $favorite->Vin){
+                                                    $count++;
+                                                    break;
+                                                }
+                                            }
+                                        //jon and amaury was here
+                                        @endphp
+                                        @if($count == 0)
+                                            <ion-icon name="heart" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                        @else
+                                            <ion-icon name="heart" class="fav" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                        @endif
+                                        <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item">
                                                 Make: {{ $cars[$i]->Make }}
                                             </div>
@@ -287,16 +479,29 @@
                                                 Year: {{ $cars[$i]->Year }}
                                             </div>
                                             <div class="desc-item">
-                                                Price: {{ $cars[$i]->Price }}
+                                                Price: ${{ $cars[$i]->Price }}
                                             </div>
                                         </div>
+                                        <div class="row purchase">
+                                            <form class="col-lg-6" action="{{ route('car.buy', ['vin' => $cars[$i]->Vin]) }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="car_details" value="{{$cars[$i]->Vin }}">
+                                                <button type="submit" class="btn btn-primary">Buy</button>
+                                            </form>
+                                            <form class="col-lg-6" action="{{ route('car.leaseDetails') }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="car_details" value="{{ $cars[$i]->Vin }}">
+                                                <button type="submit" class="btn btn-primary">Lease</button>
+                                            </form>
+                                        </div>
+                                        
 
                                         {{-- Modal for description that shows all desc items of vehicle --}}
                                         <div class="modal fade" id="{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}" role="dialog">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">

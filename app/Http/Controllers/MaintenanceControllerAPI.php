@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Maintenance;
+use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Pagination\Paginator;
 
 
 class MaintenanceControllerAPI extends Controller
@@ -93,9 +97,16 @@ class MaintenanceControllerAPI extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        
+
+
+        // Retrieve all appointments from the database
+    $appointments = Maintenance::all();
+
+    // Pass the appointments data to the view
+    return view('viewMaintenanceSchedule', ['appointments' => $appointments]);
+
     }
 
     /**
@@ -109,13 +120,104 @@ class MaintenanceControllerAPI extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(Request $request, $appointmentId)
+{
+    // Find the appointment by appointment ID
+    $appointment = Maintenance::where('appointment_id', $appointmentId)->first();
+
+    // If the appointment exists, delete it
+    if ($appointment) {
+        $appointment->delete();
+        return response()->json(['message' => 'Appointment deleted successfully'], 200);
+    } else {
+        return response()->json(['message' => 'Appointment not found'], 404);
     }
+}
+
+
+    public function search(Request $request)
+    {
+        // Retrieve the search query from the request
+        $query = $request->input('query');
+        $selectedMonth = $request->input('month');
+
+        // Initialize a collection to hold the matching appointments
+        $matchingAppointments = collect([]);
+
+        // Check if the query contains a month name
+        if ($selectedMonth) {
+            // Perform the search query for appointments matching the month
+            $monthAppointments = Maintenance::whereMonth('date', Carbon::parse($selectedMonth)->month)->get();
+            // Merge the matching appointments into the collection
+            $matchingAppointments = $matchingAppointments->merge($monthAppointments);
+        }
+
+        // Perform additional search for other fields if applicable
+        if ($query) {
+            $otherAppointments = Maintenance::where('email', 'like', "%$query%")
+                ->orWhere('phoneNumber', 'like', "%$query%")
+                ->orWhere('maintenanceInstruction', 'like', "%$query%")
+                ->orWhere('apptTime', 'like', "%$query%")
+                ->get();
+
+            // Merge the matching appointments into the collection
+            $matchingAppointments = $matchingAppointments->merge($otherAppointments);
+        }
+
+        // Pass the matched appointments data to the view
+        return view('viewMaintenanceSchedule', ['appointments' => $matchingAppointments]);
+    }
+
+    public function filterByMonth(Request $request)
+{
+    $selectedMonth = $request->input('month');
+    // Log selected month
+    Log::info("Selected Month: " . $selectedMonth);
+
+    if ($selectedMonth) {
+        $monthAppointments = Maintenance::whereMonth('date', Carbon::parse($selectedMonth)->month)->get();
+        // Log retrieved appointments
+        Log::info("Appointments: " . $monthAppointments);
+        return response()->json(['appointments' => $monthAppointments]);
+    } else {
+        // Handle invalid input or return all appointments if no month is selected
+        $appointments = Maintenance::all();
+        return response()->json(['appointments' => $appointments]);
+    }
+}
+
+
+
+    // // Retrieve the search query from the request
+    // $query = $request->input('query');
+
+    // // Perform the search query
+    // $appointments = Maintenance::where('email', 'like', "%$query%")
+    //     ->orWhere('phoneNumber', 'like', "%$query%")
+    //     ->orWhere('maintenanceInstruction', 'like', "%$query%")
+    //     ->orWhere('date', 'like', "%$query%")
+    //     ->orWhere('apptTime', 'like', "%$query%")
+    //     ->get();
+
+    // // Pass the matched appointments data to the view
+    // return view('viewMaintenanceSchedule', ['appointments' => $appointments]);
+
+
+
+
+    public function getAppointments()
+    {
+    $appointments = Maintenance::all();
+    return response()->json(['appointments' => $appointments]);
+    }
+
 
     public function schMaintenanceForm(){
         return view('scheduleMaintenance');
+    }
+
+    public function viewMaintenanceScheduleForm(){
+        return view('viewMaintenanceSchedule');
     }
 
 

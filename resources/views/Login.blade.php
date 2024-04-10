@@ -25,7 +25,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
-                <form action="{{url('/Register')}}" method="GET" class="p-5">
+                <form action="{{url('/register')}}" method="GET" class="p-5">
                     <p>Not Registered?</p>
                     <button type="submit" class="btn btn-secondary">Register Now</button>
                 </form>

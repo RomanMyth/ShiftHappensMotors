@@ -10,7 +10,7 @@ class Maintenance extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-            // 'Appointment_ID',
+            'appointment_ID',
             'email',
             'phoneNumber',
             'vin',
