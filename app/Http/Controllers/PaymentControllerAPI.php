@@ -1,62 +1,62 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Balance;
+use App\Models\User;
 
 class PaymentControllerAPI extends Controller
 {
-    /**
-     * Display the payment form.
-     *
-     * @return \Illuminate\View\View
-     */
     public function showPaymentForm()
     {
         // Get the authenticated user's ID
         $userId = auth()->id();
 
         // Retrieve the user's balance
-        $balance = Balance::where('user_id', $userId)->first();
+        $balance = Balance::where('user_ID', $userId)->first();
 
-        return view('payments', ['balance' => $balance]);
+        return view('Payments', ['balance' => $balance]);
     }
 
-    /**
-     * Process a payment.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function processPayment(Request $request)
-    {
-        // Validate the payment request
-        $request->validate([
-            'amount' => 'required|numeric|min:0',
-        ]);
 
-        // Get the authenticated user's ID
-        $userId = auth()->id();
 
-        // Retrieve the user's balance
-        $balance = Balance::where('user_id', $userId)->first();
+  public function processPayment(Request $request)
+{
+    // Validate payment amount
+    $request->validate([
+        'amount' => 'required|numeric|min:0',
+    ]);
 
-        if (!$balance) {
-            return redirect()->back()->with('error', 'User balance not found');
-        }
+    // Get the authenticated user's ID
+    $userId = auth()->id();
 
-        // Calculate the new balance after payment
-        $newBalance = $balance->balance - $request->amount;
+    // Retrieve the user's balance
+    $balance = Balance::where('user_id', $userId)->first();
 
-        if ($newBalance < 0) {
-            return redirect()->back()->with('error', 'Insufficient balance');
-        }
-
-        // Update the user's balance
-        $balance->balance = $newBalance;
-        $balance->save();
-
-        return redirect()->back()->with('success', 'Payment processed successfully');
+    // Check if the user exists
+    if (!$balance) {
+        // Handle the case where the user does not exist
+        return redirect()->back()->with('error', 'User balance not found.');
     }
+
+    // Ensure the payment amount does not exceed the current balance
+    if ($request->amount > $balance->balance) {
+        return redirect()->back()->with('error', 'Payment amount exceeds current balance.');
+    }
+
+    // Calculate the new balance after deducting the payment amount
+    $newBalance = $balance->balance - $request->amount;
+
+    // Update the user's balance
+    $balance->balance = $newBalance;
+    $balance->save();
+
+    return redirect()->back()->with('success', 'Payment processed successfully. Balance updated.');
+}
+
+
+    
+    
+
 }

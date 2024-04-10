@@ -29,9 +29,9 @@ use App\Http\Controllers\PaymentControllerAPI;
 
 Route::get('/', [CarControllerAPI::class, 'index'])->name('Home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 //checks if a user is logged in when accessing a route inside. If they are not, brings them to the login page
@@ -39,6 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', [ProfileController::class, "dashboard"])->name('dashboard');
+
+    Route::get('/buy', [CarControllerAPI::class, 'showBuyVehicleDetails'])->name('car.buy');
+    Route::get('/lease', [CarControllerAPI::class, 'showLeaseVehicleDetails'])->name('car.leaseDetails');
 
     //Routes Accessed by a Manager Only
     Route::middleware([AuthManager::class])->group(function(){
@@ -59,9 +63,13 @@ Route::middleware('auth')->group(function () {
 
     //Routes Accessed by customers only
     Route::middleware([AuthCustomer::class])->group(function(){
-
+        Route::post('/favorite', [CarControllerAPI::class, 'favorite'])->name('favorite');
+        Route::delete('/deleteFavorite', [CarControllerAPI::class, 'deleteFavorite'])->name('deleteFavorite');
     });
 });
+
+
+
 
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
@@ -94,6 +102,11 @@ Route::get('/empRatings', [EmployeeRatingControllerAPI::class, 'Employee_Dropdow
 
 Route::get('/payment', [PaymentControllerAPI::class, 'showPaymentForm'])->name('payment.form');
 Route::post('/payment/process', [PaymentControllerAPI::class, 'processPayment'])->name('payment.process');
+
+
+Route::post('/update-balance', [CarControllerAPI::class, 'updateBalance'])->name('update.balance');
+Route::post('/lease/vehicle', [CarControllerAPI::class, 'storeLease'])->name('lease.vehicle');
+
 
 
 require __DIR__.'/auth.php';

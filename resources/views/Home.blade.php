@@ -7,8 +7,58 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <script>
             $(document).ready(function(){
+                //check when a a vehicle has the 'favorite' button clicked
+                $("ion-icon").click(function(){
+
+                    //save the element that triggered the function
+                    var trigger = this;
+
+                    //check if the vehicle is not favorited
+                    if(!$(trigger).hasClass("fav")){
+                        try{
+                            $.ajax({
+                                url: "/favorite",
+                                type: 'POST',
+                                data: {Vin:$(trigger).attr("data-vin")},
+                                dataType: 'JSON',
+                                headers: {
+                                    'X_CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                error: function(xhr) {
+                                    if(xhr.status == 401){
+                                        window.location.href = '/login'
+                                    }
+                                }
+                            }) 
+                        }
+                        catch(err){
+                            alert(err);
+                        }
+
+                        $(trigger).addClass("fav");
+                    }
+
+                    //else unfavorite it
+                    else{
+                        $.ajax({
+                            url: "/deleteFavorite",
+                            type: 'DELETE',
+                            data: {_token: $('meta[name="csrf-token"]').attr('content'), Vin:$(trigger).attr("data-vin")},
+                            dataType: 'JSON'
+                        })
+
+                        $(trigger).removeClass("fav");
+                    }
+
+                });
+
+
                 Colors = [];
                 interiorColors = [];
                 
@@ -153,13 +203,6 @@
                 background-size: cover; */
             }
 
-            .border-end{
-                /* background-image: url(https://t3.ftcdn.net/jpg/02/78/85/18/240_F_278851891_YOcWwTNJ4XoaudVUf4qXvpBb9ROrzBQO.jpg);
-                background-repeat: no-repeat;
-                background-size: cover;
-                border-radius: 15px; */
-            }
-
             .vehicleCon{
                 height: 100%;
                 width: 80%;
@@ -202,6 +245,55 @@
                 height: fit-content;
                 padding: 10px;
             }
+
+            .vehicleInfo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: stretch;
+            }
+
+            .favorite{
+                width: 100%;
+                height: 10%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                align-content: center;
+                margin: 0;
+            }
+
+            .favorite button{
+                height: 100%;
+                border: none;
+                background: none;
+            }
+
+            .fav{
+                fill: red;
+            }
+
+            ion-icon{
+                height: 10%;
+                width: 20px;
+                stroke: black;
+                stroke-width: 4px;
+                stroke-linejoin: round;
+                paint-order: stroke;
+                transition: 200ms;
+            }
+            ion-icon:hover{
+                fill: red;
+            }
+
+            /* .purchase{
+                display: flex;
+                flex-direction: row;
+            } */
+
+            /* .overtop{
+                pointer-events: none;
+            } */
 
             @media only screen and (max-width: 1000px){
                 #banner{
@@ -349,7 +441,7 @@
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <div class="modal-body image-modal">
                                                         <img src="{{ $cars[$i]->Image }}" alt="">
@@ -360,8 +452,23 @@
                                     </div>
                             
                                     {{-- Short description of car that clicks for modal --}}
-                                    <div class="col-lg-6" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
-                                        <div class="row">
+                                    <div class="col-lg-6 vehicleInfo">
+                                        @php
+                                            $count = 0;
+                                            foreach($favorites as $favorite){
+                                                if($cars[$i]->Vin == $favorite->Vin){
+                                                    $count++;
+                                                    break;
+                                                }
+                                            }
+                                        //jon and amaury was here
+                                        @endphp
+                                        @if($count == 0)
+                                            <ion-icon name="heart" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                        @else
+                                            <ion-icon name="heart" class="fav" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                        @endif
+                                        <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item">
                                                 Make: {{ $cars[$i]->Make }}
                                             </div>
@@ -372,16 +479,29 @@
                                                 Year: {{ $cars[$i]->Year }}
                                             </div>
                                             <div class="desc-item">
-                                                Price: {{ $cars[$i]->Price }}
+                                                Price: ${{ $cars[$i]->Price }}
                                             </div>
                                         </div>
+                                        <div class="row purchase">
+                                            <form class="col-lg-6" action="{{ route('car.buy', ['vin' => $cars[$i]->Vin]) }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="car_details" value="{{$cars[$i]->Vin }}">
+                                                <button type="submit" class="btn btn-primary">Buy</button>
+                                            </form>
+                                            <form class="col-lg-6" action="{{ route('car.leaseDetails') }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="car_details" value="{{ $cars[$i]->Vin }}">
+                                                <button type="submit" class="btn btn-primary">Lease</button>
+                                            </form>
+                                        </div>
+                                        
 
                                         {{-- Modal for description that shows all desc items of vehicle --}}
                                         <div class="modal fade" id="{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}" role="dialog">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
