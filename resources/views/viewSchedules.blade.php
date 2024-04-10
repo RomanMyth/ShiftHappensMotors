@@ -9,7 +9,7 @@
         $(document).ready(function(){
 
             if("{{ $today }}" == "None"){
-                $("table").html("No Schedule Created for Today");
+                $("#title").html("No Schedule Created for Today");
             }
             else{
                 $("#Manager").html("{{ $today[0]->Manager ?? null }}");
@@ -17,13 +17,28 @@
                 $("#Sales2").html("{{ $today[0]->Sales2 ?? null }}");
                 $("#Technician").html("{{ $today[0]->Technician ?? null }}");
             }
+
+            $("#date").change(function(){
+                var dates = <?php echo json_encode($schedules); ?>;
+
+                dates.forEach(element => {
+                    if($(this).val() == element.Date){
+                        console.log("test");
+                    }
+                    else{
+                        console.log("false");
+                    }
+                });
+            });
+
         });
     </script>
 </head>
 <body>
     <x-navbar></x-navbar>
     <div class="container">
-        <input type="date">
+        <input type="date" id="date">
+        <div id="title"></div>
         <table>
             <tr>
                 <th>Manager</th>
