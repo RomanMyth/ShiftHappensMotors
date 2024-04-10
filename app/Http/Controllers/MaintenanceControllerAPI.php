@@ -120,19 +120,24 @@ class MaintenanceControllerAPI extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $appointmentId)
-{
-    // Find the appointment by appointment ID
-    $appointment = Maintenance::where('appointment_id', $appointmentId)->first();
 
-    // If the appointment exists, delete it
-    if ($appointment) {
-        $appointment->delete();
-        return response()->json(['message' => 'Appointment deleted successfully'], 200);
-    } else {
-        return response()->json(['message' => 'Appointment not found'], 404);
+    /**
+     * Delete an appointment.
+     *
+     *
+     */
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Request $request)
+    {
+
+    Maintenance::where('Appointment_ID', $request->Appointment_ID)->delete();
+
     }
-}
+
+
 
 
     public function search(Request $request)
@@ -188,6 +193,8 @@ class MaintenanceControllerAPI extends Controller
 
 
 
+
+
     // // Retrieve the search query from the request
     // $query = $request->input('query');
 
@@ -237,6 +244,7 @@ class MaintenanceControllerAPI extends Controller
         // Return the count of appointments
         return response()->json(['count' => $countAppointments]);
     }
+
 
 
 

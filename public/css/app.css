@@ -33,6 +33,11 @@
     border-radius: 0.25rem;
 }
 
+.table thead th {
+    background-color: #007bff; /* Change this color to your desired color */
+    color: #fff; /* Change text color to contrast with background */
+}
+
 .input-group-text {
     background-color: #007bff;
     border-color: #007bff;
@@ -48,6 +53,7 @@
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
+    font-weight: 500;
 }
 
 .btn-primary:hover {

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Maintenance extends Model
 {
+
     public $timestamps = false;
     protected $fillable = [
-            'appointment_ID',
+
+            'Appointment_ID',
             'email',
             'phoneNumber',
             'vin',
@@ -22,3 +24,8 @@ class Maintenance extends Model
             'apptTime'
     ];
 }
+
+
+
+
+
