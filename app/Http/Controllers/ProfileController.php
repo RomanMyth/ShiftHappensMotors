@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -56,5 +57,13 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function dashboard(){
+        $id = Auth::user()->id;
+        $favorites = DB::select("SELECT c.Year as Year, c.Model as Model, c.Make as Make, c.Price as Price, c.Image as Image, c.Vin as Vin FROM cars c join favorites f ON c.Vin = f.Vin WHERE f.User_ID = $id;");
+
+
+        return view("dashboard", ["favorites"=>$favorites]);
     }
 }
