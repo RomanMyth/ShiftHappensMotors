@@ -206,9 +206,9 @@
             .vehicleCon{
                 height: 100%;
                 width: 80%;
-                border: 1px solid black;
+                border: .5px solid gray;
                 border-radius: 15px;
-                box-shadow: 5px 5px 10px gray;
+                /* box-shadow: 5px 5px 10px gray; */
                 margin: 5px;
             }
 

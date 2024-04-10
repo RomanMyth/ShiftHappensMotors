@@ -14,20 +14,6 @@
     <x-nav-link :href="route('Home')" :active="request()->routeIs('Home')">
         {{ __('Home') }}
     </x-nav-link>
-    <x-nav-link :href="route('sell.parts')" :active="request()->routeIs('sell.parts')">
-        {{ __('Order Parts') }}
-    </x-nav-link>
-    <x-nav-link :href="route('schedule.maintenance')" :active="request()->routeIs('schedule.maintenance')">
-        {{ __('Schedule Maintenance') }}
-    </x-nav-link>
-
-    <x-nav-link :href="route('ratings.create')" :active="request()->routeIs('ratings.create')">
-        {{ __('Employees Ratings') }}
-    </x-nav-link>
-
-    <x-nav-link :href="route('payment.form')" :active="request()->routeIs('payment.form')">
-        {{ __('Make a Payment') }}
-    </x-nav-link>
 
 
     {{-- Check if any user is currently logged in and if that user is a Manager--}}
@@ -57,10 +43,28 @@
         <x-nav-link :href="route('ratings.create')" :active="request()->routeIs('ratings.create')">
             {{ __('Rate an Employee') }}
         </x-nav-link>
+        <x-nav-link :href="route('sell.parts')" :active="request()->routeIs('sell.parts')">
+            {{ __('Order Parts') }}
+        </x-nav-link>
+        <x-nav-link :href="route('schedule.maintenance')" :active="request()->routeIs('schedule.maintenance')">
+            {{ __('Schedule Maintenance') }}
+        </x-nav-link>
+        <x-nav-link :href="route('payment.form')" :active="request()->routeIs('payment.form')">
+            {{ __('Make a Payment') }}
+        </x-nav-link>
     @endif
 
     {{-- Checks if the current user is not logged in --}}
     @if (Auth::user() === null)
+        <x-nav-link :href="route('sell.parts')" :active="request()->routeIs('sell.parts')">
+            {{ __('Order Parts') }}
+        </x-nav-link>
+        <x-nav-link :href="route('schedule.maintenance')" :active="request()->routeIs('schedule.maintenance')">
+            {{ __('Schedule Maintenance') }}
+        </x-nav-link>
+        <x-nav-link :href="route('ratings.create')" :active="request()->routeIs('ratings.create')">
+            {{ __('Rate an Employee') }}
+        </x-nav-link>
         <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
             {{ __('Register') }}
         </x-nav-link>
