@@ -75,17 +75,81 @@
         margin: 0 5px; /* Adjust the margin as needed */
         }
 
+        #showAllAppointmentsBtn {
+            margin-bottom: 20px;
+        }
+
+    .confirmation-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-dialog p {
+    margin-bottom: 10px;
+}
+
+.confirmation-dialog button {
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    /* Apply the same padding and font properties as .btn-primary */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    min-width: 54.1px;
+}
+
+.confirmation-dialog button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.confirmation-dialog button:focus {
+    /* box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); */
+}
+
+.confirmation-dialog button:last-child {
+    margin-right: 0;
+}
+
+.header2 {
+    font-weight: bold;
+}
+
 
 </style>
 
 </head>
 <body class="viewMaintenanceSchedule">
 
+    <div id="confirmation-dialog" class="confirmation-dialog">
+        <p>Are you sure you want to delete this appointment?</p>
+        <button id="confirm-delete">Yes</button>
+        <button id="cancel-delete">No</button>
+    </div>
+
+
     <x-navbar>
     </x-navbar>
 
     <div class="container mt-3">
-        <h2>Maintenance Schedule</h2>
+        <h2 class="maintenanceHeader">Maintenance Schedule</h2>
 
 
         <form id="searchForm" action="{{ route('search.appointments') }}" method="GET">
@@ -95,6 +159,7 @@
                 <button class="btn btn-primary btn-block" type="submit">Search</button>
             </div>
         </form>
+        <button id="showAllAppointmentsBtn" class="btn btn-primary btn-block" onclick="showAll()" type="submit">Show all appointments</button>
         <p>Filter by month</p>
         <div class="input-group mb-3">
             <select id="monthFilter" class="form-select">
@@ -124,26 +189,22 @@
                         </tr>
                     @else
                         @foreach($appointments as $appointment)
-                            <tr data-bs-toggle="modal" data-bs-target="#appointmentModal{{ $appointment->id }}">
+                            <tr data-bs-toggle="modal" data-bs-target="#appointmentModal{{ $appointment->Appointment_ID }}">
                                 <td>{{ $appointment->email }}</td>
                                 <td>{{ $appointment->phoneNumber }}</td>
                                 <td>{{ \Carbon\Carbon::parse($appointment->date)->format('F j, Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($appointment->apptTime)->format('h:i A') }}</td>
                                 <td>{{ $appointment->maintenanceInstruction }}</td>
-                                <td>
-                                    <!-- Delete button -->
-                                    <button class="btn btn-primary btn-block" onclick="deleteAppointment({{ $appointment->id }})">Delete</button>
-                                </td>
                             </tr>
                             <!-- Modal -->
-                            <div class="modal fade" id="appointmentModal{{ $appointment->id }}" tabindex="-1" aria-labelledby="appointmentModalLabel{{ $appointment->id }}" aria-hidden="true">
+                            <div class="modal fade" id="appointmentModal{{ $appointment->Appointment_ID }}" tabindex="-1" aria-labelledby="appointmentModalLabel{{ $appointment->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="appointmentModalLabel{{ $appointment->id }}">Appointment Details</h5>
+                                            <h5 class="modal-title" id="appointmentModalLabel{{ $appointment->Apointment_ID }}">Appointment Details</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div id="modalBody" class="modal-body">
                                             <p><strong>Email:</strong> {{ $appointment->email }}</p>
                                             <p><strong>Phone Number:</strong> {{ $appointment->phoneNumber }}</p>
                                             <p><strong>Vehicle VIN:</strong> {{ $appointment->vin }}</p>
@@ -153,6 +214,7 @@
                                             <p><strong>Model:</strong> {{ $appointment->model }}</p>
                                             <p><strong>Year:</strong> {{ $appointment->year }}</p>
                                             <p><strong>Instructions:</strong> {{ $appointment->maintenanceInstruction }}</p>
+                                            <button id="modalDeleteBtn" class="btn btn-primary btn-block" onclick="deleteAppointment({{ $appointment->Appointment_ID }})">Delete Appointment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -210,6 +272,103 @@
         });
 
 
+//         function deleteAppointment(appointmentId) {
+//     var confirmationDialog = document.getElementById('confirmation-dialog');
+//     confirmationDialog.style.display = 'block';
+
+//     var confirmDeleteBtn = document.getElementById('confirm-delete');
+//     var cancelDeleteBtn = document.getElementById('cancel-delete');
+
+//     confirmDeleteBtn.onclick = function() {
+//         $.ajax({
+//             url: "{{ route('delete.appointment') }}",
+//             method: 'DELETE',
+//             data: {
+//                 _token: "{{ csrf_token() }}",
+//                 Appointment_ID: appointmentId // Using Appointment_ID here
+//             },
+//             success: function(response) {
+//                 // Refresh the page or update the table after successful deletion
+//                 location.reload(); // You can change this to update the table without refreshing the page
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error(xhr.responseText);
+//                 // Handle errors if any
+//             }
+//         });
+//         confirmationDialog.style.display = 'none';
+//     };
+
+//     cancelDeleteBtn.onclick = function() {
+//         confirmationDialog.style.display = 'none';
+//     };
+
+
+
+// }
+
+function deleteAppointment(appointmentId) {
+        // Hide the appointment modal
+        var appointmentModal = document.getElementById('appointmentModal' + appointmentId);
+        $(appointmentModal).modal('hide');
+        $('.modal-backdrop').remove();
+
+        var confirmationDialog = document.getElementById('confirmation-dialog');
+        confirmationDialog.style.display = 'block';
+
+        var confirmDeleteBtn = document.getElementById('confirm-delete');
+        var cancelDeleteBtn = document.getElementById('cancel-delete');
+
+        confirmDeleteBtn.onclick = function() {
+            $.ajax({
+                url: "{{ route('delete.appointment') }}",
+                method: 'DELETE',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    Appointment_ID: appointmentId // Using Appointment_ID here
+                },
+                success: function(response) {
+                    // Refresh the page or update the table after successful deletion
+                    location.reload(); // You can change this to update the table without refreshing the page
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Handle errors if any
+                }
+            });
+            confirmationDialog.style.display = 'none';
+        };
+    }
+
+
+    //     function deleteAppointment(appointmentId) {
+    //     if (confirm("Are you sure you want to delete this appointment?")) {
+    //         console.log(appointmentId);
+    //         $.ajax({
+    //             url: "{{ route('delete.appointment') }}",
+    //             method: 'DELETE',
+    //             data: {
+    //                 _token: "{{ csrf_token() }}",
+    //                 Appointment_ID: appointmentId // Using Appointment_ID here
+    //             },
+    //             success: function(response) {
+    //                 alert("Deleted Successfully!");
+    //                 // Refresh the page or update the table after successful deletion
+    //                 location.reload(); // You can change this to update the table without refreshing the page
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error(xhr.responseText);
+    //                 // Handle errors if any
+    //             }
+    //         });
+    //     }
+    // }
+
+    function showAll(){
+        location.reload();
+    }
+
+
 
         // Function to format date (assuming 'Y-m-d' format)
         function formatDate(dateString) {
@@ -228,25 +387,9 @@
         return hours + ':' + minutes + ' ' + ampm;
     }
 
-    function deleteAppointment(appointmentId) {
-    if (confirm("Are you sure you want to delete this appointment?")) {
-        $.ajax({
-            url: "{{ url('/appointments') }}/" + appointmentId,
-            type: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                alert(response.message);
-                location.reload(); // Reload the page after successful deletion
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert("An error occurred while deleting the appointment.");
-            }
-        });
-    }
-}
+
+
+
 
     </script>
 
