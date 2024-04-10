@@ -39,17 +39,15 @@
     </script>
     <style>
 
-        #banner{
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                width: 100%;
-                height: 100px;
-                font-size: 50px;
-                font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-                background-image: linear-gradient(to right, rgba(59, 210, 230, 0.5), white); 
-                padding: 20px;
-            }
+#banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 250px; /* You can adjust the height as needed */
+    background-image: linear-gradient(to right, rgba(19, 19, 19, 0.922), white);
+    padding: 10px;
+}
             
             .navbar{
                 justify-content: space-around;
@@ -68,7 +66,7 @@
 </head>
 <body>
     <div id='banner'>
-        ShiftHappensMotors
+        <img src="https://github.com/RomanMyth/ShiftHappensMotors/blob/Frank/Logo.png?raw=true" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
     </div>
 
     <x-navbar>
