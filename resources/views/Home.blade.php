@@ -141,20 +141,28 @@
         </script>
 
         <style>
-            #banner{
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                width: 100%;
-                height: 100px;
-                font-size: 50px;
-                font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-                background-image: linear-gradient(to right, rgba(59, 210, 230, 0.5), white); 
-                padding: 20px;
+
+            *{
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
             }
+            #banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px; /* You can adjust the height as needed */
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.922), white);
+    padding: 10px;
+}
+
+
+            
             .navbar{
                 justify-content: space-around;
             }
+
+
             .container-fluid{
                 display: flex;
                 flex-direction: row;
@@ -206,10 +214,11 @@
             .vehicleCon{
                 height: 100%;
                 width: 80%;
-                border: .5px solid gray;
+                border: 1px solid grey;
                 border-radius: 15px;
                 /* box-shadow: 5px 5px 10px gray; */
                 margin: 5px;
+                
             }
 
             .radio-item{
@@ -307,25 +316,142 @@
                     height: auto;
                 }
             }
+            /* Slideshow Styles */
+          /* Slideshow container */
+          .mySlides {display: none}
+img {vertical-align: middle;}
+
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.mySlides img {
+  width: 2000px; /* Adjust the width as needed */
+  height: 700px; /* Maintain the aspect ratio */
+}
+
+.mySlides {
+  display: none;
+  transition: opacity 1s; /* Adjust the duration as needed (e.g., 1s for 1 second) */
+}
+
+.mySlides.fade {
+  opacity: 1;
+}
+
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 33px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: right;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+
+
+
+
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}  
         </style>
     </head>
     <body>
         <div id='banner'>
-            ShiftHappensMotors
+            <img src="https://github.com/RomanMyth/ShiftHappensMotors/blob/Frank/Logo.png?raw=true" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
+        </div>
+        
+        
+        
+    <div class="slideshow-container">
+
+        <div class="mySlides ">
+          <div class="numbertext">1 / 3</div>
+          <img src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0" style="width:100%">
+          <div class="text">2024 Honda Accord</div>
+        </div>
+        
+        <div class="mySlides">
+          <div class="numbertext">2 / 3</div>
+          <img src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg" style="width:100%">
+          <div class="text">2023 Jeep Wrangler</div>
+        </div>
+        
+        <div class="mySlides ">
+          <div class="numbertext">3 / 3</div>
+          <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*" style="width:100%">
+          <div class="text">2020 Lamborghini Urus</div>
+        </div>
+        
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+        
+        </div>
+        
+        
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span> 
+          <span class="dot" onclick="currentSlide(2)"></span> 
+          <span class="dot" onclick="currentSlide(3)"></span> 
         </div>
 
-        {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
-        <x-navbar>
+          {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
+          <x-navbar>
         </x-navbar>
-
+    
         <div class="container-fluid p-5">
             <div class="row" id="con">
                 <div class="col-lg-2 sticky-top">
-                    <div id="filter-header">
+                    <div id="filter-header" class="mb-3">
                         Filter Vehicles
                     </div>
                     Color: 
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-lg-3">
                             <input type="checkbox" id="Red" name="color" value="Red" class="color-filter filter-option">
                             <label for="Red">Red</label>
@@ -358,9 +484,10 @@
                             <input type="checkbox" id="Gray" name="color" value="Gray" class="color-filter filter-option">
                             <label for="Gray">Gray</label>
                         </div>
+                        
                     </div>
                     Interior Color: 
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-lg-3">
                             Black
                             <input type="checkbox" value="Black" class="interior-color filter-option">
@@ -375,7 +502,7 @@
                         </div>
                     </div>
                     Make:
-                    <div class="row">
+                    <div class="row mb-4">
                         <select name="make" id="" class="make-filter filter-option">
                             <option value="">All</option>
                             @foreach ($makes as $make)
@@ -385,11 +512,11 @@
                     </div>
                     Minimum Price:
                     <div>
-                        <input type="number" class="min-filter filter-option">
+                        <input type="number" class="min-filter filter-option mb-3">
                     </div>
                     Maximum Price:
                     <div>
-                        <input type="number" class="max-filter filter-option">
+                        <input type="number" class="max-filter filter-option mb-3">
                     </div>
                     New or Used:
                     <div>
@@ -399,7 +526,7 @@
                             <option value="1">Used</option>
                         </select>
                     </div>
-                    Minimum Mileage:
+                   <h5> Minimum Mileage:</h5>
                     <div>
                         <input type="number" class="min-mileage filter-option">
                     </div>
@@ -470,17 +597,13 @@
                                         @endif
                                         <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item">
-                                                Make: {{ $cars[$i]->Make }}
+                                            ${{ $cars[$i]->Price }}
                                             </div>
                                             <div class="desc-item">
-                                                Model: {{ $cars[$i]->Model }}
+                                                {{ $cars[$i]->Year }}  {{ $cars[$i]->Make }} {{ $cars[$i]->Model }}
                                             </div>
-                                            <div class="desc-item">
-                                                Year: {{ $cars[$i]->Year }}
-                                            </div>
-                                            <div class="desc-item">
-                                                Price: ${{ $cars[$i]->Price }}
-                                            </div>
+                            
+                                    
                                         </div>
                                         <div class="row purchase">
                                             <form class="col-lg-6" action="{{ route('car.buy', ['vin' => $cars[$i]->Vin]) }}" method="GET">
@@ -560,5 +683,56 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+            
+            function plusSlides(n) {
+              showSlides(slideIndex += n);
+            }
+            
+            function currentSlide(n) {
+              showSlides(slideIndex = n);
+            }
+            
+            function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    
+    // Hide all slides
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+        slides[i].style.opacity = 0;  // Start with opacity 0
+    }
+    
+    // Remove active class from all dots
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    
+    // Fade in the current slide
+    slides[slideIndex-1].style.display = "block";  
+    fadeIn(slides[slideIndex-1]); // Apply fade in effect
+    dots[slideIndex-1].className += " active";
+}
+
+// Function to fade in a specific element
+function fadeIn(element) {
+    var opacity = 0;
+    var timer = setInterval(function() {
+        if (opacity >= 1) {
+            clearInterval(timer); // Stop the timer when opacity reaches 1
+        }
+        element.style.opacity = opacity;
+        opacity += 0.05; // Increase opacity gradually with smaller steps
+    }, 20); // Decrease the interval for smoother animation
+}
+
+            </script>
+
     </body>
 </html>
