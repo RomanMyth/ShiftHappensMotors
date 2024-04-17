@@ -144,17 +144,17 @@
 
             *{
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
             }
+
             #banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 200px; /* You can adjust the height as needed */
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.922), white);
-    padding: 10px;
-}
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 200px; /* You can adjust the height as needed */
+                background-image: linear-gradient(to right, rgba(255, 255, 255, 0.922), white);
+                padding: 10px;
+            }
 
 
             
@@ -317,128 +317,172 @@
                 }
             }
             /* Slideshow Styles */
-          /* Slideshow container */
-          .mySlides {display: none}
-img {vertical-align: middle;}
+            /* Slideshow container */
+            .mySlides {
+                display: none
+            }
+            img {
+                vertical-align: middle;
+            }
 
-.slideshow-container {
-  max-width: 100%;
-  position: relative;
-  margin: auto;
-}
+            .slideshow-container {
+                max-width: 100%;
+                position: relative;
+                margin: auto;
+                height: auto;
+            }
 
-.mySlides img {
-  width: 2000px; /* Adjust the width as needed */
-  height: 700px; /* Maintain the aspect ratio */
-}
+            .mySlides img {
+                width: 95%; /* Adjust the width as needed */
+                height: auto; /* Maintain the aspect ratio */
+            }
 
-.mySlides {
-  display: none;
-  transition: opacity 1s; /* Adjust the duration as needed (e.g., 1s for 1 second) */
-}
+            .mySlides {
+                display: none;
+                transition: opacity 1s; /* Adjust the duration as needed (e.g., 1s for 1 second) */
+            }
 
-.mySlides.fade {
-  opacity: 1;
-}
-
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 33px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: right;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+            .mySlides.fade {
+                opacity: 1;
+            }
 
 
+            /* Next & previous buttons */
+            .prev, .next {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                padding: 16px;
+                margin-top: -22px;
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+            }
 
+            /* Position the "next button" to the right */
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
 
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover, .next:hover {
+                background-color: rgba(0,0,0,0.8);
+            }
 
+            /* Caption text */
+            .text {
+                color: #f2f2f2;
+                font-size: 33px;
+                padding: 8px 12px;
+                position: absolute;
+                bottom: 8px;
+                width: 100%;
+                text-align: right;
+            }
 
+            /* Number text (1/3 etc) */
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+            }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}  
+            #ShowcaseCon{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            #ShowcaseVehicle{
+                width: 80%;
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+                .prev, .next,.text {
+                    font-size: 11px
+                }
+            }  
         </style>
     </head>
     <body>
         <div id='banner'>
-            <img src="https://github.com/RomanMyth/ShiftHappensMotors/blob/Frank/Logo.png?raw=true" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
+            <img src="{{ asset('/storage/images/SHM.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
         </div>
         
         
         
-    <div class="slideshow-container">
+        {{-- <div class="slideshow-container">
 
-        <div class="mySlides ">
-          <div class="numbertext">1 / 3</div>
-          <img src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0" style="width:100%">
-          <div class="text">2024 Honda Accord</div>
+            <div class="mySlides ">
+            <div class="numbertext">1 / 3</div>
+            <img src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0" style="width:100%">
+            <div class="text">2024 Honda Accord</div>
+            </div>
+            
+            <div class="mySlides">
+            <div class="numbertext">2 / 3</div>
+            <img src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg" style="width:100%">
+            <div class="text">2023 Jeep Wrangler</div>
+            </div>
+            
+            <div class="mySlides ">
+            <div class="numbertext">3 / 3</div>
+            <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*" style="width:100%">
+            <div class="text">2020 Lamborghini Urus</div>
+            </div>
+            
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+            
+        </div> --}}
+
+        <div id="ShowcaseCon">
+            <div id="ShowcaseVehicle" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0">
+                    </div>
+    
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg">
+                    </div>
+    
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*">
+                    </div>
+                </div>
+    
+                <button class="carousel-control-prev" type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">></span>
+                </button>
+    
+            </div>
         </div>
         
-        <div class="mySlides">
-          <div class="numbertext">2 / 3</div>
-          <img src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg" style="width:100%">
-          <div class="text">2023 Jeep Wrangler</div>
-        </div>
         
-        <div class="mySlides ">
-          <div class="numbertext">3 / 3</div>
-          <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*" style="width:100%">
-          <div class="text">2020 Lamborghini Urus</div>
-        </div>
-        
-        <a class="prev" onclick="plusSlides(-1)">❮</a>
-        <a class="next" onclick="plusSlides(1)">❯</a>
-        
-        </div>
-        
-        
-        <div style="text-align:center">
+        {{-- <div style="text-align:center">
           <span class="dot" onclick="currentSlide(1)"></span> 
           <span class="dot" onclick="currentSlide(2)"></span> 
           <span class="dot" onclick="currentSlide(3)"></span> 
-        </div>
+        </div> --}}
 
           {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
           <x-navbar>
@@ -684,7 +728,7 @@ img {vertical-align: middle;}
             </div>
         </div>
 
-        <script>
+        {{-- <script>
             let slideIndex = 1;
             showSlides(slideIndex);
             
@@ -732,7 +776,7 @@ function fadeIn(element) {
     }, 20); // Decrease the interval for smoother animation
 }
 
-            </script>
+            </script> --}}
 
     </body>
 </html>
