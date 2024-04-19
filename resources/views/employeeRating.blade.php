@@ -6,29 +6,25 @@
     <title>Employee Ratings</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
-#banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 250px; /* You can adjust the height as needed */
-    background-image: linear-gradient(to right, rgba(19, 19, 19, 0.922), white);
-    padding: 10px;
-}
-            .navbar{
-                justify-content: space-around;
-            }
-
-
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        #banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 250px;
+            background-image: linear-gradient(to right, rgba(19, 19, 19, 0.922), white);
+            padding: 10px;
+        }
+        .navbar {
+            justify-content: space-around;
+        }
         .container {
             padding: 20px;
-        }
-        .table {
-            margin-bottom: 20px;
-        }
-        .btn {
-            margin-top: 10px;
+            margin-top: 30px;
         }
         .star-rating {
             font-size: 24px;
@@ -40,85 +36,130 @@
         .star.active {
             color: gold;
         }
-        .rating {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
+        .ratings-table th,
+        .ratings-table td {
+            text-align: center;
+            vertical-align: middle;
         }
-        .rating p {
-            margin: 0;
+        .card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            border-bottom: none;
+            padding: 15px 20px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            border-radius: 0;
+        }
+        .form-select {
+            border-radius: 0;
+        }
+        .btn {
+            border-radius: 0;
+        }
+        .table {
+            background-color: #fff;
+        }
+        .table th,
+        .table td {
+            padding: 12px;
         }
     </style>
 </head>
 <body>
-    <div id='banner'>
+    <div id="banner">
         <img src="https://github.com/RomanMyth/ShiftHappensMotors/blob/Frank/Logo.png?raw=true" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
     </div>
-    
     <x-navbar>
     </x-navbar>
     <div class="container">
-        <h1>Employee Ratings</h1>
-        
-        <!-- Add Rating Form -->
-        <form action="{{ route('ratings.store') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="employee">Select Employee:</label>
-                <select name="employee_id">
-                    <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                    <option value="{{ $employee->id }}">{{ $employee->firstName }} {{ $employee->lastName }}</option>
-                    @endforeach                
-                </select>
+        <div class="card">
+            <div class="card-header text-center">
+                <h1 class="mb-0">Employee Ratings</h1>
             </div>
-            <div class="mb-3">
-                <label for="rating">Rating:</label>
-                <div class="star-rating">
-                    <span class="star" data-rating="1">&#9733;</span>
-                    <span class="star" data-rating="2">&#9733;</span>
-                    <span class="star" data-rating="3">&#9733;</span>
-                    <span class="star" data-rating="4">&#9733;</span>
-                    <span class="star" data-rating="5">&#9733;</span>
-                </div>
-                <input type="hidden" name="rating" id="rating" value="0">
+            <div class="card-body">
+                <!-- Add Rating Form -->
+                <form action="{{ route('ratings.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="employee" class="form-label">Select Employee:</label>
+                        <select name="employee_id" class="form-select">
+                            <option value="">Select Employee</option>
+                            @foreach ($employees as $employee)
+                            <option value="{{ $employee->id }}">{{ $employee->firstName }} {{ $employee->lastName }}</option>
+                            @endforeach                
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating:</label>
+                        <div class="star-rating">
+                            <span class="star" data-rating="1">&#9733;</span>
+                            <span class="star" data-rating="2">&#9733;</span>
+                            <span class="star" data-rating="3">&#9733;</span>
+                            <span class="star" data-rating="4">&#9733;</span>
+                            <span class="star" data-rating="5">&#9733;</span>
+                        </div>
+                        <input type="hidden" name="rating" id="rating" value="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comment:</label>
+                        <textarea class="form-control" name="comment" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Rating</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control" name="comment" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit Rating</button>
-        </form>
-    </div>
-    
-    
-    @if ($ratings->count() > 0)
-        <div class="container mt-5">
-            <h2>Submitted Ratings</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Employee Being Rated</th>
-                        <th>Rating</th>
-                        <th>Comment</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($ratings as $rating)
-                    <tr>
-                        <td>{{ $rating->employee->firstName }} {{ $rating->employee->lastName }}</td>
-                        <td>{{ $rating->rating }}</td>
-                        <td>{{ $rating->comment }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
+    </div>
+    @if ($ratings->count() > 0)
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2 class="mb-0">Submitted Ratings</h2>
+            </div>
+            <div class="card-body">
+                <table class="table ratings-table">
+                    <thead>
+                        <tr>
+                            <th>Employee Being Rated</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($ratings as $rating)
+                        <tr>
+                            <td>{{ $rating->employee->firstName }} {{ $rating->employee->lastName }}</td>
+                            <td>{{ $rating->rating }}</td>
+                            <td>{{ $rating->comment }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     @else
-        <p>No ratings found.</p>
+    <div class="container mt-5">
+        <p class="text-center">No ratings found.</p>
+    </div>
     @endif
-    
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const stars = document.querySelectorAll('.star');
