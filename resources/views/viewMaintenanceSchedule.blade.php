@@ -61,18 +61,10 @@
         .modal-body p {
             margin-bottom: 10px;
         }
+
         #monthFilter {
         width: 25%;
         max-width: 150px; /* Limiting maximum width for better responsiveness */
-        }
-
-        .pagination {
-        justify-content: center;
-        }
-
-        .pagination > li > a,
-        .pagination > li > span {
-        margin: 0 5px; /* Adjust the margin as needed */
         }
 
         #showAllAppointmentsBtn {
@@ -132,6 +124,9 @@
     font-weight: bold;
 }
 
+.modal-header {
+    background-color: #007bff;
+}
 
 </style>
 
@@ -172,7 +167,7 @@
 
 
         <div class="table-responsive">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
                         <th>Email</th>
