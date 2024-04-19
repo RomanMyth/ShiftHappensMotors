@@ -7,17 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
-        #banner{
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                width: 100%;
-                height: 100px;
-                font-size: 50px;
-                font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-                background-image: linear-gradient(to right, rgba(59, 210, 230, 0.5), white); 
-                padding: 20px;
-            }
             .navbar{
                 justify-content: space-around;
             }
@@ -53,12 +42,9 @@
     </style>
 </head>
 <body>
-    <div id='banner'>
-        ShiftHappensMotors
-    </div>
-    
     <x-navbar>
     </x-navbar>
+    
     <div class="container">
         <h1>Employee Ratings</h1>
         
