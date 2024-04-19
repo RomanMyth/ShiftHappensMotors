@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="css/app.css" type="text/css">
 </head>
 <body class="maintenance">
-    <x-navbar></x-navbar>
+    <x-navbar>
+    </x-navbar>
     
     <div class="container mt-5">
         <div class="row justify-content-center">

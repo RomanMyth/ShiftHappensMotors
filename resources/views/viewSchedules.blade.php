@@ -35,7 +35,8 @@
     </script>
 </head>
 <body>
-    <x-navbar></x-navbar>
+    <x-navbar>
+    </x-navbar>
     <div class="container">
         <input type="date" id="date">
         <div id="title"></div>
