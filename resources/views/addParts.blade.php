@@ -21,6 +21,11 @@
         <form action="{{ route('Part.store') }}" method="POST">
             @csrf
             <div class="row">
+
+                <div class="col-lg-3">
+                    <label for="PartNumber">Serial Number:</label>
+                    <input type="text" name="PartNumber">
+                </div>
                 
                 <div class="col-lg-3">
                     <label for="PartName">Part Name:</label>

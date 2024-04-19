@@ -9,8 +9,9 @@ class Part extends Model
 {
     public $timestamps = false;
 
-    protected $primaryKey = 'PartNumber';
+    
     protected $fillable = [
+        'PartNumber',
         'PartName',
         'Price',
         'Quantity'
