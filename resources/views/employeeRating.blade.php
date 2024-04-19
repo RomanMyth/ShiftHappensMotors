@@ -10,15 +10,6 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
         }
-        #banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 250px;
-            background-image: linear-gradient(to right, rgba(19, 19, 19, 0.922), white);
-            padding: 10px;
-        }
         .navbar {
             justify-content: space-around;
         }
@@ -84,11 +75,9 @@
     </style>
 </head>
 <body>
-    <div id="banner">
-        <img src="https://github.com/RomanMyth/ShiftHappensMotors/blob/Frank/Logo.png?raw=true" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
-    </div>
     <x-navbar>
     </x-navbar>
+    
     <div class="container">
         <div class="card">
             <div class="card-header text-center">

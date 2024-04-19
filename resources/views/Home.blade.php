@@ -146,15 +146,6 @@
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
 
-            #banner {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 200px; /* You can adjust the height as needed */
-                background-image: linear-gradient(to right, rgba(255, 255, 255, 0.922), white);
-                padding: 10px;
-            }
 
 
             
@@ -404,6 +395,11 @@
                 width: 80%;
             }
 
+            .index{
+                z-index: 0 !important;
+                top: 11% !important;
+            }
+
             /* On smaller screens, decrease text size */
             @media only screen and (max-width: 300px) {
                 .prev, .next,.text {
@@ -413,9 +409,9 @@
         </style>
     </head>
     <body>
-        <div id='banner'>
-            <img src="{{ asset('/storage/images/SHM.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
-        </div>
+        <x-navbar>
+        </x-navbar>
+        
         
         
         
@@ -485,12 +481,10 @@
         </div> --}}
 
           {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
-          <x-navbar>
-        </x-navbar>
     
         <div class="container-fluid p-5">
             <div class="row" id="con">
-                <div class="col-lg-2 sticky-top">
+                <div class="col-lg-2 sticky-top index">
                     <div id="filter-header" class="mb-3">
                         Filter Vehicles
                     </div>

@@ -59,16 +59,6 @@
         *{
             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
-
-        #banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 250px; /* You can adjust the height as needed */
-            background-image: linear-gradient(to right, rgba(19, 19, 19, 0.922), white);
-            padding: 10px;
-        }
                     
         .navbar{
             justify-content: space-around;
@@ -119,9 +109,6 @@
     </style>
 </head>
 <body>
-    <div id='banner'>
-        <img src="{{ asset('/storage/images/SHM.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 280%; max-height: 130%;">
-    </div>
     <x-navbar>
     </x-navbar>
    
