@@ -139,7 +139,7 @@
     #banner{
         display: flex;
         justify-content: space-between;
-        height: 10%;
+        height: 12%;
         background-image: linear-gradient(to right, rgba(255, 255, 255, 0.922), white);
         padding: 10px;
     }
@@ -223,7 +223,7 @@
         @endif
     </div>
 
-    <img src="{{ asset('/storage/images/SHM.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 100px;">
+    <img src="{{ asset('/storage/images/Logo.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 100px;">
 
     <div>Icon</div>
 </div>
