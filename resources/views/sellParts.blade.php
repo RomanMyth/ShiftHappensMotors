@@ -78,11 +78,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .btn {
-            margin-top: 10px;
-            width: 100%;
-        }
-
         h1, h2, h3 {
             text-align: center;
             color: #343a40;
@@ -96,8 +91,9 @@
             width: 100px;
         }
         
-        .btn{
-            width: 30%
+        .partsBtn{
+            width: 30%;
+            margin-top: 10px;
         }
 
         .table th,
@@ -154,7 +150,7 @@
                                 <input type="hidden" name="partNumber" value="{{ $part->PartNumber }}">
                                 <label for="quantity">Quantity:</label>
                                 <input type="number" name="quantity" min="1" max="{{ $part->Quantity }}">
-                                <button type="submit" class="btn btn-primary" style="margin-left: 35px; margin-top:0;">Add to Cart</button>
+                                <button type="submit" class="btn btn-primary partsBtn" style="margin-left: 35px; margin-top:0;">Add to Cart</button>
                             </form>
                         </td>
                     </tr>
@@ -195,7 +191,7 @@
                             <form action="{{ route('sell.parts.removeFromCart', ['partNumber' => $partNumber]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">-</button>
+                                <button type="submit" class="btn btn-danger partsBtn">-</button>
                             </form>
                         </td>
                     </tr>
@@ -208,7 +204,7 @@
             @csrf
             <input type="hidden" name="userId" value="{{ auth()->id() }}">
             <input type="hidden" name="totalCost" value="{{ $totalCost }}">
-            <button type="submit" class="btn btn-primary">Checkout</button>
+            <button type="submit" class="btn btn-primary partsBtn">Checkout</button>
         </form>
     </div>
 </body>

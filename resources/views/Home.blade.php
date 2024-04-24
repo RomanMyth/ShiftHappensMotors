@@ -7,14 +7,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
         <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <script>
             $(document).ready(function(){
                 //check when a a vehicle has the 'favorite' button clicked
-                $("ion-icon").click(function(){
+                $(".icon").click(function(){
 
                     //save the element that triggered the function
                     var trigger = this;
@@ -273,7 +272,7 @@
                 fill: red;
             }
 
-            ion-icon{
+            .icon{
                 height: 10%;
                 width: 20px;
                 stroke: black;
@@ -282,7 +281,7 @@
                 paint-order: stroke;
                 transition: 200ms;
             }
-            ion-icon:hover{
+            .icon:hover{
                 fill: red;
             }
 
@@ -411,34 +410,6 @@
     <body>
         <x-navbar>
         </x-navbar>
-        
-        
-        
-        
-        {{-- <div class="slideshow-container">
-
-            <div class="mySlides ">
-            <div class="numbertext">1 / 3</div>
-            <img src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0" style="width:100%">
-            <div class="text">2024 Honda Accord</div>
-            </div>
-            
-            <div class="mySlides">
-            <div class="numbertext">2 / 3</div>
-            <img src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg" style="width:100%">
-            <div class="text">2023 Jeep Wrangler</div>
-            </div>
-            
-            <div class="mySlides ">
-            <div class="numbertext">3 / 3</div>
-            <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*" style="width:100%">
-            <div class="text">2020 Lamborghini Urus</div>
-            </div>
-            
-            <a class="prev" onclick="plusSlides(-1)">❮</a>
-            <a class="next" onclick="plusSlides(1)">❯</a>
-            
-        </div> --}}
 
         <div id="ShowcaseCon">
             <div id="ShowcaseVehicle" class="carousel slide" data-bs-ride="carousel">
@@ -629,9 +600,9 @@
                                         //jon and amaury was here
                                         @endphp
                                         @if($count == 0)
-                                            <ion-icon name="heart" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            <ion-icon name="heart" class="icon"data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
                                         @else
-                                            <ion-icon name="heart" class="fav" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            <ion-icon name="heart" class="fav icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
                                         @endif
                                         <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item">
