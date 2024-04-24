@@ -120,7 +120,7 @@
     }
 
     #navbarContent{
-        position: absolute;
+        position: fixed;
         z-index: 1056;
         height: auto;
         width: 0;
@@ -174,7 +174,7 @@
     #dashboardContent{
         display: none;
         width: 5%;
-        position: absolute;
+        position: fixed;
         top: 7%;
         left: 94.3%;
         height: 0px;
