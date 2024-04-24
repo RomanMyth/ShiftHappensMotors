@@ -160,8 +160,8 @@
     #banner{
         display: flex;
         justify-content: space-between;
+        height: 12%;
         align-items: center;
-        height: 10%;
         background-image: linear-gradient(to right, rgba(255, 255, 255, 0.922), white);
         padding: 10px;
     }
@@ -206,7 +206,7 @@
         </button>
     </div>
 
-    <img src="{{ asset('/storage/images/SHM.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 100px;" class="navbar-link">
+    <img src="{{ asset('/storage/images/Logo.png') }}" alt="ShiftHappensMotors Logo" style="max-width: 100px;" class="navbar-link">
 
     <ion-icon name="person-circle-outline" class="dashboard md hydrated" role="img"></ion-icon>
 
