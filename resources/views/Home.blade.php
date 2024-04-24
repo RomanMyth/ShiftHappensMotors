@@ -7,14 +7,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
         <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <script>
             $(document).ready(function(){
                 //check when a a vehicle has the 'favorite' button clicked
-                $("ion-icon").click(function(){
+                $(".icon").click(function(){
 
                     //save the element that triggered the function
                     var trigger = this;
@@ -141,20 +140,19 @@
         </script>
 
         <style>
-            #banner{
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                width: 100%;
-                height: 100px;
-                font-size: 50px;
-                font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-                background-image: linear-gradient(to right, rgba(59, 210, 230, 0.5), white); 
-                padding: 20px;
+
+            *{
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
+
+
+
+            
             .navbar{
                 justify-content: space-around;
             }
+
+
             .container-fluid{
                 display: flex;
                 flex-direction: row;
@@ -206,10 +204,11 @@
             .vehicleCon{
                 height: 100%;
                 width: 80%;
-                border: 1px solid black;
+                border: 1px solid grey;
                 border-radius: 15px;
-                box-shadow: 5px 5px 10px gray;
+                /* box-shadow: 5px 5px 10px gray; */
                 margin: 5px;
+                
             }
 
             .radio-item{
@@ -273,7 +272,7 @@
                 fill: red;
             }
 
-            ion-icon{
+            .icon{
                 height: 10%;
                 width: 20px;
                 stroke: black;
@@ -282,7 +281,7 @@
                 paint-order: stroke;
                 transition: 200ms;
             }
-            ion-icon:hover{
+            .icon:hover{
                 fill: red;
             }
 
@@ -307,25 +306,161 @@
                     height: auto;
                 }
             }
+            /* Slideshow Styles */
+            /* Slideshow container */
+            .mySlides {
+                display: none
+            }
+            img {
+                vertical-align: middle;
+            }
+
+            .slideshow-container {
+                max-width: 100%;
+                position: relative;
+                margin: auto;
+                height: auto;
+            }
+
+            .mySlides img {
+                width: 95%; /* Adjust the width as needed */
+                height: auto; /* Maintain the aspect ratio */
+            }
+
+            .mySlides {
+                display: none;
+                transition: opacity 1s; /* Adjust the duration as needed (e.g., 1s for 1 second) */
+            }
+
+            .mySlides.fade {
+                opacity: 1;
+            }
+
+
+            /* Next & previous buttons */
+            .prev, .next {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                padding: 16px;
+                margin-top: -22px;
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+            }
+
+            /* Position the "next button" to the right */
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover, .next:hover {
+                background-color: rgba(0,0,0,0.8);
+            }
+
+            /* Caption text */
+            .text {
+                color: #f2f2f2;
+                font-size: 33px;
+                padding: 8px 12px;
+                position: absolute;
+                bottom: 8px;
+                width: 100%;
+                text-align: right;
+            }
+
+            /* Number text (1/3 etc) */
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+            }
+
+            #ShowcaseCon{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            #ShowcaseVehicle{
+                width: 80%;
+            }
+
+            .index{
+                z-index: 0 !important;
+                top: 11% !important;
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+                .prev, .next,.text {
+                    font-size: 11px
+                }
+            }  
         </style>
     </head>
     <body>
-        <div id='banner'>
-            ShiftHappensMotors
-        </div>
-
-        {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
         <x-navbar>
         </x-navbar>
 
+        <div id="ShowcaseCon">
+            <div id="ShowcaseVehicle" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0">
+                    </div>
+    
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg">
+                    </div>
+    
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*">
+                    </div>
+                </div>
+    
+                <button class="carousel-control-prev" type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">></span>
+                </button>
+    
+            </div>
+        </div>
+        
+        
+        {{-- <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span> 
+          <span class="dot" onclick="currentSlide(2)"></span> 
+          <span class="dot" onclick="currentSlide(3)"></span> 
+        </div> --}}
+
+          {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
+    
         <div class="container-fluid p-5">
             <div class="row" id="con">
-                <div class="col-lg-2 sticky-top">
-                    <div id="filter-header">
+                <div class="col-lg-2 sticky-top index">
+                    <div id="filter-header" class="mb-3">
                         Filter Vehicles
                     </div>
                     Color: 
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-lg-3">
                             <input type="checkbox" id="Red" name="color" value="Red" class="color-filter filter-option">
                             <label for="Red">Red</label>
@@ -358,9 +493,10 @@
                             <input type="checkbox" id="Gray" name="color" value="Gray" class="color-filter filter-option">
                             <label for="Gray">Gray</label>
                         </div>
+                        
                     </div>
                     Interior Color: 
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-lg-3">
                             Black
                             <input type="checkbox" value="Black" class="interior-color filter-option">
@@ -375,7 +511,7 @@
                         </div>
                     </div>
                     Make:
-                    <div class="row">
+                    <div class="row mb-4">
                         <select name="make" id="" class="make-filter filter-option">
                             <option value="">All</option>
                             @foreach ($makes as $make)
@@ -385,11 +521,11 @@
                     </div>
                     Minimum Price:
                     <div>
-                        <input type="number" class="min-filter filter-option">
+                        <input type="number" class="min-filter filter-option mb-3">
                     </div>
                     Maximum Price:
                     <div>
-                        <input type="number" class="max-filter filter-option">
+                        <input type="number" class="max-filter filter-option mb-3">
                     </div>
                     New or Used:
                     <div>
@@ -399,7 +535,7 @@
                             <option value="1">Used</option>
                         </select>
                     </div>
-                    Minimum Mileage:
+                   <h5> Minimum Mileage:</h5>
                     <div>
                         <input type="number" class="min-mileage filter-option">
                     </div>
@@ -464,23 +600,19 @@
                                         //jon and amaury was here
                                         @endphp
                                         @if($count == 0)
-                                            <ion-icon name="heart" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            <ion-icon name="heart" class="icon"data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
                                         @else
-                                            <ion-icon name="heart" class="fav" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            <ion-icon name="heart" class="fav icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
                                         @endif
                                         <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item">
-                                                Make: {{ $cars[$i]->Make }}
+                                            ${{ $cars[$i]->Price }}
                                             </div>
                                             <div class="desc-item">
-                                                Model: {{ $cars[$i]->Model }}
+                                                {{ $cars[$i]->Year }}  {{ $cars[$i]->Make }} {{ $cars[$i]->Model }}
                                             </div>
-                                            <div class="desc-item">
-                                                Year: {{ $cars[$i]->Year }}
-                                            </div>
-                                            <div class="desc-item">
-                                                Price: ${{ $cars[$i]->Price }}
-                                            </div>
+                            
+                                    
                                         </div>
                                         <div class="row purchase">
                                             <form class="col-lg-6" action="{{ route('car.buy', ['vin' => $cars[$i]->Vin]) }}" method="GET">
@@ -560,5 +692,56 @@
                 </div>
             </div>
         </div>
+
+        {{-- <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+            
+            function plusSlides(n) {
+              showSlides(slideIndex += n);
+            }
+            
+            function currentSlide(n) {
+              showSlides(slideIndex = n);
+            }
+            
+            function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    
+    // Hide all slides
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+        slides[i].style.opacity = 0;  // Start with opacity 0
+    }
+    
+    // Remove active class from all dots
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    
+    // Fade in the current slide
+    slides[slideIndex-1].style.display = "block";  
+    fadeIn(slides[slideIndex-1]); // Apply fade in effect
+    dots[slideIndex-1].className += " active";
+}
+
+// Function to fade in a specific element
+function fadeIn(element) {
+    var opacity = 0;
+    var timer = setInterval(function() {
+        if (opacity >= 1) {
+            clearInterval(timer); // Stop the timer when opacity reaches 1
+        }
+        element.style.opacity = opacity;
+        opacity += 0.05; // Increase opacity gradually with smaller steps
+    }, 20); // Decrease the interval for smoother animation
+}
+
+            </script> --}}
+
     </body>
 </html>
