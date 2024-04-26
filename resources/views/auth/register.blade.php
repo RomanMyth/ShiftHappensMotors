@@ -236,14 +236,15 @@ a:hover {
 
 </head>
 <body>
-    {{-- <x-navbar></x-navbar> --}}
+
+    <x-navbar></x-navbar>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
 
                 <form id="register" method="POST" action="{{ route('register') }}" class="p-5">
                     @csrf
-                    <h3 class="mb-4">Register (Logo will go here)</h3>
+                    <h3 class="mb-4">Register</h3>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name:</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First" required>
@@ -292,9 +293,9 @@ a:hover {
                         </form>
                     </div>
                 </form>
-                <div class="text-center">
+                {{-- <div class="text-center">
                     <p class="copyright">Shift Happens Motors © 2024</p>
-            </div>
+            </div> --}}
 
             </div>
         </div>
