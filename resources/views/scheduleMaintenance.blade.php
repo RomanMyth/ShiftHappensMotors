@@ -25,6 +25,24 @@ input[type="email"], {
     box-sizing: border-box;
 }
 
+button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
+        }
+
 input[type="text"],
 input[type="email"],
 textarea {

@@ -68,7 +68,9 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #111;
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
         }
     </style>
 </head>

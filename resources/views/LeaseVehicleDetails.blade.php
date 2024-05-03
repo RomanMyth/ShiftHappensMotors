@@ -13,6 +13,18 @@
             font-family: Arial, sans-serif;
         }
 
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
         /* Card styling */
         .card {
             border: none;
