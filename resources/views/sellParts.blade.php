@@ -64,6 +64,25 @@
             justify-content: space-around;
         }
 
+
+        
+        button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
+        }
+
         .container {
             padding: 20px;
             background-color: #f8f9fa;
@@ -191,7 +210,7 @@
                             <form action="{{ route('sell.parts.removeFromCart', ['partNumber' => $partNumber]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger partsBtn">-</button>
+                                <button type="submit1" class="btn btn-danger partsBtn">-</button>
                             </form>
                         </td>
                     </tr>

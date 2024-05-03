@@ -172,51 +172,125 @@
     </script>
 </head>
 <body class="maintenance">
+
+
+    <style>
+input[type="text"],
+input[type="email"], {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
+        }
+
+input[type="text"],
+input[type="email"],
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+textarea:hover {
+    border-color: #007bff; /* Change border color on hover */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+}
+
+#submitBtn {
+    font-weight: bold;
+}
+
+::placeholder {
+    font-style: italic;
+
+}
+
+#messageLabel:hover, #message:hover, #appointmentTime:hover {
+    border-color: #007bff; /* Change border color on hover */
+}
+
+#messageLabel:focus, #message:focus, #appointmentTime:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+}
+
+
+    </style>
+
     <x-navbar>
     </x-navbar>
-    
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title text-center mb-4">Schedule Maintenance</h3>
+                        <h2 class="card-title text-center mb-4">Schedule Maintenance</h2>
                         <form action="/storeAppointment" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="email"  class="form-label">Email Address</label>
+                                <label for="email"  class="form-label">Email Address:</label>
                                 <input required type="email" name="email" class="form-control" id="email" placeholder="Enter your Email Address">
                             </div>
                             <div class="mb-3">
-                                <label for="phoneNumber" class="form-label">Phone Number</label>
-                                <input required ="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter your Phone Number">
+                                <label for="phoneNumber" class="form-label">Phone Number:</label>
+                                <input required type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter your Phone Number">
                             </div>
                             <div class="mb-3">
-                                <label for="vin"  class="form-label">Vehicle VIN Number</label>
-                                <input required ="text" name="vin" class="form-control" id="vin" placeholder="Enter your Vehicle's VIN">
+                                <label for="vin"  class="form-label">Vehicle VIN Number:</label>
+                                <input required type="text" name="vin" class="form-control" id="vin" placeholder="Enter your Vehicle's VIN">
                             </div>
                             <div class="mb-3">
-                                <label for="make" class="form-label">Make</label>
-                                <input required ="text" name="make" class="form-control" id="make" placeholder="Enter your Vehicle's Make">
+                                <label for="make" class="form-label">Make:</label>
+                                <input required type="text" name="make" class="form-control" id="make" placeholder="Enter your Vehicle's Make">
                             </div>
                             <div class="mb-3">
-                                <label for="model" class="form-label">Model</label>
-                                <input required ="text" name="model" class="form-control" id="model" placeholder="Enter your Vehicle's Model">
+                                <label for="model" class="form-label">Model:</label>
+                                <input required type="text" name="model" class="form-control" id="model" placeholder="Enter your Vehicle's Model">
                             </div>
                             <div class="mb-3">
-                                <label for="year" class="form-label">Year</label>
+                                <label for="year" class="form-label">Year:</label>
                                 <input required type="text" name="year" class="form-control" id="year" placeholder="Enter your Vehicle's Year">
                             </div>
                             <div class="mb-3">
-                                <label for="appointmentDate" class="form-label">Booking Date</label>
+                                <label for="appointmentDate" class="form-label">Booking Date:</label>
                                 <div class="input-group">
-                                    <input required ="text" name="date" class="form-control" id="appointmentDate" placeholder="Select the Appointment Date">
+                                    <input required type="text" name="date" class="form-control" id="appointmentDate" placeholder="Select the Appointment Date">
                                     <button type="button" class="btn btn-outline-secondary" id="datepickerTrigger"><i class="bi bi-calendar"></i></button>
                                 </div>
                                 <p>Grayed-out date indicates the date is unavailable</p>
                             </div>
                             <div class="mb-3">
-                                <label for="appointmentTime" class="form-label">Booking Time</label>
+                                <label for="appointmentTime" class="form-label">Booking Time:</label>
                                 <select required name="apptTime" class="form-control" id="appointmentTime">
                                     <option value="09:00:00">9:00 AM</option>
                                     <option value="11:00:00">11:00 AM</option>
@@ -231,10 +305,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="message" class="form-label">What are you looking to get done?</label>
+                                <label id="messageLabel" for="message" class="form-label">What are you looking to get done?</label>
                                 <textarea required name="maintenanceInstruction" class="form-control" id="message" rows="3" placeholder="What maintenance can we perform on your vehicle? "></textarea>
                             </div>
-                            <button id = "submitbtn" type="submit" class="btn btn-primary btn-block">Schedule Your Appointment</button>
+                            <button id = "submitBtn" type="submit" class="btn btn-primary btn-block">Schedule Your Appointment</button>
                         </form>
                     </div>
                 </div>
