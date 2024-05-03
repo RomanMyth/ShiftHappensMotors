@@ -61,11 +61,9 @@
             padding-right: 30px; /* Adjusted to accommodate the arrow icon */
         }
 
-        /* Button styling */
         button[type="submit"] {
             width: 100%;
             padding: 10px;
-            margin-top: 15px;
             border: none;
             border-radius: 5px;
             background-color: #000;
@@ -76,7 +74,9 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #111;
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
         }
 
         /* Navbar styling */
@@ -92,6 +92,8 @@
 <body>
     <x-navbar>
     </x-navbar>
+
+    <h1 style="text-align: center;">Create a Schedule</h1>
 
     <div class='container'>
         <form action="{{ route('schedule.create') }}" method="POST">
