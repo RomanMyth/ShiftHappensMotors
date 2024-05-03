@@ -62,6 +62,10 @@ Route::middleware('auth')->group(function () {
     Route::middleware([AuthEmployee::class])->group(function(){
         Route::get('/viewSchedule', [ScheduleControllerAPI::class, 'index'])->name('schedule.view');
     });
+   
+
+    Route::get('/showSchedule', [ScheduleControllerAPI::class, 'showSchedule'])->name('showSchedule');
+
 
     //Routes Accessed by customers only
     Route::middleware([AuthCustomer::class])->group(function(){
