@@ -309,6 +309,11 @@
         transition: 200ms;
     }
 
+    .index{
+        z-index: 0 !important;
+        top: 13% !important;
+    }
+    
     .icon:hover {
         fill: red;
     }

@@ -38,12 +38,12 @@
 
             // Function to handle search by serial number
             $(".search-input").keyup(function(){
-                var searchText = $(this).val();
+                var searchText = $(this).val().toLowerCase();
 
 
                 $(".part").each(function(){
 
-                    if( $(this).attr("data-serial").indexOf(searchText) != -1 || $(this).attr("data-name").indexOf(searchText) != -1 ){
+                    if( $(this).attr("data-serial").toLowerCase().indexOf(searchText) != -1 || $(this).attr("data-name").toLowerCase().indexOf(searchText) != -1 ){
                         $(this).show();
                     }
                     else{

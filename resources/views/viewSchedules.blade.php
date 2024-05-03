@@ -8,7 +8,7 @@
     <script>
         $(document).ready(function(){
 
-            if("{{ $today }}" == "None"){
+            if(true){
                 $("#title").html("No Schedule Created for Today");
             }
             else{
