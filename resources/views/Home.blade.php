@@ -396,7 +396,7 @@
 
             .index{
                 z-index: 0 !important;
-                top: 11% !important;
+                top: 13% !important;
             }
 
             /* On smaller screens, decrease text size */

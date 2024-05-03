@@ -87,7 +87,7 @@ class MaintenanceControllerAPI extends Controller
 
         // Return a success response
         return response()->json(['message' => 'Appointment scheduled successfully', 'data' => $appointment], 200);
-        return redirect(route('/'));
+        //return redirect(route('/'));
     }
 
     // Other methods...
@@ -102,10 +102,10 @@ class MaintenanceControllerAPI extends Controller
 
 
         // Retrieve all appointments from the database
-    $appointments = Maintenance::all();
+        $appointments = Maintenance::all();
 
-    // Pass the appointments data to the view
-    return view('viewMaintenanceSchedule', ['appointments' => $appointments]);
+        // Pass the appointments data to the view
+        return view('viewMaintenanceSchedule', ['appointments' => $appointments]);
 
     }
 
@@ -220,7 +220,9 @@ class MaintenanceControllerAPI extends Controller
 
 
     public function schMaintenanceForm(){
-        return view('scheduleMaintenance');
+        $appointments = $this->getNextMonth();
+
+        return view('scheduleMaintenance', ['appointments'=>$appointments]);
     }
 
     public function viewMaintenanceScheduleForm(){
@@ -245,93 +247,10 @@ class MaintenanceControllerAPI extends Controller
         return response()->json(['count' => $countAppointments]);
     }
 
+    public function getNextMonth(){
+        $appointments = DB::select("SELECT date, apptTime FROM maintenances WHERE date BETWEEN Getdate()+4 AND GETDATE()+30 GROUP BY date, apptTime;");
 
-
-
-//     public function checkAppointments(Request $request){
-//     $date = Carbon::parse($request->input('date'))->toDateString();
-//     $countAppointments = Maintenance::whereDate('date', $date)->count();
-
-//     return response()->json($countAppointments);
-//     }
-
-
-
-
-//     public function getUnavailableDates(){
-//         $unavailableDates = Maintenance::select('date')
-//             ->groupBy('date')
-//             ->havingRaw('COUNT(*) >= 5') // Assuming 5 is the max appointments per day
-//             ->get()
-//             ->pluck('date')
-//             ->map(function ($date) {
-//                 // Format dates as 'YYYY-MM-DD'
-//                 return Carbon::parse($date)->format('Y-m-d');
-//             });
-
-//         return response()->json($unavailableDates);
-//     }
-
-
-
-
-
-//     public function getAvailableTimes(Request $request){
-//     $date = $request->input('date');
-
-//     // Get all time slots for the specified date
-//     $allTimes = [
-//         ['value' => '09:00:00', 'label' => '9:00 AM', 'available' => true],
-//         ['value' => '11:00:00', 'label' => '11:00 AM', 'available' => true],
-//         ['value' => '13:00:00', 'label' => '1:00 PM', 'available' => true],
-//         ['value' => '15:00:00', 'label' => '3:00 PM', 'available' => true],
-//         ['value' => '17:00:00', 'label' => '5:00 PM', 'available' => true]
-//         // Add other available time slots
-//     ];
-
-//     // Check if any appointments exist for the specified date
-//     $existingAppointments = Maintenance::whereDate('date', $date)->count();
-
-//     // If there are already appointments for the date, mark the corresponding time slots as unavailable
-//     if ($existingAppointments >= 5) {
-//         foreach ($allTimes as &$time) {
-//             $time['available'] = false;
-//         }
-//     }
-
-//     return response()->json($allTimes);
-// }
-
-
-
-
-
-// public function markAppointmentUnavailable(Request $request)
-// {
-//     // Validate the request data
-//     $validator = Validator::make($request->all(), [
-//         'date' => 'required|date',
-//         'apptTime' => 'required',
-//     ]);
-
-//     // If validation fails, return the validation errors
-//     if ($validator->fails()) {
-//         return response()->json(['errors' => $validator->errors()], 400);
-//     }
-
-//     // Find the appointment by date and apptTime
-//     $appointment = Maintenance::where('date', $request->input('date'))
-//                                 ->where('apptTime', $request->input('apptTime'))
-//                                 ->first();
-
-//     // If the appointment exists, mark it as unavailable
-//     if ($appointment) {
-//         $appointment->update(['is_available' => false]);
-//         return response()->json(['message' => 'Appointment marked as unavailable'], 200);
-//     } else {
-//         return response()->json(['message' => 'Appointment not found'], 404);
-//     }
-// }
-
+        return $appointments;
+    }
 
 }
