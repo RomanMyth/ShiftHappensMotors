@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/css?family=Montserrat:400,500,700);
+
 *{
     font-family: "Montserrat", sans-serif;
   /* color: #8d97ad; */
@@ -65,7 +67,6 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 
-@import url(//fonts.googleapis.com/css?family=Montserrat:400,500,700);
 .ui-datepicker {
     font-size: 14px;
     z-index: 9999; /* Ensure datepicker appears on top of other elements */
