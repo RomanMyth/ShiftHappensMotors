@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
         Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
         Route::get('/newSchedule', [ScheduleControllerAPI::class, 'newSchedule'])->name('schedule');
         Route::post('/createSchedule', [ScheduleControllerAPI::class, 'store'])->name('schedule.create');
+        Route::get('/maintenanceSchedule', [MaintenanceControllerAPI::class, 'show'])->name("viewSchedule.maintenance");
     });
 
     //Routes Accessed by any employee (non-customer)
@@ -93,7 +94,6 @@ Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppoin
 Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
 Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store'])->name('storeAppointment');
 
-Route::get('/maintenanceSchedule', [MaintenanceControllerAPI::class, 'show'])->name("viewSchedule.maintenance");
 // Route::delete('/appointments', [MaintenanceControllerAPI::class,'destroy'])->name('appointments.destroy');
 // Route::get('/search', [MaintenanceControllerAPI::class, 'search']);
 Route::get('/search', [MaintenanceControllerAPI::class, 'search'])->name('search.appointments');
