@@ -172,10 +172,10 @@
 
     #dashboardContent{
         display: none;
-        width: 5%;
+        width: 100px;
         position: fixed;
         top: 8%;
-        left: 94.3%;
+        right: .5%;
         height: 0px;
         z-index: 1056;
     }
@@ -228,6 +228,9 @@
         </x-nav-link>
         <x-nav-link :href="route('schedule')" :active="request()->routeIs('schedule')" class="navbar-link">
             {{ __('Create Schedule') }}
+        </x-nav-link>
+        <x-nav-link :href="route('viewSchedule.maintenance')" :active="request()->routeIs('viewSchedule.maintenance')" class="navbar-link">
+            {{ __('View Appointments') }}
         </x-nav-link>
     @endif
     {{-- Checks if Any employee is currently logged in --}}
