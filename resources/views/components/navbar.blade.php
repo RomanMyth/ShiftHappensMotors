@@ -200,7 +200,7 @@
 <div id="banner" class="sticky-top">
     <div class="navbar" id="navbar">
         <!-- Button to toggle navbar -->
-        <button id="toggleButton" class="toggle-navbar btn btn-primary">
+        <button id="toggleButton" class="toggle-navbar btn">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
