@@ -7,7 +7,7 @@
     $(document).ready(function(){
         $("#toggleButton").click(function(event){
             event.stopPropagation();
-            
+
             if(!$("#navbarContent").hasClass("column")){
                 $("#navbarContent").addClass("column");
                 //$("#navbarContent").stop().show();
@@ -188,7 +188,7 @@
         z-index: 1055;
         display: none;
     }
-   
+
 </style>
 
 <div id="overlay">
