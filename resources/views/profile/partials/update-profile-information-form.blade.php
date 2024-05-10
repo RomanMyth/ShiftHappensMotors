@@ -1,4 +1,70 @@
 <section>
+    <style>
+       input[type="text"],
+input[type="email"], {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* box-shadow: 0 0 5px black; */
+    margin-bottom: 20px;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+textarea:hover {
+    border-color: black; /* Change border color on hover */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: black; /* Change border color on focus */
+    box-shadow: 0 0 5px black; /* Add box shadow on focus */
+    outline: black;
+}
+
+col-lg-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    text-align: center; /* Center text */
+            }
+
+            .row {
+    display: flex;
+    justify-content: center; /* Center the columns horizontally */
+}
+
+.passwordContainer {
+    display: flex;
+    justify-content: center; /* Center the container horizontally */
+    align-items: center; /* Center the container vertically */
+    /* height: 100vh; Set the container height to full viewport height */
+}
+
+button {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: 88px;
+    height: 44px;
+    border: none;
+}
+
+    </style>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
@@ -17,15 +83,17 @@
         @csrf
         @method('patch')
 
-        <div>
+        <div class="passwordContainer">
+            <div class="col-lg-3">
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-        <div>
+
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            </div>
+        </div>
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -42,7 +110,6 @@
                             {{ __('A new verification link has been sent to your email address.') }}
                         </p>
                     @endif
-                </div>
             @endif
         </div>
 
