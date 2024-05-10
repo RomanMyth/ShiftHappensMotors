@@ -14,6 +14,9 @@
             color: #333;
             margin-top: 50px; /* Adjusted to accommodate the navbar */
         }
+        .form-input{
+            margin-bottom: 10px !important;
+        }
 
         /* Container styling */
         .container {
@@ -61,11 +64,9 @@
             padding-right: 30px; /* Adjusted to accommodate the arrow icon */
         }
 
-        /* Button styling */
         button[type="submit"] {
             width: 100%;
             padding: 10px;
-            margin-top: 15px;
             border: none;
             border-radius: 5px;
             background-color: #000;
@@ -76,7 +77,9 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #111;
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
         }
 
         /* Navbar styling */
@@ -93,13 +96,15 @@
     <x-navbar>
     </x-navbar>
 
+    <h1 style="text-align: center;">Create a Schedule</h1>
+
     <div class='container'>
         <form action="{{ route('schedule.create') }}" method="POST">
             @csrf
             <label for="Date">Date</label>
-            <input type="date"  name='Date' required>
+            <input type="date"  class="form-input" name='Date' required>
 
-            <select name="Manager" required>
+            <select name="Manager" class="form-input"  required>
                 <option value="" disabled selected>Select Manager</option>
                 @foreach ($managers as $manager)
                     <option value="{{ $manager->id }}">{{ $manager->firstName }}</option>
@@ -107,13 +112,13 @@
             </select>
 
             <div style="display: flex; width: 100%; justify-content: space-between;">
-                <select name="Salesperson1" id="sales1" style="flex: 1;" required>
+                <select name="Salesperson1" id="sales1" style="flex: 1;" class="form-input"  required>
                     <option value="" disabled selected>Select Salesperson 1</option>
                     @foreach ($salesperson as $sales)
                         <option value="{{ $sales->id }}">{{ $sales->firstName }}</option>
                     @endforeach
                 </select>
-                <select name="Salesperson2" id="sales2" style="flex: 1;" required>
+                <select name="Salesperson2" id="sales2" style="flex: 1;" class="form-input"  required>
                     <option value="" disabled selected>Select Salesperson 2</option>
                     @foreach ($salesperson as $sales)
                         <option value="{{ $sales->id }}">{{ $sales->firstName }}</option>
@@ -121,7 +126,7 @@
                 </select>
             </div>
 
-            <select name="Technician" required>
+            <select name="Technician" class="form-input"  required>
                 <option value="" disabled selected>Select Technician</option>
                 @foreach ($technicians as $technician)
                     <option value="{{ $technician->id }}">{{ $technician->firstName }}</option>

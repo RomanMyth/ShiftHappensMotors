@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/buy', [CarControllerAPI::class, 'showBuyVehicleDetails'])->name('car.buy');
     Route::get('/lease', [CarControllerAPI::class, 'showLeaseVehicleDetails'])->name('car.leaseDetails');
+    Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->name('sell.parts.checkout');
+
 
     //Routes Accessed by a Manager Only
     Route::middleware([AuthManager::class])->group(function(){
@@ -54,12 +56,17 @@ Route::middleware('auth')->group(function () {
         Route::post("/storeVehicle", [CarControllerAPI::class, 'store']);
         Route::get('/newSchedule', [ScheduleControllerAPI::class, 'newSchedule'])->name('schedule');
         Route::post('/createSchedule', [ScheduleControllerAPI::class, 'store'])->name('schedule.create');
+        Route::get('/maintenanceSchedule', [MaintenanceControllerAPI::class, 'show'])->name("viewSchedule.maintenance");
     });
 
     //Routes Accessed by any employee (non-customer)
     Route::middleware([AuthEmployee::class])->group(function(){
         Route::get('/viewSchedule', [ScheduleControllerAPI::class, 'index'])->name('schedule.view');
     });
+   
+
+    Route::get('/showSchedule', [ScheduleControllerAPI::class, 'showSchedule'])->name('showSchedule');
+
 
     //Routes Accessed by customers only
     Route::middleware([AuthCustomer::class])->group(function(){
@@ -74,7 +81,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/sell-parts', [PartControllerAPI::class, 'sellParts'])->name('sell.parts');
 Route::post('/sell-parts/sell/{partNumber}', [PartControllerAPI::class, 'sellPart'])->name('sell.parts.sell');
 Route::post('/add-to-cart', [PartControllerAPI::class, 'addToCart'])->name('add.to.cart');
-Route::post('/sell-parts/checkout', [PartControllerAPI::class, 'checkout'])->name('sell.parts.checkout');
 Route::delete('/sell-parts/remove-from-cart/{partNumber}', [PartControllerAPI::class, 'removeFromCart'])->name('sell.parts.removeFromCart');
 
 Route::get('/scheduleMaintenance', [MaintenanceControllerAPI::class, 'schMaintenanceForm'])->name("schedule.maintenance");
@@ -88,7 +94,6 @@ Route::get('/markTimeUnavailable', [MaintenanceControllerAPI::class, 'markAppoin
 Route::get('/getAppointmentCount', [MaintenanceControllerAPI::class, 'getAppointmentCount']);
 Route::post('/storeAppointment', [MaintenanceControllerAPI::class, 'store'])->name('storeAppointment');
 
-Route::get('/maintenanceSchedule', [MaintenanceControllerAPI::class, 'show'])->name("viewSchedule.maintenance");
 // Route::delete('/appointments', [MaintenanceControllerAPI::class,'destroy'])->name('appointments.destroy');
 // Route::get('/search', [MaintenanceControllerAPI::class, 'search']);
 Route::get('/search', [MaintenanceControllerAPI::class, 'search'])->name('search.appointments');

@@ -35,12 +35,13 @@
                                     }
                                 }
                             }) 
+
+                            $(trigger).addClass("fav");
                         }
                         catch(err){
                             alert(err);
                         }
 
-                        $(trigger).addClass("fav");
                     }
 
                     //else unfavorite it
@@ -139,310 +140,432 @@
             });
         </script>
 
-        <style>
+<style>
+    * {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
 
-            *{
-                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            }
+    button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #000;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
+    button[type="submit"]:hover {
+        background-color: white;
+        color: #000;
+        border: 1px solid black;
+    }
 
+    .navbar {
+        justify-content: space-around;
+    }
 
-            
-            .navbar{
-                justify-content: space-around;
-            }
+    .container-fluid {
+        display: flex;
+        flex-direction: row;
+        /* background-color: red; */
+    }
 
+    #con {
+        width: 100%;
+        height: 100%;
+    }
 
-            .container-fluid{
-                display: flex;
-                flex-direction: row;
-                /* background-color: red;  */
-            }
-            #con{
-                width: 100%;
-                height: 100%;
-            }
-            .row{
-                display: flex;
-            }
-            .vehicleImage{
-                padding: 0;
-            }
-            .vehicle{
-                margin-bottom: 20px;
-                height: 30vh;
-            }
-            .col-lg-6{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .desc-items{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-            .desc-item{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .vehicleImage img{
-                /* aspect-ratio: 1/2; */
-                width: 95%;
-            }
-            .image-modal{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                /* background-image: url(https://t3.ftcdn.net/jpg/02/78/85/18/240_F_278851891_YOcWwTNJ4XoaudVUf4qXvpBb9ROrzBQO.jpg);
-                background-repeat: no-repeat;
-                background-size: cover; */
-            }
+    .row {
+        display: flex;
+    }
 
-            .vehicleCon{
-                height: 100%;
-                width: 80%;
-                border: 1px solid grey;
-                border-radius: 15px;
-                /* box-shadow: 5px 5px 10px gray; */
-                margin: 5px;
-                
-            }
+    .vehicleImage {
+        padding: 0;
+    }
 
-            .radio-item{
-                display: none !important;
-            }
-            .label-item{
-                width: 20px;
-                height: 20px;
-            }
-            .label-item img{
-                width: 100%;
-                height: 100%;
-            }
-            .radio-item:checked + label{
-                opacity: 1;
-            }
-            .col-lg-2{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background-color:rgba(0, 0, 0, 0.1);
-                border: 1px solid rgba(0, 0, 0, 0.4);
-                border-radius: 15px;
-            }
-            #filter-header{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 2em;
-            }
+    .vehicle {
+        margin-bottom: 20px;
+        height: 30vh;
+    }
 
-            .col-lg-2{
-                height: fit-content;
-                padding: 10px;
-            }
+    .col-lg-6 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-            .vehicleInfo{
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: stretch;
-            }
+    .desc-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-            .favorite{
-                width: 100%;
-                height: 10%;
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                align-content: center;
-                margin: 0;
-            }
+    .desc-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-            .favorite button{
-                height: 100%;
-                border: none;
-                background: none;
-            }
+    .vehicleImage img {
+        /* aspect-ratio: 1/2; */
+        width: 95%;
+    }
 
-            .fav{
-                fill: red;
-            }
+    .image-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-image: url(https://t3.ftcdn.net/jpg/02/78/85/18/240_F_278851891_YOcWwTNJ4XoaudVUf4qXvpBb9ROrzBQO.jpg);
+        background-repeat: no-repeat;
+        background-size: cover; */
+    }
 
-            .icon{
-                height: 10%;
-                width: 20px;
-                stroke: black;
-                stroke-width: 4px;
-                stroke-linejoin: round;
-                paint-order: stroke;
-                transition: 200ms;
-            }
-            .icon:hover{
-                fill: red;
-            }
+    .vehicleCon {
+        height: 100%;
+        width: 80%;
+        border: 1px solid grey;
+        border-radius: 15px;
+        /* box-shadow: 5px 5px 10px gray; */
+        margin: 5px;
 
-            /* .purchase{
-                display: flex;
-                flex-direction: row;
-            } */
+    }
 
-            /* .overtop{
-                pointer-events: none;
-            } */
+    .radio-item {
+        display: none !important;
+    }
 
-            @media only screen and (max-width: 1000px){
-                #banner{
-                    justify-content: center;
-                    font-size: 8vw;
-                }
-                .col-lg-6{
-                    height: auto;
-                }
-                .vehicleCon{
-                    height: auto;
-                }
-            }
-            /* Slideshow Styles */
-            /* Slideshow container */
-            .mySlides {
-                display: none
-            }
-            img {
-                vertical-align: middle;
-            }
+    .label-item {
+        width: 20px;
+        height: 20px;
+    }
 
-            .slideshow-container {
-                max-width: 100%;
-                position: relative;
-                margin: auto;
-                height: auto;
-            }
+    .label-item img {
+        width: 100%;
+        height: 100%;
+    }
 
-            .mySlides img {
-                width: 95%; /* Adjust the width as needed */
-                height: auto; /* Maintain the aspect ratio */
-            }
+    .radio-item:checked+label {
+        opacity: 1;
+    }
 
-            .mySlides {
-                display: none;
-                transition: opacity 1s; /* Adjust the duration as needed (e.g., 1s for 1 second) */
-            }
+    .col-lg-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 15px;
+    }
 
-            .mySlides.fade {
-                opacity: 1;
-            }
+    #filter-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+    }
 
+    .col-lg-2 {
+        height: fit-content;
+        padding: 10px;
+    }
 
-            /* Next & previous buttons */
-            .prev, .next {
-                cursor: pointer;
-                position: absolute;
-                top: 50%;
-                width: auto;
-                padding: 16px;
-                margin-top: -22px;
-                color: white;
-                font-weight: bold;
-                font-size: 18px;
-                transition: 0.6s ease;
-                border-radius: 0 3px 3px 0;
-                user-select: none;
-            }
+    .vehicleInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+    }
 
-            /* Position the "next button" to the right */
-            .next {
-                right: 0;
-                border-radius: 3px 0 0 3px;
-            }
+    .favorite {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        margin: 0;
+    }
 
-            /* On hover, add a black background color with a little bit see-through */
-            .prev:hover, .next:hover {
-                background-color: rgba(0,0,0,0.8);
-            }
+    .favorite button {
+        height: 100%;
+        border: none;
+        background: none;
+    }
 
-            /* Caption text */
-            .text {
-                color: #f2f2f2;
-                font-size: 33px;
-                padding: 8px 12px;
-                position: absolute;
-                bottom: 8px;
-                width: 100%;
-                text-align: right;
-            }
+    .fav {
+        fill: red;
+    }
 
-            /* Number text (1/3 etc) */
-            .numbertext {
-                color: #f2f2f2;
-                font-size: 12px;
-                padding: 8px 12px;
-                position: absolute;
-                top: 0;
-            }
+    .icon {
+        height: 100%;
+        width: 20px;
+        stroke: black;
+        stroke-width: 4px;
+        stroke-linejoin: round;
+        paint-order: stroke;
+        transition: 200ms;
+    }
+    .favorite-con{
+        height: 10%;
+        display: flex;
+        justify-content: flex-end;
+    }
 
-            #ShowcaseCon{
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
+    .index{
+        z-index: 0 !important;
+        top: 13% !important;
+    }
+    
+    .icon:hover {
+        fill: red;
+    }
 
-            #ShowcaseVehicle{
-                width: 80%;
-            }
+    @media only screen and (max-width: 1000px) {
+        #banner {
+            justify-content: center;
+            font-size: 8vw;
+        }
 
-            .index{
-                z-index: 0 !important;
-                top: 11% !important;
-            }
+        .col-lg-6 {
+            height: auto;
+        }
 
-            /* On smaller screens, decrease text size */
-            @media only screen and (max-width: 300px) {
-                .prev, .next,.text {
-                    font-size: 11px
-                }
-            }  
-        </style>
+        .vehicleCon {
+            height: auto;
+        }
+
+        .index{
+            position: relative !important;
+            margin-bottom: 20;
+        }
+
+    }
+
+    /* Slideshow Styles */
+    /* Slideshow container */
+    .mySlides {
+        display: none
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    .slideshow-container {
+        max-width: 100%;
+        position: relative;
+        margin: auto;
+        height: auto;
+    }
+
+    .mySlides img {
+        width: 95%; /* Adjust the width as needed */
+        height: auto; /* Maintain the aspect ratio */
+    }
+
+    .mySlides {
+        display: none;
+        transition: opacity 1s; /* Adjust the duration as needed (e.g., 1s for 1 second) */
+    }
+
+    .mySlides.fade {
+        opacity: 1;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Caption text */
+    .text {
+        color: #f2f2f2;
+        font-size: 33px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: right;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+
+    /* Set ShowcaseCon to flex and align items to the center */
+    #ShowcaseCon {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; /* Change from center to flex-start */
+        align-items: center;
+    }
+
+    /* Set ShowcaseVehicle to a fixed width */
+    #ShowcaseVehicle {
+        width: 100%;
+    }
+
+    /* Set the carousel items to align-items: flex-start */
+    .carousel-item {
+        display: flex; /* Add this line */
+        align-items: flex-start; /* Add this line */
+    }
+
+    /* Set the description to display on the right */
+    /* Set the description to match the height of the image */
+    .description {
+        flex: 1; /* Allow the description to take up remaining space */
+        /* margin-left: 21px; Adjust the margin as needed */
+        background-color: rgb(25, 24, 24);
+        padding: 20px; /* Add padding for spacing */
+        object-fit: cover;
+        color: white; /* Set text color to white */
+    }
+
+    /* Make images taller and descriptions smaller */
+    /* Set the images in the carousel to have a fixed height */
+    .carousel-item img {
+        object-fit: cover; /* Ensure the entire image is visible within the fixed height */
+    }
+
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+        .prev,
+        .next,
+        .text {
+            font-size: 11px;
+        }
+    }
+
+    .col-lg-4{
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+    }
+
+</style>
     </head>
     <body>
         <x-navbar>
         </x-navbar>
-
         <div id="ShowcaseCon">
             <div id="ShowcaseVehicle" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0">
+                        <div class="d-flex">
+                            <img class="d-block w-75 h-auto" src="https://th.bing.com/th/id/R.0e2b1959d1970ae86743ecd18df9d2ca?rik=AjbNLihgK4ZOww&riu=http%3a%2f%2fhondanewspecs.com%2fwp-content%2fuploads%2f2022%2f07%2f2024-Honda-Accord-Redesign.png&ehk=mGKXS9cxcKAuE3AlWv8fv6Vb6GLACqyaiC7dwBo3sGY%3d&risl=&pid=ImgRaw&r=0">
+                            <div class="description">
+                                <!-- Description for Slide 1 -->
+                                <br>
+                                <h3 style="font-family: Arial, sans-serif; font-size: 28px;">2024 Honda Accord</h3>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Experience luxury redefined with the 2024 Honda Accord. Unleash the thrill of driving with cutting-edge technology and superior comfort. Lease for as low as <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$399.99/day</span> or own it today for just <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$39,999</span>. Elevate your drive, elevate your lifestyle.</p>
+                            </div>
+                        </div>
                     </div>
-    
+
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="https://moparinsiders.com/wp-content/uploads/2022/07/2023-Jeep%C2%AE-Wrangler-Unlimited-Rubicon-4xe.-Jeep..jpg">
+                        <div class="d-flex">
+                            <img class="d-block w-75 h-auto" src="https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1562227927/autoexpress/0/18/honda-civic-ek9-54e0cfb452d5d.jpg">
+                            <div class="description">
+                                <!-- Description for Slide 3 -->
+                                <br>
+                                <h3 style="font-family: Arial, sans-serif; font-size: 28px;">Shift Happens Motors will make sure you are 100% Satisfied</h3>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">With the right parts for your car , and with mechanics ready to install the part needed as soon as the parts is bought.</p>
+                                <br>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"> We want to make sure that not only you buy parts from us but to be an place you can trust your cars needs.</p>
+                            </div>
+                        </div>
                     </div>
-    
+        
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*">
+                        <div class="d-flex">
+                            <img class="d-block w-75 h-auto" src="https://pictures.dealer.com/i/igburtonberlinchryslerdodgecllc/0776/33f57276011b64714d11780c0c018059x.jpg">
+                            <div class="description">
+                                <!-- Description for Slide 2 -->
+                                <br>
+                                <h3 style="font-family: Arial, sans-serif; font-size: 28px;">2023 Jeep Wrangler Unlimited Rubicon 4xe</h3>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Conquer every terrain with the legendary 2023 Jeep Wrangler Unlimited Rubicon 4xe. Dominate the off-road and make a statement on the streets. Starting at <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$30,000</span>, experience adventure like never before. Unleash your inner explorer.</p>
+                            </div>
+                        </div>
                     </div>
+        
+                    <div class="carousel-item">
+                        <div class="d-flex">
+                            <img class="d-block w-75 h-auto" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-lamborghini-urus-mmp-1-1570563282.jpg?crop=0.923xw:0.702xh;0.00801xw,0.298xh&resize=1200:*">
+                            <div class="description">
+                                <!-- Description for Slide 3 -->
+                                <h3 style="font-family: Arial, sans-serif; font-size: 28px;">2020 Lamborghini Urus</h3>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Unleash the power of prestige with the 2020 Lamborghini Urus. Elevate your status with Italian craftsmanship and unparalleled performance. Priced at <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$200,000</span>, experience the epitome of luxury and speed. Own the road, own the dream.</p>
+                                <br>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"> Already with the parts needed installed , and free maintance for 4 years. This car is ready to be yours! <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">BUY NOW BELOW!</span>, see details about Buying or Leasing by scrolling down.</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="d-flex">
+                            <img class="d-block w-75 h-auto" src="https://cdn.classic-trader.com/I/images/1920_1920_inset/vehicle_ad_standard_image_c9941636f5e01c9d44e9bacb78bb77be.jpg">
+                            <div class="description">
+                                <!-- Description for Slide 3 -->
+                                <br>
+                                <h3 style="font-family: Arial, sans-serif; font-size: 28px;">1920 Ford Model-T</h3>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Go Back in Time with this amazing classic , our team managed to fully restore this beauty to how it was at its prime, it could be yours for <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$250,000</span>, with this car you will have ultimate 1900's experience not forgetting as well this would be an pretty valuable addition to your colection.</p>
+                            </div>
+                        </div>
+                    </div>
+        
+        
+                    <!-- Add more carousel items with similar structure as needed -->
+        
                 </div>
-    
+        
                 <button class="carousel-control-prev" type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"><</span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#ShowcaseVehicle" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">></span>
+                    <span class="visually-hidden">Next</span>
                 </button>
-    
             </div>
         </div>
+        
+        
+        
         
         
         {{-- <div style="text-align:center">
@@ -453,126 +576,136 @@
 
           {{-- Tag that holds Navbar html (Comes from components/navbar.blade.php) --}}
     
-        <div class="container-fluid p-5">
+          <div class="container-fluid p-5">
             <div class="row" id="con">
                 <div class="col-lg-2 sticky-top index">
                     <div id="filter-header" class="mb-3">
                         Filter Vehicles
                     </div>
-                    Color: 
-                    <div class="row mb-4">
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Red" name="color" value="Red" class="color-filter filter-option">
-                            <label for="Red">Red</label>
+                    <div class="mb-4">
+                        <h5>Color:</h5>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Red" name="color" value="Red" class="color-filter filter-option">
+                                <label for="Red">Red</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Black" name="color" value="Black" class="color-filter filter-option">
+                                <label for="Black">Black</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Blue" name="color" value="Blue" class="color-filter filter-option">
+                                <label for="Blue">Blue</label>
+                            </div>
                         </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Black" name="color" value="Black" class="color-filter filter-option">
-                            <label for="Black">Black</label>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="White" name="color" value="White" class="color-filter filter-option">
+                                <label for="White">White</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Green" name="color" value="Green" class="color-filter filter-option">
+                                <label for="Green">Green</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Silver" name="color" value="Silver" class="color-filter filter-option">
+                                <label for="Silver">Silver</label>
+                            </div>
                         </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Blue" name="color" value="Blue" class="color-filter filter-option">
-                            <label for="Blue">Blue</label>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="White" name="color" value="White" class="color-filter filter-option">
-                            <label for="White">White</label>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Green" name="color" value="Green" class="color-filter filter-option">
-                            <label for="Green">Green</label>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Silver" name="color" value="Silver" class="color-filter filter-option">
-                            <label for="Silver">Silver</label>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Orange" name="color" value="Orange" class="color-filter filter-option">
-                            <label for="Orange">Orange</label>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="checkbox" id="Gray" name="color" value="Gray" class="color-filter filter-option">
-                            <label for="Gray">Gray</label>
-                        </div>
-                        
-                    </div>
-                    Interior Color: 
-                    <div class="row mb-4">
-                        <div class="col-lg-3">
-                            Black
-                            <input type="checkbox" value="Black" class="interior-color filter-option">
-                        </div>
-                        <div class="col-lg-3">
-                            Gray
-                            <input type="checkbox" value="Gray" class="interior-color filter-option">
-                        </div>
-                        <div class="col-lg-3">
-                            White
-                            <input type="checkbox" value="White" class="interior-color filter-option">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Orange" name="color" value="Orange" class="color-filter filter-option">
+                                <label for="Orange">Orange</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" id="Gray" name="color" value="Gray" class="color-filter filter-option">
+                                <label for="Gray">Gray</label>
+                            </div>
                         </div>
                     </div>
-                    Make:
-                    <div class="row mb-4">
-                        <select name="make" id="" class="make-filter filter-option">
+                    <div class="mb-4">
+                        <h5>Interior Color:</h5>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="checkbox" value="Black" class="interior-color filter-option">
+                                <label>Black</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" value="Gray" class="interior-color filter-option">
+                                <label>Gray</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="checkbox" value="White" class="interior-color filter-option">
+                                <label>White</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Make:</h5>
+                        <select name="make" class="make-filter filter-option">
                             <option value="">All</option>
                             @foreach ($makes as $make)
-                                <option value="{{ $make->Make }}">{{ $make->Make }}</option>
+                            <option value="{{ $make->Make }}">{{ $make->Make }}</option>
                             @endforeach
                         </select>
                     </div>
-                    Minimum Price:
-                    <div>
-                        <input type="number" class="min-filter filter-option mb-3">
+                    <div class="mb-3">
+                        <h5>Price Range:</h5>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="number" class="min-filter filter-option form-control" placeholder="Min">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="number" class="max-filter filter-option form-control" placeholder="Max">
+                            </div>
+                        </div>
                     </div>
-                    Maximum Price:
-                    <div>
-                        <input type="number" class="max-filter filter-option mb-3">
-                    </div>
-                    New or Used:
-                    <div>
-                        <select name="age" class="age filter-option">
+                    <div class="mb-3">
+                        <h5>Condition:</h5>
+                        <select name="age" class="age filter-option form-control">
                             <option value="">All</option>
                             <option value="0">New</option>
                             <option value="1">Used</option>
                         </select>
                     </div>
-                   <h5> Minimum Mileage:</h5>
-                    <div>
-                        <input type="number" class="min-mileage filter-option">
+                    <div class="mb-3">
+                        <h5>Mileage Range:</h5>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="number" class="min-mileage filter-option form-control" placeholder="Min">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="number" class="max-mileage filter-option form-control" placeholder="Max">
+                            </div>
+                        </div>
                     </div>
-                    Maximum Mileage:
-                    <div>
-                        <input type="number" class="max-mileage filter-option">
-                    </div>
-                   Transmission:
-                   <div>
-                        <select name="transmission" class="transmission filter-option">
+                    <div class="mb-3">
+                        <h5>Transmission:</h5>
+                        <select name="transmission" class="transmission filter-option form-control">
                             <option value="">All</option>
                             <option value="Automatic">Automatic</option>
                             <option value="Manual">Manual</option>
                         </select>
-                   </div>
-                   Gas Type:
-                   <div>
-                        <select name="Gas" class="gas-type filter-option">
+                    </div>
+                    <div class="mb-3">
+                        <h5>Gas Type:</h5>
+                        <select name="Gas" class="gas-type filter-option form-control">
                             <option value="">All</option>
                             <option value="Gas">Gas</option>
                             <option value="Diesel">Diesel</option>
                         </select>
-                   </div>
+                    </div>
                 </div>
+                
                 <div class="col-lg-10">
                     <div class="row">
                         @for($i = 0; $i < count($cars); $i++)
                             <div class="col-lg-6 vehicle" data-color="{{ $cars[$i]->Color }}" data-make="{{ $cars[$i]->Make }}" data-price="{{ $cars[$i]->Price }}" data-age="{{ $cars[$i]->newOrUsed }}" data-mileage="{{ $cars[$i]->Mileage }}" data-transmission="{{ $cars[$i]->Transmission }}" data-interior="{{ $cars[$i]->interiorColor }}" data-gas="{{ $cars[$i]->gasType }}">
                                 <div class="row vehicleCon">
                                     <div class="col-lg-6 border-end">
-
-                                        {{-- Image of car that clicks for modal --}}
                                         <div class="vehicleImage" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}Image">
                                             <img src="{{ $cars[$i]->Image }}" alt="">
                                         </div>
-
-                                        {{-- Modal from image that shows a blownup image --}}
                                         <div class="modal fade" id="{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}Image" role="dialog">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
@@ -586,8 +719,6 @@
                                             </div>
                                         </div>
                                     </div>
-                            
-                                    {{-- Short description of car that clicks for modal --}}
                                     <div class="col-lg-6 vehicleInfo">
                                         @php
                                             $count = 0;
@@ -597,27 +728,32 @@
                                                     break;
                                                 }
                                             }
-                                        //jon and amaury was here
                                         @endphp
-                                        @if($count == 0)
-                                            <ion-icon name="heart" class="icon"data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
-                                        @else
-                                            <ion-icon name="heart" class="fav icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
-                                        @endif
+                                        <div class="favorite-con">
+                                            @if($count == 0)
+                                                <ion-icon name="heart" class="icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            @else
+                                                <ion-icon name="heart" class="fav icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            @endif
+                                        </div>
                                         <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
-                                            <div class="desc-item">
-                                            ${{ $cars[$i]->Price }}
+                                            <div class="desc-item" style="font-size: 18px; color: #333; font-family: Arial, sans-serif;"> <!-- Car name -->
+                                                {{ $cars[$i]->Year }} {{ $cars[$i]->Make }} {{ $cars[$i]->Model }}
+                                            </div>
+                                            <div class="desc-item" style="font-weight: bold; color: #007bff; font-size: 18px; font-family: Arial, sans-serif;"> <!-- Price -->
+                                                ${{ $cars[$i]->Price }}
                                             </div>
                                             <div class="desc-item">
-                                                {{ $cars[$i]->Year }}  {{ $cars[$i]->Make }} {{ $cars[$i]->Model }}
+                                               Transmission: {{ $cars[$i]->Transmission }}
                                             </div>
-                            
-                                    
+                                            <div class="desc-item">
+                                                DriveTrain: {{ $cars[$i]->driveTrain }}
+                                             </div>
                                         </div>
                                         <div class="row purchase">
                                             <form class="col-lg-6" action="{{ route('car.buy', ['vin' => $cars[$i]->Vin]) }}" method="GET">
                                                 @csrf
-                                                <input type="hidden" name="car_details" value="{{$cars[$i]->Vin }}">
+                                                <input type="hidden" name="car_details" value="{{ $cars[$i]->Vin }}">
                                                 <button type="submit" class="btn btn-primary">Buy</button>
                                             </form>
                                             <form class="col-lg-6" action="{{ route('car.leaseDetails') }}" method="GET">
@@ -626,9 +762,6 @@
                                                 <button type="submit" class="btn btn-primary">Lease</button>
                                             </form>
                                         </div>
-                                        
-
-                                        {{-- Modal for description that shows all desc items of vehicle --}}
                                         <div class="modal fade" id="{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}" role="dialog">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
@@ -692,6 +825,7 @@
                 </div>
             </div>
         </div>
+        
 
         {{-- <script>
             let slideIndex = 1;

@@ -38,12 +38,12 @@
 
             // Function to handle search by serial number
             $(".search-input").keyup(function(){
-                var searchText = $(this).val();
+                var searchText = $(this).val().toLowerCase();
 
 
                 $(".part").each(function(){
 
-                    if( $(this).attr("data-serial").indexOf(searchText) != -1 || $(this).attr("data-name").indexOf(searchText) != -1 ){
+                    if( $(this).attr("data-serial").toLowerCase().indexOf(searchText) != -1 || $(this).attr("data-name").toLowerCase().indexOf(searchText) != -1 ){
                         $(this).show();
                     }
                     else{
@@ -62,6 +62,25 @@
                     
         .navbar{
             justify-content: space-around;
+        }
+
+
+        
+        button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
         }
 
         .container {
@@ -191,7 +210,7 @@
                             <form action="{{ route('sell.parts.removeFromCart', ['partNumber' => $partNumber]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger partsBtn">-</button>
+                                <button type="submit1" class="btn btn-danger partsBtn">-</button>
                             </form>
                         </td>
                     </tr>

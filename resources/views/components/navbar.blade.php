@@ -1,7 +1,6 @@
 <!-- Navbar.blade.php -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
 <script>
@@ -124,7 +123,7 @@
         z-index: 1056;
         height: auto;
         width: 0;
-        top: 7%;
+        top: 8%;
         left: .8%;
     }
 
@@ -173,10 +172,10 @@
 
     #dashboardContent{
         display: none;
-        width: 5%;
+        width: 100px;
         position: fixed;
-        top: 7%;
-        left: 94.3%;
+        top: 8%;
+        right: .5%;
         height: 0px;
         z-index: 1056;
     }
@@ -231,7 +230,7 @@
             {{ __('Create Schedule') }}
         </x-nav-link>
         <x-nav-link :href="route('viewSchedule.maintenance')" :active="request()->routeIs('viewSchedule.maintenance')" class="navbar-link">
-            {{ __('View Maintenance Schedule') }}
+            {{ __('View Appointments') }}
         </x-nav-link>
     @endif
     {{-- Checks if Any employee is currently logged in --}}
@@ -293,45 +292,11 @@
 
 
 
-{{-- <script>
-    // Function to toggle the visibility of the navbar
-    function toggleNavbar() {
-        var navbarContent = document.getElementById('navbarContent');
-        var toggleButton = document.getElementById('toggleButton');
-        var navbar = document.getElementById('navbar');
-        if (navbarContent.classList.contains('show')) {
-            navbarContent.classList.remove('show');
-            toggleButton.style.display = 'block'; // Show the toggle button
-            navbar.style.paddingLeft = '0'; // Remove left padding
-            navbar.style.backgroundColor = 'transparent'; // Reset navbar background color
-        } else {
-            navbarContent.classList.add('show');
-            toggleButton.style.display = 'none'; // Hide the toggle button
-            navbar.style.paddingLeft = '20px'; // Add left padding
-            navbar.style.backgroundColor = '#f8f9fa'; // Change navbar background color
-        }
-    }
-
-    // Function to hide the navbar when close button is clicked
-    function hideNavbar() {
-        var navbarContent = document.getElementById('navbarContent');
-        var toggleButton = document.getElementById('toggleButton');
-        var navbar = document.getElementById('navbar');
-        navbarContent.classList.remove('show');
-        toggleButton.style.display = 'block'; // Show the toggle button
-        navbar.style.paddingLeft = '0'; // Remove left padding
-        navbar.style.backgroundColor = 'transparent'; // Reset navbar background color
-    }
-
-    // Add click event listener to the toggle button
-    document.getElementById('toggleButton').addEventListener('click', toggleNavbar);
-
-    // Add click event listener to the close button
-    document.querySelector('.close-btn').addEventListener('click', hideNavbar);
-</script> --}}
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
 
 </div>
