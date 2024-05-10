@@ -8,7 +8,7 @@
     $(document).ready(function(){
         $("#toggleButton").click(function(event){
             event.stopPropagation();
-            
+
             if(!$("#navbarContent").hasClass("column")){
                 $("#navbarContent").addClass("column");
                 //$("#navbarContent").stop().show();
@@ -189,7 +189,7 @@
         z-index: 1055;
         display: none;
     }
-   
+
 </style>
 
 <div id="overlay">
@@ -229,6 +229,9 @@
         </x-nav-link>
         <x-nav-link :href="route('schedule')" :active="request()->routeIs('schedule')" class="navbar-link">
             {{ __('Create Schedule') }}
+        </x-nav-link>
+        <x-nav-link :href="route('viewSchedule.maintenance')" :active="request()->routeIs('viewSchedule.maintenance')" class="navbar-link">
+            {{ __('View Maintenance Schedule') }}
         </x-nav-link>
     @endif
     {{-- Checks if Any employee is currently logged in --}}

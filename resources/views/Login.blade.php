@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
     <style>
 
 .loginForm {
@@ -17,6 +16,8 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
+
+
 
 input[type="text"],
 input[type="password"], {
@@ -40,14 +41,14 @@ textarea {
 input[type="text"]:hover,
 input[type="password"]:hover,
 textarea:hover {
-    border-color: #007bff; /* Change border color on hover */
+    border-color: black /* Change border color on hover */
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
 textarea:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+    border-color: black; /* Change border color on focus */
+    box-shadow: 0 0 5px black; /* Add box shadow on focus */
 }
 
 ::placeholder {
@@ -59,16 +60,30 @@ textarea:focus {
     width: 596px;
     font-weight: bold;
     margin-bottom: 20px;
+    background-color: #000;
+    border: solid 1px black;
+}
+
+#regHere{
+    /* background-color: #f9f9f9; */
+    color: black;
+    border: none;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+#regHere:hover {
+    font-weight: bold;
+}
+
+#loginBtn:hover {
+    background-color: white;
+    color: #000;
+    border: #000 solid 1px;
 }
 
 #clearBtn {
 
-}
-
-
-button:hover {
-    background-color: #0056b3; /* Darker Blue Color on Hover */
-    color: #fff; /* Change text color on hover */
 }
 
 
@@ -154,13 +169,13 @@ a:hover {
                     <br>
                         <button id="loginBtn" type="submit" class="btn btn-primary">Login</button>
                     <br>
-                    <div class="text-center">
-                    <form action="{{url('/register')}}" method="GET" class="p-5">
+                </form>
+                <div class="text-center">
+                    <form class="regHereForm" action="{{url('/register')}}" method="GET" class="p-5">
                         <p class="notReg">Or</p>
-                        <button class="btn btn-secondary">Register Here</button>
+                        <button id="regHere" class="btn btn-secondary">Register Here</button>
                     </form>
                     </div>
-                </form>
                 <div class="text-center">
                     <p class="copyright">Shift Happens Motors © 2024</p>
             </div>

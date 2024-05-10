@@ -34,8 +34,9 @@
 }
 
 .table thead th {
-    background-color: #007bff; /* Change this color to your desired color */
+    background-color: black; /* Change this color to your desired color */
     color: #fff; /* Change text color to contrast with background */
+    font-weight: bold;
 }
 
 .input-group-text {
@@ -51,14 +52,14 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: black;
+    /* border-color: #007bff; */
     font-weight: 500;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: white;
+    border-color: black solid 1px;
 }
 
 .btn-primary:focus {
