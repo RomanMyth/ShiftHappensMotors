@@ -59,7 +59,7 @@
     <title>Registration Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 
 
@@ -296,9 +296,7 @@ a:hover {
                         <input type="hidden" name="userType" value="Customer">
                     </div>
                     <div id="terms" class="text-center">By clicking <strong>"Register"</strong>,  you <strong>agree</strong> to our <strong>terms and conditions</strong>.</div>
-                    <div class="text-center">
-                    <button id="registerBtn" type="submit" class="btn btn-primary" name="register">{{ __('Register') }}</button>
-                    </div>
+                    <button id="registerBtn" type="submit" class="btn btn-register " name="register">{{ __('Register') }}</button>
                     <br><br>
                     {{-- <button id="clearBtn" type="button" class="btn btn-secondary" onclick="clearFields()">Clear Fields</button> --}}
                 </form>
