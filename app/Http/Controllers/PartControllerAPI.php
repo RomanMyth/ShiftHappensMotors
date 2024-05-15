@@ -67,7 +67,7 @@ class PartControllerAPI extends Controller
     {
         $newPart = $request->all();
         Part::create($newPart);
-        echo"Success";
+        return redirect()->back();
 
     }
 

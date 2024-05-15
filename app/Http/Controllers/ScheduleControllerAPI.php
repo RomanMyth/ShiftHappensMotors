@@ -30,7 +30,7 @@ class ScheduleControllerAPI extends Controller
     {
         $data = $request->all();
         Schedule::create($data);
-        return "Schedule Created";
+        return redirect($to = "/viewSchedule");
     }
 
     /**

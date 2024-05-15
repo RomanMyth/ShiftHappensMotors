@@ -45,7 +45,7 @@ class CarControllerAPI extends Controller
         $data = $request->all();
 
         Car::create($data);
-        echo "Success";
+        return redirect()->back();
 
           
 
