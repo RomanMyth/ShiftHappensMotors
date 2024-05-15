@@ -13,7 +13,7 @@
         <script>
             $(document).ready(function(){
                 //check when a a vehicle has the 'favorite' button clicked
-                $(".icon").click(function(){
+                $(".icon").click(async function(){
 
                     //save the element that triggered the function
                     var trigger = this;
@@ -21,7 +21,7 @@
                     //check if the vehicle is not favorited
                     if(!$(trigger).hasClass("fav")){
                         try{
-                            $.ajax({
+                            await $.ajax({
                                 url: "/favorite",
                                 type: 'POST',
                                 data: {Vin:$(trigger).attr("data-vin")},
@@ -29,19 +29,17 @@
                                 headers: {
                                     'X_CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
+                                success: function(data){
+                                    $(trigger).addClass("fav");
+                                },
                                 error: function(xhr) {
                                     if(xhr.status == 401){
                                         window.location.href = '/login'
                                     }
                                 }
-                            }) 
-
-                            $(trigger).addClass("fav");
+                            })    
                         }
-                        catch(err){
-                            alert(err);
-                        }
-
+                        finally{}
                     }
 
                     //else unfavorite it
@@ -256,7 +254,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgb(179 179 179 / 10%);
         border: 1px solid rgba(0, 0, 0, 0.4);
         border-radius: 15px;
     }
@@ -318,6 +316,7 @@
     .index{
         z-index: 0 !important;
         top: 13% !important;
+        
     }
     
     .icon:hover {
@@ -460,19 +459,28 @@
     .carousel-item img {
         object-fit: cover; /* Ensure the entire image is visible within the fixed height */
     }
-/* Hide the carousel on smaller screens */
-@media only screen and (max-width: 774px) {
-    /* Hide the entire carousel container */
-    #ShowcaseVehicle {
-     display: none;
+    
+    /* Hide the carousel on smaller screens */
+    @media only screen and (max-width: 774px) {
+        /* Hide the entire carousel container */
+        #ShowcaseVehicle {
+         display: none;
+        }
+
+        .col-lg-4{
+            display: flex;
+            flex-direction: column;
+        }
     }
 
-    /* Optionally, you can adjust the width of the images to fit the screen */
-    .carousel-item img {
-        width: 100%; /* Adjust as needed */
-        height: auto; /* Maintain aspect ratio */
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+        /* Optionally, you can adjust the width of the images to fit the screen */
+        .carousel-item img {
+            width: 100%; /* Adjust as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
     }
-}
 
 
 
