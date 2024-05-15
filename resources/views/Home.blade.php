@@ -13,7 +13,7 @@
         <script>
             $(document).ready(function(){
                 //check when a a vehicle has the 'favorite' button clicked
-                $(".icon").click(function(){
+                $(".icon").click(async function(){
 
                     //save the element that triggered the function
                     var trigger = this;
@@ -21,7 +21,7 @@
                     //check if the vehicle is not favorited
                     if(!$(trigger).hasClass("fav")){
                         try{
-                            $.ajax({
+                            await $.ajax({
                                 url: "/favorite",
                                 type: 'POST',
                                 data: {Vin:$(trigger).attr("data-vin")},
@@ -29,18 +29,17 @@
                                 headers: {
                                     'X_CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
+                                success: function(data){
+                                    $(trigger).addClass("fav");
+                                },
                                 error: function(xhr) {
                                     if(xhr.status == 401){
                                         window.location.href = '/login'
                                     }
                                 }
-                            }) 
+                            })    
                         }
-                        catch(err){
-                            alert(err);
-                        }
-
-                        $(trigger).addClass("fav");
+                        finally{}
                     }
 
                     //else unfavorite it
@@ -255,7 +254,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgb(179 179 179 / 10%);
         border: 1px solid rgba(0, 0, 0, 0.4);
         border-radius: 15px;
     }
@@ -300,7 +299,7 @@
     }
 
     .icon {
-        height: 10%;
+        height: 100%;
         width: 20px;
         stroke: black;
         stroke-width: 4px;
@@ -312,6 +311,7 @@
     .index{
         z-index: 0 !important;
         top: 13% !important;
+        
     }
     
     .icon:hover {
@@ -449,6 +449,18 @@
         object-fit: cover; /* Ensure the entire image is visible within the fixed height */
     }
 
+    .fav-align{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        height: 10%;
+    }
+
+    .col-lg-4{
+        display: flex;
+        flex-direction: column;
+    }
+
     /* On smaller screens, decrease text size */
     @media only screen and (max-width: 300px) {
         .prev,
@@ -565,7 +577,7 @@
                         Filter Vehicles
                     </div>
                     <div class="mb-4">
-                        <h6>Color:</h6>
+                        <h5>Color:</h5>
                         <div class="row">
                             <div class="col-lg-4">
                                 <input type="checkbox" id="Red" name="color" value="Red" class="color-filter filter-option">
@@ -606,7 +618,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h6>Interior Color:</h6>
+                        <h5>Interior Color:</h5>
                         <div class="row">
                             <div class="col-lg-4">
                                 <input type="checkbox" value="Black" class="interior-color filter-option">
@@ -623,7 +635,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h6>Make:</h6>
+                        <h5>Make:</h5>
                         <select name="make" class="make-filter filter-option">
                             <option value="">All</option>
                             @foreach ($makes as $make)
@@ -632,7 +644,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <h6>Price Range:</h6>
+                        <h5>Price Range:</h5>
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="number" class="min-filter filter-option form-control" placeholder="Min">
@@ -643,7 +655,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <h6>Condition:</h6>
+                        <h5>Condition:</h5>
                         <select name="age" class="age filter-option form-control">
                             <option value="">All</option>
                             <option value="0">New</option>
@@ -651,7 +663,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <h6>Mileage Range:</h6>
+                        <h5>Mileage Range:</h5>
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="number" class="min-mileage filter-option form-control" placeholder="Min">
@@ -662,7 +674,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <h6>Transmission:</h6>
+                        <h5>Transmission:</h5>
                         <select name="transmission" class="transmission filter-option form-control">
                             <option value="">All</option>
                             <option value="Automatic">Automatic</option>
@@ -670,7 +682,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <h6>Gas Type:</h6>
+                        <h5>Gas Type:</h5>
                         <select name="Gas" class="gas-type filter-option form-control">
                             <option value="">All</option>
                             <option value="Gas">Gas</option>
@@ -711,12 +723,14 @@
                                                 }
                                             }
                                         @endphp
-                                        @if($count == 0)
-                                            <ion-icon name="heart" class="icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
-                                        @else
-                                            <ion-icon name="heart" class="fav icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
-                                        @endif
-                                        <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}{{ $cars[$i]->Transmission }}{{ $cars[$i]->driveTrain }}">
+                                        <div class='Fav-align'>
+                                            @if($count == 0)
+                                                <ion-icon name="heart" class="icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            @else
+                                                <ion-icon name="heart" class="fav icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
+                                            @endif
+                                        </div>
+                                        <div class="row" data-bs-toggle="modal" data-bs-target="#{{ $cars[$i]->Make }}{{ $cars[$i]->Model }}{{ $cars[$i]->Year }}">
                                             <div class="desc-item" style="font-size: 18px; color: #333; font-family: Arial, sans-serif;"> <!-- Car name -->
                                                 {{ $cars[$i]->Year }} {{ $cars[$i]->Make }} {{ $cars[$i]->Model }}
                                             </div>
