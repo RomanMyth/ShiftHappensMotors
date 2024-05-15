@@ -460,15 +460,21 @@
     .carousel-item img {
         object-fit: cover; /* Ensure the entire image is visible within the fixed height */
     }
-
-    /* On smaller screens, decrease text size */
-    @media only screen and (max-width: 300px) {
-        .prev,
-        .next,
-        .text {
-            font-size: 11px;
-        }
+/* Hide the carousel on smaller screens */
+@media only screen and (max-width: 774px) {
+    /* Hide the entire carousel container */
+    #ShowcaseVehicle {
+     display: none;
     }
+
+    /* Optionally, you can adjust the width of the images to fit the screen */
+    .carousel-item img {
+        width: 100%; /* Adjust as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
+
 
     .col-lg-4{
         display: flex;
@@ -492,6 +498,8 @@
                                 <br>
                                 <h3 style="font-family: Arial, sans-serif; font-size: 28px;">2024 Honda Accord</h3>
                                 <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Experience luxury redefined with the 2024 Honda Accord. Unleash the thrill of driving with cutting-edge technology and superior comfort. Lease for as low as <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$399.99/day</span> or own it today for just <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$39,999</span>. Elevate your drive, elevate your lifestyle.</p>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"> One of the latest technology from the Honda Company , this Hybrid car includes both thr 192-hp turbo engine and available 204-hp hybrid powertrain offer improved accerelation.</p>
+
                             </div>
                         </div>
                     </div>
@@ -506,6 +514,7 @@
                                 <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">With the right parts for your car , and with mechanics ready to install the part needed as soon as the parts is bought.</p>
                                 <br>
                                 <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"> We want to make sure that not only you buy parts from us but to be an place you can trust your cars needs.</p>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"> Like this Honda Civic? , it is an 1999 Honda Civic Type R Hatchback it is one of our employees favorite , with modified parts from Shift Happens Motors this bad boy is at its ultimate peak condition, we have used for your own beginners project.</p>
                             </div>
                         </div>
                     </div>
@@ -517,7 +526,10 @@
                                 <!-- Description for Slide 2 -->
                                 <br>
                                 <h3 style="font-family: Arial, sans-serif; font-size: 28px;">2023 Jeep Wrangler Unlimited Rubicon 4xe</h3>
-                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Conquer every terrain with the legendary 2023 Jeep Wrangler Unlimited Rubicon 4xe. Dominate the off-road and make a statement on the streets. Starting at <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$30,000</span>, experience adventure like never before. Unleash your inner explorer.</p>
+                                <br>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Conquer every terrain with the legendary 2023 Jeep Wrangler Unlimited Rubicon 4xe. Dominate the off-road and make a statement on the streets.</p> 
+                                
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"> Starting at <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$30,000</span>, experience adventure like never before. Unleash your inner explorer.</p>
                             </div>
                         </div>
                     </div>
@@ -544,6 +556,8 @@
                                 <br>
                                 <h3 style="font-family: Arial, sans-serif; font-size: 28px;">1920 Ford Model-T</h3>
                                 <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Go Back in Time with this amazing classic , our team managed to fully restore this beauty to how it was at its prime, it could be yours for <span style="font-family: 'Arial Black', sans-serif; font-size: 24px;">$250,000</span>, with this car you will have ultimate 1900's experience not forgetting as well this would be an pretty valuable addition to your colection.</p>
+                                <p style="font-family: 'Times New Roman', Times, serif; font-size: 18px;">Literally an Time Machine on wheels , feel the classic and show off an vehicle that has survived through generations.</p>
+
                             </div>
                         </div>
                     </div>

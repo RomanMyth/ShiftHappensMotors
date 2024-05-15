@@ -209,14 +209,13 @@
                 @endforeach
             </tbody>
         </table>
-
-        <h3>Total Cost: ${{ $totalCost }}</h3>
+        <h3>Total Cost: {{ $totalCost }}</h3>
         <form id="checkoutForm" action="{{ route('sell.parts.checkout') }}" method="POST" style="text-align: center;">
             @csrf
             <input type="hidden" name="userId" value="{{ auth()->id() }}">
             <input type="hidden" name="totalCost" value="{{ $totalCost }}">
             <button type="submit" class="btn btn-primary partsBtn">Checkout</button>
-        </form>
+        </form>        
     </div>
 </body>
 </html>
