@@ -59,12 +59,12 @@
     <title>Registration Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 
 
 
-form {
+.regForm {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
@@ -102,7 +102,7 @@ input[type="tel"]:hover,
 input[type="password"]:hover,
 input[type="date"]:hover,
 textarea:hover {
-    border-color: #007bff; /* Change border color on hover */
+    border-color: black; /* Change border color on hover */
 }
 
 input[type="text"]:focus,
@@ -111,8 +111,8 @@ input[type="tel"]:focus,
 input[type="password"]:focus,
 input[type="date"]:focus,
 textarea:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+    border-color: black; /* Change border color on focus */
+    box-shadow: 0 0 5px black; /* Add box shadow on focus */
 }
 
 ::placeholder {
@@ -123,6 +123,9 @@ textarea:focus {
 #registerBtn {
     width: 540px;
     font-weight: bold;
+    color: white;
+    background-color:#000;
+    border: none;
 }
 
 #clearBtn {
@@ -130,9 +133,10 @@ textarea:focus {
 }
 
 
-button:hover {
-    background-color: #0056b3; /* Darker Blue Color on Hover */
-    color: #fff; /* Change text color on hover */
+#registerBtn:hover {
+    background-color: white;
+    color: #000;
+    border: #000 solid 1px;
 }
 
 
@@ -165,7 +169,7 @@ input[type="checkbox"] {
     width: 20px; /* Set width of checkbox */
     height: 20px; /* Set height of checkbox */
     border-radius: 3px; /* Optional: Add border radius for a rounded look */
-    border: 2px solid #007bff; /* Add border */
+    border: 2px solid black; /* Add border */
     background-color: #fff; /* Background color */
     cursor: pointer; /* Show pointer cursor on hover */
     margin-right: 5px; /* Add spacing between checkbox and label */
@@ -180,7 +184,7 @@ input[type="checkbox"] + label {
 
 /* Custom styling for checked checkboxes */
 input[type="checkbox"]:checked {
-    background-color: #007bff; /* Change background color when checked */
+    background-color: black; /* Change background color when checked */
 }
 
 /* Custom styling for checked checkbox labels */
@@ -231,6 +235,17 @@ a:hover {
     margin-bottom: 20px;
 }
 
+#loginHere{
+    background-color: white;
+    color: black;
+    border: none;
+    margin-bottom: 40px;
+}
+
+#loginHere:hover {
+    font-weight: bold;
+}
+
     </style>
 
 
@@ -242,7 +257,7 @@ a:hover {
         <div class="row justify-content-center">
             <div class="col-lg-6">
 
-                <form id="register" method="POST" action="{{ route('register') }}" class="p-5">
+                <form class="regForm" id="register" method="POST" action="{{ route('register') }}" class="p-5">
                     @csrf
                     <h3 class="mb-4">Register</h3>
                     <div class="mb-3">
@@ -281,27 +296,24 @@ a:hover {
                         <input type="hidden" name="userType" value="Customer">
                     </div>
                     <div id="terms" class="text-center">By clicking <strong>"Register"</strong>,  you <strong>agree</strong> to our <strong>terms and conditions</strong>.</div>
-                    <button id="registerBtn" type="submit" class="btn btn-primary" name="register">{{ __('Register') }}</button>
+                    <button id="registerBtn" type="submit" class="btn btn-register " name="register">{{ __('Register') }}</button>
                     <br><br>
-                    <div class="text-center">
                     {{-- <button id="clearBtn" type="button" class="btn btn-secondary" onclick="clearFields()">Clear Fields</button> --}}
-                    </div>
-                    <div class="text-center">
-                        <form action="{{url('/login')}}" method="GET" class="p-5">
-                            <p class="notReg">Or</p>
-                            <button class="btn btn-secondary">Login Here</button>
-                        </form>
-                    </div>
                 </form>
-                {{-- <div class="text-center">
+                <div class="text-center">
+                    <form class="loginHereForm" action="{{url('/login')}}" method="GET" class="p-5">
+                        <p class="notReg">Or</p>
+                        <button id="loginHere" class="btn btn-secondary">Login Here</button>
+                    </form>
+                </div>
+                <div class="text-center">
                     <p class="copyright">Shift Happens Motors © 2024</p>
-            </div> --}}
+            </div>
 
             </div>
         </div>
     </div>
 
-    <x-footer></x-footer>
 
     <script>
         function clearFields() {

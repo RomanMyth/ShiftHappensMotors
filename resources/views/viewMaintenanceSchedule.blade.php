@@ -70,6 +70,7 @@
         #showAllAppointmentsBtn {
             margin-bottom: 20px;
         }
+        
 
     .confirmation-dialog {
     display: none;

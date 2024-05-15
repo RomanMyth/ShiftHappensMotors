@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lease</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Body styling */
         body {
@@ -23,6 +24,14 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+
+        button[type="submit"]:hover {
+            border: solid 1px black;
+            color: black;
+            background-color: white;
         }
 
         /* Card styling */
@@ -34,12 +43,14 @@
             background-color: #fff;
         }
 
-        .card-header {
+        #header {
             background-color: #000;
             color: #fff;
             border-radius: 10px 10px 0 0;
             padding: 10px 20px;
             margin-bottom: 20px;
+            border: none;
+            font-weight: bold;
         }
 
         /* Form styling */
@@ -105,6 +116,21 @@
             width: 100%;
             height: auto;
         }
+
+        input {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:hover {
+            border-color: black;
+        }
+
+        form input:focus {
+            border-color: black; /* Change border color on focus */
+            box-shadow: 0 0 5px black; /
+        }
     </style>
 </head>
 <body>
@@ -115,8 +141,8 @@
 <div class="container">
     <!-- Car details display area -->
     <div class="card">
-        <div class="card-header">
-            <h5>{{ $car->Make }} {{ $car->Model }} {{ $car->Year }}</h5>
+        <div id="header" class="card-header">
+            <h5><strong>{{ $car->Make }} {{ $car->Model }} {{ $car->Year }}</strong></h5>
         </div>
         <div class="card-body">
             <div class="row">
@@ -158,7 +184,7 @@
         <input type="hidden" name="price_per_day" value="{{ (int)$car->Price/100 }}">
 
         <!-- Add form fields for customer information -->
-      
+
         <div class="mt-4">
             <label for="cardNumber" class="form-label">Credit Card Number</label>
             <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
@@ -187,6 +213,10 @@
         <button type="submit" class="btn btn-primary mt-4">Lease Now</button>
     </form>
 </div>
+<br>
+<br>
+<br>
+<br>
 
 <!-- Bootstrap Bundle with Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

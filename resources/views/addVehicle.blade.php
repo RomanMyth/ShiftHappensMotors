@@ -40,21 +40,22 @@ input[type="number"],
 textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 5px black; */
     margin-bottom: 20px;
 }
 
 input[type="text"]:hover,
 input[type="number"]:hover,
 textarea:hover {
-    border-color: #007bff; /* Change border color on hover */
+    border-color: black; /* Change border color on hover */
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+    border-color: black; /* Change border color on focus */
+    box-shadow: 0 0 5px black; /* Add box shadow on focus */
+    outline: black;
 }
 
 select.form-select {
@@ -80,12 +81,12 @@ select.form-select option {
 
 
 select.form-select:hover {
-    border-color: #007bff;
+    border-color: black;
 }
 
 select.form-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: black;
+    box-shadow: 0 0 5px black;
 }
 
 
@@ -105,10 +106,23 @@ form {
 
 label {
     font-weight: bold;
+    color: #555;
 }
 
 #submitBtn {
     font-weight: bold;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: 88px;
+    height: 44px;
+}
+
+#submitBtn:hover {
+    border: solid 1px black;
+    background-color: white;
+    color: black;
 }
 
 button[type="submit"] {

@@ -7,7 +7,7 @@
     $(document).ready(function(){
         $("#toggleButton").click(function(event){
             event.stopPropagation();
-            
+
             if(!$("#navbarContent").hasClass("column")){
                 $("#navbarContent").addClass("column");
                 //$("#navbarContent").stop().show();
@@ -188,7 +188,7 @@
         z-index: 1055;
         display: none;
     }
-   
+
 </style>
 
 <div id="overlay">
@@ -200,7 +200,7 @@
 <div id="banner" class="sticky-top">
     <div class="navbar" id="navbar">
         <!-- Button to toggle navbar -->
-        <button id="toggleButton" class="toggle-navbar btn btn-primary">
+        <button id="toggleButton" class="toggle-navbar btn">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>

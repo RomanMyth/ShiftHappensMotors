@@ -64,6 +64,15 @@
             padding-right: 30px; /* Adjusted to accommodate the arrow icon */
         }
 
+        select:focus {
+            border-color: black; /* Change border color on focus */
+            box-shadow: 0 0 5px black; /* Add box shadow on focus */
+        }
+
+        select:hover {
+            border-color: black; /* Change border color on hover */
+        }
+
         button[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -74,6 +83,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
         button[type="submit"]:hover {
