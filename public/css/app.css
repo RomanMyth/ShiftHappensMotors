@@ -49,8 +49,8 @@
 }
 
 .input-group-text:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: black;
+    border-color: black;
 }
 
 .btn-primary {
@@ -93,8 +93,8 @@
     text-decoration: none;
 }
 .ui-datepicker-prev:hover, .ui-datepicker-next:hover {
-    background-color: #007bff;
-    color: #007bff;
+    background-color: black;
+    color: white;
     cursor: pointer;
 }
 .ui-datepicker-calendar {
