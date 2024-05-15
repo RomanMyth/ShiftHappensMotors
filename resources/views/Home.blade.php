@@ -13,7 +13,7 @@
         <script>
             $(document).ready(function(){
                 //check when a a vehicle has the 'favorite' button clicked
-                $(".icon").click(async function(){
+                $(".icon").click(function(){
 
                     //save the element that triggered the function
                     var trigger = this;
@@ -21,11 +21,11 @@
                     //check if the vehicle is not favorited
                     if(!$(trigger).hasClass("fav")){
                         try{
-                            await $.ajax({
+                            $.ajax({
                                 url: "/favorite",
                                 type: 'POST',
+                                async: true,
                                 data: {Vin:$(trigger).attr("data-vin")},
-                                dataType: 'JSON',
                                 headers: {
                                     'X_CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
@@ -39,7 +39,9 @@
                                 }
                             })    
                         }
-                        finally{}
+                        catch(err){
+                            alert(err);
+                        }
                     }
 
                     //else unfavorite it

@@ -181,7 +181,7 @@ public function checkout(Request $request)
 
     // Clear the cart after successful checkout
     session()->forget('cart');
-    return redirect()->back()->with('success', 'Payment processed successfully. Balance updated.');
+    return redirect($to = '/payment');
 }
 
 
