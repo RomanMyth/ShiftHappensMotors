@@ -29,7 +29,7 @@ class EmployeeControllerAPI extends Controller
     {
         $newEmp = $request->all();
         User::create($newEmp);
-        echo"Success";
+        return redirect()->back();
 
     }
 
