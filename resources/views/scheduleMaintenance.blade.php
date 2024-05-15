@@ -36,21 +36,7 @@
             var now = new Date();
 
             var dates = getDates(now, new Date(now.getFullYear(), now.getMonth(), now.getDate()+30));
-
-            console.log(dates);
             
-
-        
-
-
-
-
-            //console.log(appointments);
-
-            // for (var d = now; d <= now.setDate(now.getDate() + 30); d.setDate(d.getDate() + 30)){
-            //     console.log("test");
-            // }
-
             var appointments = <?php echo json_encode($appointments); ?>;
 
             for(var i = 0; i < appointments.length; i++){
@@ -58,8 +44,6 @@
             }
 
             apptTimeCount = {};
-
-            console.log(appointments);
 
 
             //Initialize datepicker
@@ -98,6 +82,12 @@
                                 }
                             }
                             return [times.indexOf(dateString) == -1];
+                        }
+
+                        if (disabled) {
+                            return [false, 'unavailable', 'Maximum appointments reached']; // Disable the date
+                        } else {
+                            return [true]; // Enable the date
                         }
                     }
                 },
@@ -170,22 +160,19 @@
 
 
     </script>
-</head>
-<body class="maintenance">
-
 
     <style>
-input[type="text"],
-input[type="email"], {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
+        input[type="text"],
+        input[type="email"], {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
-button[type="submit"] {
+        button[type="submit"] {
             width: 100%;
             padding: 10px;
             border: none;
@@ -203,48 +190,54 @@ button[type="submit"] {
             border: 1px solid black;
         }
 
-input[type="text"],
-input[type="email"],
-textarea {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-input[type="text"]:hover,
-input[type="email"]:hover,
-textarea:hover {
-    border-color: #007bff; /* Change border color on hover */
-}
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        textarea:hover {
+            border-color: #007bff; /* Change border color on hover */
+        }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
-}
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #007bff; /* Change border color on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+        }
 
-#submitBtn {
-    font-weight: bold;
-}
+        #submitBtn {
+            font-weight: bold;
+        }
 
-::placeholder {
-    font-style: italic;
+        ::placeholder {
+            font-style: italic;
 
-}
+        }
 
-#messageLabel:hover, #message:hover, #appointmentTime:hover {
-    border-color: #007bff; /* Change border color on hover */
-}
+        #messageLabel:hover, #message:hover, #appointmentTime:hover {
+            border-color: #007bff; /* Change border color on hover */
+        }
 
-#messageLabel:focus, #message:focus, #appointmentTime:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
-}
+        #messageLabel:focus, #message:focus, #appointmentTime:focus {
+            border-color: #007bff; /* Change border color on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+        }
+        #datepickerTrigger{
+            margin-bottom: 20px;
+        }
 
 
     </style>
+</head>
+<body class="maintenance">
+
 
     <x-navbar>
     </x-navbar>

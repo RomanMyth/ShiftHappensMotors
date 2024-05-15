@@ -307,6 +307,11 @@
         paint-order: stroke;
         transition: 200ms;
     }
+    .favorite-con{
+        height: 10%;
+        display: flex;
+        justify-content: flex-end;
+    }
 
     .index{
         z-index: 0 !important;
@@ -331,6 +336,12 @@
         .vehicleCon {
             height: auto;
         }
+
+        .index{
+            position: relative !important;
+            margin-bottom: 20;
+        }
+
     }
 
     /* Slideshow Styles */
@@ -449,13 +460,6 @@
         object-fit: cover; /* Ensure the entire image is visible within the fixed height */
     }
 
-    .fav-align{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        height: 10%;
-    }
-
     .col-lg-4{
         display: flex;
         flex-direction: column;
@@ -468,6 +472,12 @@
         .text {
             font-size: 11px;
         }
+    }
+
+    .col-lg-4{
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
     }
 
 </style>
@@ -723,7 +733,7 @@
                                                 }
                                             }
                                         @endphp
-                                        <div class='Fav-align'>
+                                        <div class="favorite-con">
                                             @if($count == 0)
                                                 <ion-icon name="heart" class="icon" data-vin="{{ $cars[$i]->Vin }}"></ion-icon>
                                             @else
