@@ -37,7 +37,7 @@ Route::get('/', [CarControllerAPI::class, 'index'])->name('Home');
 //checks if a user is logged in when accessing a route inside. If they are not, brings them to the login page
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/200', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [ProfileController::class, "dashboard"])->name('dashboard');
 
@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware([AuthEmployee::class])->group(function(){
         Route::get('/viewSchedule', [ScheduleControllerAPI::class, 'index'])->name('schedule.view');
     });
-   
+
 
     Route::get('/showSchedule', [ScheduleControllerAPI::class, 'showSchedule'])->name('showSchedule');
 

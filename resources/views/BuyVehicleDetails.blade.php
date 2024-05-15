@@ -24,12 +24,13 @@
             background-color: #fff;
         }
 
-        .card-header {
+        #header {
             background-color: #000;
             color: #fff;
             border-radius: 10px 10px 0 0;
             padding: 10px 20px;
             margin-bottom: 20px;
+            font-weight: bold;
         }
 
         /* Form styling */
@@ -67,6 +68,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
         button[type="submit"]:hover {
@@ -118,6 +120,20 @@
             width: 100%;
             height: auto;
         }
+        input {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:hover {
+            border-color: black;
+        }
+
+        form input:focus {
+            border-color: black; /* Change border color on focus */
+            box-shadow: 0 0 5px black; /
+        }
     </style>
 </head>
 <body>
@@ -128,8 +144,8 @@
 <div class="container mt-5">
     <!-- Car details display area -->
     <div class="card">
-        <div class="card-header">
-            <h5>{{ $car->Make }} {{ $car->Model }} {{ $car->Year }}</h5>
+        <div id="header" class="card-header">
+            <h5><strong>{{ $car->Make }} {{ $car->Model }} {{ $car->Year }}</strong></h5>
         </div>
         <div class="card-body">
             <div class="row">

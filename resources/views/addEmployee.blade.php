@@ -6,7 +6,7 @@
     <title>Add Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="css/app.css" type="text/css">
+    {{-- <link rel="stylesheet" href="css/app.css" type="text/css"> --}}
     <style>
         .col-lg-4 {
             display: flex;
@@ -55,15 +55,6 @@ button[type="submit"] {
 }
 
 
-.empSelect:hover {
-    border-color: #007bff;
-}
-
-.empSelect:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
 .container {
                 max-width: 800px; /* Limit the width of the container */
             margin: 0 auto; /* Center the container horizontally */
@@ -105,16 +96,18 @@ textarea {
 input[type="text"]:hover,
 input[type="email"]:hover,
 input[type="date"]:hover,
+.empSelect:hover,
 textarea:hover {
-    border-color: #007bff; /* Change border color on hover */
+    border-color: black; /* Change border color on hover */
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
+.empSelect:focus,
 textarea:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+    border-color: black; /* Change border color on focus */
+    box-shadow: 0 0 5px black; /* Add box shadow on focus */
 }
 form {
     background-color: #f9f9f9;

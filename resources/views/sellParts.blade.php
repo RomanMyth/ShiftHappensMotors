@@ -22,7 +22,7 @@
                 filters.MinPrice= this.value;
             });
 
-            
+
 
             $(".filter").change(function(){
                 $(".part").each(function(){
@@ -51,7 +51,7 @@
                     }
 
                 });
-                
+
             });
         });
     </script>
@@ -59,13 +59,13 @@
         *{
             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
-                    
+
         .navbar{
             justify-content: space-around;
         }
 
 
-        
+
         button[type="submit"] {
             padding: 10px;
             border: none;
@@ -75,6 +75,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
         button[type="submit"]:hover {
@@ -109,7 +110,7 @@
         #filters input[type="number"] {
             width: 100px;
         }
-        
+
         .partsBtn{
             width: 30%;
             margin-top: 10px;
@@ -126,26 +127,17 @@
 <body>
     <x-navbar>
     </x-navbar>
-   
+
     <br>
     <br>
     <div class="container">
-        Maximum Price
-        <div>
-            <input type="number" class="Max-Price filter">
-        </div>
-        <br>
-        Minimum Price 
-        <div>
-            <input type="number" class="Min-Price filter">
-        </div>
-        <br>
+
         Search By Name or Serial Number
         <div>
         <input type="text" class="search-input">
-        </div>   
+        </div>
         <h1>Buy the Parts</h1>
-      
+
         <table class="table part-table">
             <thead>
                 <tr>
@@ -218,7 +210,7 @@
             </tbody>
         </table>
 
-        <h3>Total Cost: {{ $totalCost }}</h3>
+        <h3>Total Cost: ${{ $totalCost }}</h3>
         <form id="checkoutForm" action="{{ route('sell.parts.checkout') }}" method="POST" style="text-align: center;">
             @csrf
             <input type="hidden" name="userId" value="{{ auth()->id() }}">
