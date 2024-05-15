@@ -15,6 +15,7 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CarControllerAPI extends Controller
 {
@@ -44,7 +45,7 @@ class CarControllerAPI extends Controller
         $data = $request->all();
 
         Car::create($data);
-        echo "Success";
+        return redirect()->back();
 
           
 
@@ -86,7 +87,7 @@ class CarControllerAPI extends Controller
     }
 
     // Redirect or return a response as needed
-    return redirect()->back()->with('success', 'Lease created successfully.');
+    return redirect($to = '/payment');
 }
 
 
@@ -121,7 +122,7 @@ class CarControllerAPI extends Controller
         $balance->save();
     
         // Redirect or return a response as needed
-        return redirect()->back()->with('success', 'Balance updated successfully.');
+        return redirect($to = '/payment');
     }
     
 

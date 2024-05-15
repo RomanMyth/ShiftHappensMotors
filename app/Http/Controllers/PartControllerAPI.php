@@ -67,7 +67,7 @@ class PartControllerAPI extends Controller
     {
         $newPart = $request->all();
         Part::create($newPart);
-        echo"Success";
+        return redirect()->back();
 
     }
 
@@ -181,9 +181,7 @@ public function checkout(Request $request)
 
     // Clear the cart after successful checkout
     session()->forget('cart');
-
-    // Redirect the user back with a success message
-    return redirect()->route('payment')->with('success', 'Checkout successful. Balance updated.');
+    return redirect($to = '/payment');
 }
 
 

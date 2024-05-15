@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/css?family=Montserrat:400,500,700);
+
 *{
     font-family: "Montserrat", sans-serif;
   /* color: #8d97ad; */
@@ -34,8 +36,9 @@
 }
 
 .table thead th {
-    background-color: #007bff; /* Change this color to your desired color */
+    background-color: black; /* Change this color to your desired color */
     color: #fff; /* Change text color to contrast with background */
+    font-weight: bold;
 }
 
 .input-group-text {
@@ -46,26 +49,25 @@
 }
 
 .input-group-text:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: black;
+    border-color: black;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: black;
+    /* border-color: #007bff; */
     font-weight: 500;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: white;
+    border-color: black solid 1px;
 }
 
 .btn-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 
-@import url(//fonts.googleapis.com/css?family=Montserrat:400,500,700);
 .ui-datepicker {
     font-size: 14px;
     z-index: 9999; /* Ensure datepicker appears on top of other elements */
@@ -91,8 +93,8 @@
     text-decoration: none;
 }
 .ui-datepicker-prev:hover, .ui-datepicker-next:hover {
-    background-color: #007bff;
-    color: #007bff;
+    background-color: black;
+    color: white;
     cursor: pointer;
 }
 .ui-datepicker-calendar {

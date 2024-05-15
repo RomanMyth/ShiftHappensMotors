@@ -34,6 +34,7 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        // return $request->firstName;
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

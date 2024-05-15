@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/app.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <link rel="stylesheet" href="css/app.css" type="text/css"> --}}
     <style>
         .col-lg-4 {
             display: flex;
@@ -15,14 +16,131 @@
             display: flex;
             flex-direction: column;
         }
+        .empSelect {
+    width: 416px;
+    /* padding: 10px; */
+    /* margin-bottom: 15px; */
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #495057;
+    line-height: 1;
+    /* appearance: none; */
+    height: 28px; /* Adjust height to match input fields */
+    /* position: relative; */
+}
+
+button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
+        }
+
+.empSelect option {
+    padding: 10px;
+}
+
+
+.container {
+                max-width: 800px; /* Limit the width of the container */
+            margin: 0 auto; /* Center the container horizontally */
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            }
+
+            h2 {
+                text-align: center;
+            margin-bottom: 30px;
+            }
+
+
+
+            input[type="text"],
+input[type="email"],
+input[type="date"], {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="date"]:hover,
+.empSelect:hover,
+textarea:hover {
+    border-color: black; /* Change border color on hover */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+.empSelect:focus,
+textarea:focus {
+    border-color: black; /* Change border color on focus */
+    box-shadow: 0 0 5px black; /* Add box shadow on focus */
+}
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+
+label {
+    font-weight: bold;
+}
+
+#submitBtn {
+    font-weight: bold;
+}
+
+h2 {
+                text-align: center;
+            margin-bottom: 30px;
+            }
+
+
     </style>
 </head>
 <body>
     <x-navbar>
     </x-navbar>
-    
-    <div class="emp-container p-5">
-        <h1>Add Employee</h1>
+
+    <div id="empBack" class="emp-container p-5">
+        <h2>Add Employee</h2>
         <form action="{{ route('employees.store') }}" method="POST" class="container">
             @csrf
             <div class="row">
@@ -46,7 +164,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="userType">Department:</label>
-                    <select name="userType">
+                    <select class="empSelect" name="userType">
                         <option value="Manager">Manager</option>
                         <option value="Salesperson">Salesperson</option>
                         <option value="Technician">Technician</option>
@@ -68,7 +186,7 @@
                     <input type="date" name="DOB">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            <button id="submitBtn" type="submit" class="btn btn-primary mt-3">Submit</button>
         </form>
     </div>
 </body>

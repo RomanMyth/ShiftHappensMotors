@@ -37,7 +37,7 @@
             /* font-size: 14px; */
         }
         .table th {
-            background-color: #007bff;
+            background-color: black;
             color: #fff;
         }
         .table-hover tbody tr:hover {
@@ -70,6 +70,7 @@
         #showAllAppointmentsBtn {
             margin-bottom: 20px;
         }
+        
 
     .confirmation-dialog {
     display: none;
@@ -91,8 +92,8 @@
 .confirmation-dialog button {
     margin-right: 10px;
     cursor: pointer;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: black;
+    border-color: black;
     color: #fff;
     /* Apply the same padding and font properties as .btn-primary */
     padding: 0.375rem 0.75rem;
@@ -125,8 +126,16 @@
 }
 
 .modal-header {
-    background-color: #007bff;
+    background-color: black;
 }
+
+.black-style{
+    background-color: black !important;
+    border: none !important;
+    color: white;
+    font-weight: bold !important;
+}
+
 
 </style>
 
@@ -151,10 +160,14 @@
             @csrf
             <div class="input-group mb-3">
                 <input type="text" name="query" class="form-control" placeholder="Search appointments by email, phone, or instructions...">
-                <button class="btn btn-primary btn-block" type="submit">Search</button>
+                <button class="btn btn-primary btn-block black-style" type="submit">Search</button>
             </div>
         </form>
-        <button id="showAllAppointmentsBtn" class="btn btn-primary btn-block" onclick="showAll()" type="submit">Show all appointments</button>
+
+        <form action="{{ route('viewSchedule.maintenance') }}" method="GET" id="reload">
+            <button id="showAllAppointmentsBtn" class="btn btn-primary btn-block black-style" type="submit">Show all appointments</button>
+        </form>
+
         <p>Filter by month</p>
         <div class="input-group mb-3">
             <select id="monthFilter" class="form-select">
@@ -170,11 +183,11 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Instructions</th>
+                        <th class="black-style">Email</th>
+                        <th class="black-style">Phone Number</th>
+                        <th class="black-style">Date</th>
+                        <th class="black-style">Time</th>
+                        <th class="black-style">Instructions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -209,7 +222,7 @@
                                             <p><strong>Model:</strong> {{ $appointment->model }}</p>
                                             <p><strong>Year:</strong> {{ $appointment->year }}</p>
                                             <p><strong>Instructions:</strong> {{ $appointment->maintenanceInstruction }}</p>
-                                            <button id="modalDeleteBtn" class="btn btn-primary btn-block" onclick="deleteAppointment({{ $appointment->Appointment_ID }})">Delete Appointment</button>
+                                            <button id="modalDeleteBtn" class="btn btn-primary btn-block black-style" onclick="deleteAppointment({{ $appointment->Appointment_ID }})">Delete Appointment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -263,6 +276,9 @@
                         }
                     });
                 }
+                else{
+                    $("#reload").submit();
+                }
             });
         });
 
@@ -309,7 +325,7 @@ function deleteAppointment(appointmentId) {
         $('.modal-backdrop').remove();
 
         var confirmationDialog = document.getElementById('confirmation-dialog');
-        confirmationDialog.style.display = 'block';
+        $("#confirmation-dialog").show();
 
         var confirmDeleteBtn = document.getElementById('confirm-delete');
         var cancelDeleteBtn = document.getElementById('cancel-delete');
@@ -331,7 +347,11 @@ function deleteAppointment(appointmentId) {
                     // Handle errors if any
                 }
             });
-            confirmationDialog.style.display = 'none';
+            $("#confirmation-dialog").hide();
+        };
+
+        cancelDeleteBtn.onclick = function() {
+            $("#confirmation-dialog").hide();
         };
     }
 
@@ -358,10 +378,6 @@ function deleteAppointment(appointmentId) {
     //         });
     //     }
     // }
-
-    function showAll(){
-        location.reload();
-    }
 
 
 

@@ -22,7 +22,7 @@
                 filters.MinPrice= this.value;
             });
 
-            
+
 
             $(".filter").change(function(){
                 $(".part").each(function(){
@@ -38,12 +38,12 @@
 
             // Function to handle search by serial number
             $(".search-input").keyup(function(){
-                var searchText = $(this).val();
+                var searchText = $(this).val().toLowerCase();
 
 
                 $(".part").each(function(){
 
-                    if( $(this).attr("data-serial").indexOf(searchText) != -1 || $(this).attr("data-name").indexOf(searchText) != -1 ){
+                    if( $(this).attr("data-serial").toLowerCase().indexOf(searchText) != -1 || $(this).attr("data-name").toLowerCase().indexOf(searchText) != -1 ){
                         $(this).show();
                     }
                     else{
@@ -51,7 +51,7 @@
                     }
 
                 });
-                
+
             });
         });
     </script>
@@ -59,9 +59,29 @@
         *{
             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
-                    
+
         .navbar{
             justify-content: space-around;
+        }
+
+
+
+        button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        button[type="submit"]:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid black;
         }
 
         .container {
@@ -90,7 +110,7 @@
         #filters input[type="number"] {
             width: 100px;
         }
-        
+
         .partsBtn{
             width: 30%;
             margin-top: 10px;
@@ -107,26 +127,17 @@
 <body>
     <x-navbar>
     </x-navbar>
-   
+
     <br>
     <br>
     <div class="container">
-        Maximum Price
-        <div>
-            <input type="number" class="Max-Price filter">
-        </div>
-        <br>
-        Minimum Price 
-        <div>
-            <input type="number" class="Min-Price filter">
-        </div>
-        <br>
+
         Search By Name or Serial Number
         <div>
         <input type="text" class="search-input">
-        </div>   
+        </div>
         <h1>Buy the Parts</h1>
-      
+
         <table class="table part-table">
             <thead>
                 <tr>
@@ -191,21 +202,20 @@
                             <form action="{{ route('sell.parts.removeFromCart', ['partNumber' => $partNumber]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger partsBtn">-</button>
+                                <button type="submit1" class="btn btn-danger partsBtn">-</button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
         <h3>Total Cost: {{ $totalCost }}</h3>
         <form id="checkoutForm" action="{{ route('sell.parts.checkout') }}" method="POST" style="text-align: center;">
             @csrf
             <input type="hidden" name="userId" value="{{ auth()->id() }}">
             <input type="hidden" name="totalCost" value="{{ $totalCost }}">
             <button type="submit" class="btn btn-primary partsBtn">Checkout</button>
-        </form>
+        </form>        
     </div>
 </body>
 </html>

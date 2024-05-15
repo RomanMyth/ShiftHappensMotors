@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class ScheduleControllerAPI extends Controller
 {
@@ -29,16 +30,39 @@ class ScheduleControllerAPI extends Controller
     {
         $data = $request->all();
         Schedule::create($data);
-        return "Schedule Created";
+        return redirect($to = "/viewSchedule");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    // Assuming you have a method in your controller to fetch schedules
+    public function showSchedule(Request $request)
     {
-        //
+        $today = date('Y-m-d');
+        $selectedDate = $request->input('date') ?? $today;
+    
+        $schedule = Schedule::where('Date', $selectedDate)->first();
+    
+        if ($schedule) {
+            $manager = User::find($schedule->Manager)->firstName;
+            $sales1 = User::find($schedule->Salesperson1)->firstName;
+            $sales2 = User::find($schedule->Salesperson2)->firstName;
+            $technician = User::find($schedule->Technician)->firstName;
+    
+            return response()->json([
+                'Manager' => $manager,
+                'Sales1' => $sales1,
+                'Sales2' => $sales2,
+                'Technician' => $technician,
+            ]);
+        } else {
+            return response()->json('None');
+        }
     }
+    
+
+    
 
     /**
      * Update the specified resource in storage.
