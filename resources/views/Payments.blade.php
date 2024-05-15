@@ -21,6 +21,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
         button[type="submit"]:hover {

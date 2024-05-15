@@ -36,7 +36,7 @@
             var now = new Date();
 
             var dates = getDates(now, new Date(now.getFullYear(), now.getMonth(), now.getDate()+30));
-            
+
             var appointments = <?php echo json_encode($appointments); ?>;
 
             for(var i = 0; i < appointments.length; i++){
@@ -74,7 +74,7 @@
                                 for(var j = 0; j < appointments.length; j++){
                                     if(appointments[j].date.split(" ")[0] == appointments[i].date.split(" ")[0]){
                                         count++;
-                                    }                                 
+                                    }
                                 }
 
                                 if(count == 5){
@@ -109,16 +109,16 @@
 
                 var selectedDate = $('#appointmentDate').val();
                 var selectedDate = selectedDate.slice(6, 10) + "-" + selectedDate.slice(0, 2) + "-" + selectedDate.slice(3, 5);
-            
-                
+
+
                 for(var i = 0; i < appointments.length; i++){
                     console.log(appointments[i].date.split(" ")[0]);
-                    
+
                     if(selectedDate == appointments[i].date.split(" ")[0]){
                         console.log(appointments[i].apptTime.slice(0, 8));
                         $("#appointmentTime option[value='" + appointments[i].apptTime.slice(0, 8) + "']").attr('disabled', true);
                     }
-                    
+
                 }
             });
 
@@ -202,14 +202,14 @@
         input[type="text"]:hover,
         input[type="email"]:hover,
         textarea:hover {
-            border-color: #007bff; /* Change border color on hover */
+            border-color: black; /* Change border color on hover */
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
         textarea:focus {
-            border-color: #007bff; /* Change border color on focus */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+            border-color: black; /* Change border color on focus */
+            box-shadow: 0 0 5px black; /* Add box shadow on focus */
         }
 
         #submitBtn {
@@ -222,12 +222,12 @@
         }
 
         #messageLabel:hover, #message:hover, #appointmentTime:hover {
-            border-color: #007bff; /* Change border color on hover */
+            border-color: black; /* Change border color on hover */
         }
 
         #messageLabel:focus, #message:focus, #appointmentTime:focus {
-            border-color: #007bff; /* Change border color on focus */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+            border-color: black; /* Change border color on focus */
+            box-shadow: 0 0 5px black; /* Add box shadow on focus */
         }
         #datepickerTrigger{
             margin-bottom: 20px;

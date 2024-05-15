@@ -22,6 +22,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
         button[type="submit"]:hover {
@@ -29,7 +30,7 @@
             color: #000;
             border: 1px solid black;
         }
-        
+
         .navbar {
             justify-content: space-around;
         }
@@ -82,6 +83,13 @@
         .form-select {
             border-radius: 0;
         }
+        .form-select:hover, textarea:hover {
+            border-color: black;
+        }
+        .form-select:focus, textarea:focus {
+            border-color: black; /* Change border color on focus */
+            box-shadow: 0 0 5px black; /* Add box shadow on focus */
+        }
         .btn {
             border-radius: 0;
         }
@@ -97,7 +105,7 @@
 <body>
     <x-navbar>
     </x-navbar>
-    
+
     <div class="container">
         <div class="card">
             <div class="card-header text-center">
@@ -113,7 +121,7 @@
                             <option value="">Select Employee</option>
                             @foreach ($employees as $employee)
                             <option value="{{ $employee->id }}">{{ $employee->firstName }} {{ $employee->lastName }}</option>
-                            @endforeach                
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -173,15 +181,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const stars = document.querySelectorAll('.star');
             const ratingInput = document.getElementById('rating');
-    
+
             stars.forEach(star => {
                 star.addEventListener('click', function() {
                     const rating = parseInt(this.dataset.rating);
                     ratingInput.value = rating;
-    
+
                     // Remove 'active' class from all stars
                     stars.forEach(s => s.classList.remove('active'));
-    
+
                     // Add 'active' class to stars up to the selected rating
                     for (let i = 0; i < rating; i++) {
                         stars[i].classList.add('active');
